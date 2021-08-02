@@ -24,9 +24,9 @@ Your Vue frontend communicates with this API endpoint to authenticate and regist
 
 Refer to where the `axios.defaults.baseURL` is defined in `main.js` or the  `base:` attribute is defined in the router `index.js` file to see how values stored in this file are retrieved for use in the application.
 
-The last thing to do is start the back-end application in Eclipse before you work on the front-end application.  Be sure the server port is **8080** 
+The last thing to do is start the back-end application in IntelliJ before you work on the front-end application.  Be sure the server port is **8080** 
 
-**You MUST start the Eclipse server before any Vue applications as the Eclipse server requires port `8080` and you don't want the Vue app to take that port first.**
+**You MUST start the IntelliJ server before any Vue applications as the IntelliJ server requires port `8080` and you don't want the Vue app to take that port first.**
 
 Start your VUE application with the following command:
 
