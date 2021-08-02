@@ -2,7 +2,7 @@ package com.techelevator.application.model;
 
 public class Preference {
 
-    private long    preferenceId;
+    private long    userId;
     private String  cuisineStyle1;
     private String  cuisineStyle2;
     private String  cuisineStyle3;
@@ -11,12 +11,12 @@ public class Preference {
     private Boolean vegetarian;
     private Boolean glutenFree;
 
-    public long getPreferenceId() {
-        return preferenceId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setPreferenceId(long preferenceId) {
-        this.preferenceId = preferenceId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getCuisineStyle1() {
@@ -78,7 +78,7 @@ public class Preference {
     @Override
     public String toString() {
         return "Preferences{" +
-                "preferenceId=" + preferenceId +
+                "userId=" + userId +
                 ", cuisineStyle1='" + cuisineStyle1 + '\'' +
                 ", cuisineStyle2='" + cuisineStyle2 + '\'' +
                 ", cuisineStyle3='" + cuisineStyle3 + '\'' +

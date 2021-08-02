@@ -5,7 +5,7 @@ import com.techelevator.security.model.User;
 
 public interface PreferenceDAO {
 
-    Preference setPreferences(Preference userPreferences);
+    Preference setPreferences(User currentUser, Preference userPreferences);
 
     Preference viewPreferences(User currentUser);
 

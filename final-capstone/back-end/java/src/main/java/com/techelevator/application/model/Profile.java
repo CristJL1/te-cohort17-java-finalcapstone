@@ -4,19 +4,19 @@ import java.sql.Date;
 
 public class Profile {
 
-    private long   profileId;
+    private long   userId;
     private String firstName;
     private String lastName;
     private Date   dateOfBirth;
     private String email;
     private int    zipCode;
 
-    public long getProfileId() {
-        return profileId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setProfileId(long profileId) {
-        this.profileId = profileId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -62,7 +62,7 @@ public class Profile {
     @Override
     public String toString() {
         return "Profile{" +
-                "profileId=" + profileId +
+                "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +

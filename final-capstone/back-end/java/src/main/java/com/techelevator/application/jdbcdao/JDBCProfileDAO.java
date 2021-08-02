@@ -17,22 +17,21 @@ public class JDBCProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public Profile setProfile(Profile userProfile) {
-        String sqlCreateProfile = "insert into profile (first_name, last_name, date_of_birth, email, zip_code) " +
-                                  "values (?, ?, ?, ?, ?)";
+    public Profile setProfile(User currentUser, Profile userProfile) {
+        String sqlCreateProfile = "insert into profile (user_id, first_name, last_name, date_of_birth, email, zip_code) " +
+                                  "values (?, ?, ?, ?, ?, ?)";
 
-        theDatabase.update(sqlCreateProfile, userProfile.getFirstName(),
-                userProfile.getLastName(),userProfile.getDateOfBirth(), userProfile.getEmail(), userProfile.getZipCode());
+        theDatabase.update(sqlCreateProfile, currentUser.getId(), userProfile.getFirstName(),
+                userProfile.getLastName(),userProfile.getDateOfBirth(), userProfile.getEmail(),
+                userProfile.getZipCode());
 
-        userProfile.setProfileId(getNextId());
         return userProfile;
     }
 
     public Profile viewProfile(User currentUser) {
         Profile userProfile = new Profile();
 
-        String sqlSearch = "select * from profile p inner join user_profile up on p.profile_id = up.profile_id " +
-                            " where up.user_id = ?";
+        String sqlSearch = "select * from profile where user_id = ?";
 
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUser.getId());
 
@@ -45,19 +44,18 @@ public class JDBCProfileDAO implements ProfileDAO {
 
     public Profile updateProfile(Profile updatedProfile) { // determine parameters
         String updateSql = "update profile set first_name = ?, last_name = ?, date_of_birth = ?, "
-                         + " email = ?, zip_code = ? where profile_id = ?";
+                         + " email = ?, zip_code = ? where user_id = ?";
         theDatabase.update(updateSql, updatedProfile.getFirstName(), updatedProfile.getLastName(),
                            updatedProfile.getDateOfBirth(), updatedProfile.getEmail(), updatedProfile.getZipCode(),
-                           updatedProfile.getProfileId());
+                           updatedProfile.getUserId());
 
         return updatedProfile;
     }
 
-    public void deleteProfile(User currentUser) {
-        String deleteSql = "delete from profile p inner join user_profile up on p.profile_id = up.profile_id " +
-                           "where up.user_id = ?";
+    public void deleteProfile(Profile userProfile) {
+        String deleteSql = "delete from profile where user_id = ?";
 
-        theDatabase.update(deleteSql, currentUser.getId());
+        theDatabase.update(deleteSql, userProfile.getUserId());
     }
 
 
@@ -67,7 +65,7 @@ public class JDBCProfileDAO implements ProfileDAO {
     private Profile mapToProfile (SqlRowSet row) {
         Profile newProfile = new Profile();
 
-        newProfile.setProfileId(row.getLong("profile_id"));
+        newProfile.setUserId(row.getLong("user_id"));
         newProfile.setFirstName(row.getString("first_name"));
         newProfile.setLastName(row.getString("last_name"));
         newProfile.setDateOfBirth(row.getDate("date_of_birth"));
@@ -77,13 +75,4 @@ public class JDBCProfileDAO implements ProfileDAO {
      return newProfile;
     }
 
-    private long getNextId() {
-        SqlRowSet nextId = theDatabase.queryForRowSet("select nextval('profile_profile_id_seq')");
-
-        if (nextId.next()) {
-            return nextId.getLong(1);
-        } else {
-            throw new RuntimeException("No new profile set up");
-        }
-    }
 }
