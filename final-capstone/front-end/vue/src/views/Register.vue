@@ -6,6 +6,7 @@
         {{ registrationErrorMsg }}
       </div>
       <label for="username" class="sr-only">Username</label>
+      <br>
       <input
         type="text"
         id="username"
@@ -15,7 +16,9 @@
         required
         autofocus
       />
+      <br>
       <label for="password" class="sr-only">Password</label>
+      <br>
       <input
         type="password"
         id="password"
@@ -24,6 +27,9 @@
         v-model="user.password"
         required
       />
+      <br>
+      <label for="confirm password">Confirm Password</label >
+      <br>
       <input
         type="password"
         id="confirmPassword"
@@ -32,10 +38,14 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+      <br>
+      <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+      <br>
+      <br>
+      <router-link :to="{ name: 'login' }">Have an account?</router-link>
     </form>
   </div>
 </template>
@@ -90,4 +100,42 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.text-center {
+  text-align: center;
+  font-family: Monospace, Cursive, Sans-serif;
+}
+
+
+h1 {
+
+  color: red;
+}
+
+
+#register {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+
+  " . form-register ."
+ 
+
+}
+
+.form-register {
+  grid-area: form-register;
+  background-color: white;
+  height: 350px;
+  text-align: center;
+  padding: 5%;
+}
+
+input {
+  margin-bottom: 5%;
+  
+}
+
+</style>
