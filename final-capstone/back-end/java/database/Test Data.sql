@@ -10,6 +10,14 @@ insert into users
 (username, password_hash, role)
 values ('tswift', 'red', 'ROLE_USER');
 
+insert into users
+(username, password_hash, role)
+values ('carlyslayjepsen', 'maybe', 'ROLE_USER');
+
+insert into users
+(username, password_hash, role)
+values ('dagger', 'goose', 'ROLE_USER');
+
 select * from users;
 
 select * from profile;
@@ -22,6 +30,14 @@ insert into profile
 (user_id, first_name, last_name, date_of_birth, email, zip_code)
 values ((select user_id from users where username = 'tswift'), 'Taylor', 'Swift', '1989-12-13', 'wenevergooutofstyle1989@mailinator.com', 44473);
 
+insert into profile
+(user_id, first_name, last_name, date_of_birth, email, zip_code)
+values ((select user_id from users where username = 'carlyslayjepsen'), 'Carly Rae', 'Jepsen', '1985-11-21', 'ididntjustcomeheretodance@mailinator.com', 44118);
+
+insert into profile
+(user_id, first_name, last_name, date_of_birth, email, zip_code)
+values ((select user_id from users where username = 'dagger'), 'Israel', 'Dagg', '1988-06-06', 'daggertotheheart@mailinator.com', 44444);
+
 select * from profile;
 
 select * from preferences;
@@ -32,7 +48,15 @@ values ((select user_id from users where username = 'clubber'), 'Italian', 'Chin
 
 insert into preferences
 (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
-values ((select user_id from users where username = 'tswift'), 'Mexican', 'Indian', 'Italian', '$$$', true, true, false);
+values ((select user_id from users where username = 'tswift'), 'Mexican', 'Indian', 'Italian', '$$$$', true, true, false);
+
+insert into preferences
+(user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
+values ((select user_id from users where username = 'carlyslayjepsen'), 'BBQ', 'Sushi', 'Indian', '$$$', false, true, false);
+
+insert into preferences
+(user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
+values ((select user_id from users where username = 'dagger'), 'Thai', 'Italian', 'American', '$', false, false, false);
 
 select * from preferences;
 
