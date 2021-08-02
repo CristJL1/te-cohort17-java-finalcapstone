@@ -7,9 +7,9 @@ public class Preference {
     private String  cuisineStyle2;
     private String  cuisineStyle3;
     private String  pricePoint;
-    private boolean vegan;
-    private boolean vegetarian;
-    private boolean glutenFree;
+    private Boolean vegan;
+    private Boolean vegetarian;
+    private Boolean glutenFree;
 
     public long getPreferenceId() {
         return preferenceId;
@@ -51,27 +51,27 @@ public class Preference {
         this.pricePoint = pricePoint;
     }
 
-    public boolean isVegan() {
+    public Boolean isVegan() {
         return vegan;
     }
 
-    public void setVegan(boolean vegan) {
+    public void setVegan(Boolean vegan) {
         this.vegan = vegan;
     }
 
-    public boolean isVegetarian() {
+    public Boolean isVegetarian() {
         return vegetarian;
     }
 
-    public void setVegetarian(boolean vegetarian) {
+    public void setVegetarian(Boolean vegetarian) {
         this.vegetarian = vegetarian;
     }
 
-    public boolean isGlutenFree() {
+    public Boolean isGlutenFree() {
         return glutenFree;
     }
 
-    public void setGlutenFree(boolean glutenFree) {
+    public void setGlutenFree(Boolean glutenFree) {
         this.glutenFree = glutenFree;
     }
 

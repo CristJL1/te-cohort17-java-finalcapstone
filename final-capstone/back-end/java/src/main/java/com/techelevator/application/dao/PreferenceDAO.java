@@ -5,14 +5,12 @@ import com.techelevator.security.model.User;
 
 public interface PreferenceDAO {
 
-    Preference setPreferences(String cuisine1, String cuisine2, String cuisine3, String pricePoint, boolean vegan,
-                              boolean vegetarian, boolean glutenFree);
+    Preference setPreferences(Preference userPreferences);
 
     Preference viewPreferences(User currentUser);
 
-    Preference updatePreferences(User currentUser, String cuisine1, String cuisine2, String cuisine3, String pricePoint, boolean vegan,
-                                 boolean vegetarian, boolean glutenFree);
+    Preference updatePreferences(Preference updatedPreference);
 
-    void deletePreferences();
+    void deletePreferences(Preference preferenceToDelete);
 
 }
