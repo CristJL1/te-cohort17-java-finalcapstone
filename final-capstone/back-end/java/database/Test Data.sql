@@ -15,41 +15,43 @@ select * from users;
 select * from profile;
 
 insert into profile
-(first_name, last_name, date_of_birth, email, zip_code)
-values ('Mr.', 'T', '1990-10-31', 'test@mailinator.com', 44446);
+(user_id, first_name, last_name, date_of_birth, email, zip_code)
+values ((select user_id from users where username = 'clubber'), 'Mr.', 'T', '1952-05-21', 'ipitythefool@mailinator.com', 44446);
 
 insert into profile
-(first_name, last_name, date_of_birth, email, zip_code)
-values ('Taylor', 'Swift', '1989-12-13', 'fake@mailinator.com', 44473);
+(user_id, first_name, last_name, date_of_birth, email, zip_code)
+values ((select user_id from users where username = 'tswift'), 'Taylor', 'Swift', '1989-12-13', 'wenevergooutofstyle1989@mailinator.com', 44473);
 
 select * from profile;
 
 select * from preferences;
 
 insert into preferences
-(preference_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
-values ((select profile_id from profile where last_name = 'T'), 'Italian', 'Chinese', 'American', '$$', false, false, true);
+(user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
+values ((select user_id from users where username = 'clubber'), 'Italian', 'Chinese', 'American', '$$', false, false, true);
 
 insert into preferences
-(preference_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
-values ((select profile_id from profile where last_name = 'Swift'), 'Mexican', 'Indian', 'Italian', '$$$', true, true, false);
+(user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
+values ((select user_id from users where username = 'tswift'), 'Mexican', 'Indian', 'Italian', '$$$', true, true, false);
+
+select * from preferences;
 
 --select * from preferences where profile_id = (select profile_id from profile where last_name = 'swift');
 --select * from preferences where profile_id = (select profile_id from profile where last_name = 'T');
 
-select * from user_profile;
-
-insert into user_profile
-(user_id, profile_id)
-values ((select user_id from users where username = 'clubber'),
-(select profile_id from profile where last_name = 'T'));
-
-insert into user_profile
-(user_id, profile_id)
-values ((select user_id from users where username = 'tswift'),
-(select profile_id from profile where last_name = 'Swift'));
-
-select * from user_profile;
+--select * from user_profile;
+--
+--insert into user_profile
+--(user_id, profile_id)
+--values ((select user_id from users where username = 'clubber'),
+--(select profile_id from profile where last_name = 'T'));
+--
+--insert into user_profile
+--(user_id, profile_id)
+--values ((select user_id from users where username = 'tswift'),
+--(select profile_id from profile where last_name = 'Swift'));
+--
+--select * from user_profile;
 
 --select * from profile_preferences;
 --
