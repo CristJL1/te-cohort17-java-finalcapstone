@@ -1,7 +1,8 @@
 <template>
-  <div id="login" class="text-center">
+  <div id="login" class="text-center main-grid">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="title"> Restaurant Tinder </h1>
+      <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
       <div
         class="alert alert-danger"
         role="alert"
@@ -12,7 +13,10 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+
+      <div class= "user-pass">
+        <label for="username" class="sr-only">Username </label>
+        <br>
       <input
         type="text"
         id="username"
@@ -22,7 +26,9 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      <br>
+      <label for="password" class="sr-only">Password </label>
+      <br>
       <input
         type="password"
         id="password"
@@ -31,8 +37,13 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      </div>
+      <br>
       <button type="submit">Sign in</button>
+      <br>
+      <br>
+      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+
     </form>
   </div>
 </template>
@@ -74,3 +85,45 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.text-center {
+  text-align: center;
+  font-family: Monospace, Cursive, Sans-serif;
+}
+
+
+
+#login {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 2fr 100px;
+  height: 100%;
+  grid-template-areas:
+  ". . ."
+  ". form-signin ."
+  ". . ."
+}
+
+div.app {
+  height: 100%;
+}
+
+.form-signin {
+  grid-area: form-signin;
+  background-color: white;
+  height: 350px;
+  padding: 5%;
+}
+
+h1 {
+  color: red;
+}
+
+input {
+  margin-bottom: 5%;
+}
+
+
+</style>
