@@ -16,21 +16,21 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         this.theDatabase = new JdbcTemplate(theDataSource);
     }
 
-    public Preference setPreferences(User currentUser, Preference userPreference) {
+    public Preference setPreferences(Preference userPreference) {
         String newPreferenceStmt = "insert into preferences (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, " +
                                    "price_point, vegan, vegetarian, gluten_free) values (?, ?, ?, ?, ?, ?, ?, ?)";
-        theDatabase.update(newPreferenceStmt, currentUser.getId(), userPreference.getCuisineStyle1(), userPreference.getCuisineStyle2(),
+        theDatabase.update(newPreferenceStmt, userPreference.getUserId(), userPreference.getCuisineStyle1(), userPreference.getCuisineStyle2(),
                            userPreference.getCuisineStyle3(), userPreference.getPricePoint(), userPreference.isVegan(),
                             userPreference.isVegetarian(), userPreference.isGlutenFree());
 
         return userPreference;
     };
 
-    public Preference viewPreferences(User currentUser) { 
+    public Preference viewPreferences(long currentUserId) {
         String sqlSearch = "select * from preferences where user_id = ?";
         Preference userPreference = new Preference();
 
-        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUser.getId());
+        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUserId);
 
         if (result.next()) {
             userPreference = mapToPreference(result);
@@ -50,9 +50,9 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         return updatedPreference;
     };
 
-    public void deletePreferences(Preference preferenceToDelete) {
+    public void deletePreferences(long currentUserId) {
         String sqlDeleteStmt = "delete from preferences where user_id = ? ";
-        theDatabase.update(sqlDeleteStmt, preferenceToDelete.getUserId());
+        theDatabase.update(sqlDeleteStmt, currentUserId);
     };
 
 

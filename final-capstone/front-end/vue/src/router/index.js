@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
+import Questionnaire from '../views/Questionnaire.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 
@@ -41,6 +42,14 @@ const router = new Router({
       path: "/logout",
       name: "logout",
       component: Logout,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/questionnaire",
+      name: "questionnaire",
+      component: Questionnaire,
       meta: {
         requiresAuth: false
       }

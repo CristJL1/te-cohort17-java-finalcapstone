@@ -96,10 +96,6 @@ export default {
  
 }
 
-h1 {
-
-  color: red;
-}
 
 
 
@@ -135,6 +131,10 @@ div.app {
   border-width: medium;
   border-color: rgba(92, 92, 92, 0.842);
   border-radius: 10px;
+}
+
+h1 {
+  color: red;
 }
 
 input {

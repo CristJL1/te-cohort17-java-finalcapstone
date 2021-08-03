@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/final-capstone/back-end/java/final-capstone-back-end-server-main.iml" filepath="$PROJECT_DIR$/final-capstone/back-end/java/final-capstone-back-end-server-main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/java-key-final-capstone-team-restaurant-tinder.iml" filepath="$PROJECT_DIR$/.idea/java-key-final-capstone-team-restaurant-tinder.iml" />
-    </modules>
-  </component>
-</project>

@@ -141,6 +141,7 @@ h1 {
 input {
   margin-bottom: 5%;
   border-style: inset;
+  border-width: ;
 }
 
 

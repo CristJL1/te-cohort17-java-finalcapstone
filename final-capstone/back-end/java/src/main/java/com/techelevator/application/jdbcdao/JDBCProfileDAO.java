@@ -17,23 +17,23 @@ public class JDBCProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public Profile setProfile(User currentUser, Profile userProfile) {
+    public Profile setProfile(Profile userProfile) {
         String sqlCreateProfile = "insert into profile (user_id, first_name, last_name, date_of_birth, email, zip_code) " +
                                   "values (?, ?, ?, ?, ?, ?)";
 
-        theDatabase.update(sqlCreateProfile, currentUser.getId(), userProfile.getFirstName(),
+        theDatabase.update(sqlCreateProfile, userProfile.getUserId(), userProfile.getFirstName(),
                 userProfile.getLastName(),userProfile.getDateOfBirth(), userProfile.getEmail(),
                 userProfile.getZipCode());
 
         return userProfile;
     }
 
-    public Profile viewProfile(User currentUser) {
+    public Profile viewProfile(long currentUserId) {
         Profile userProfile = new Profile();
 
         String sqlSearch = "select * from profile where user_id = ?";
 
-        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUser.getId());
+        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUserId);
 
         if (result.next()) {
             userProfile = mapToProfile(result);
@@ -52,10 +52,10 @@ public class JDBCProfileDAO implements ProfileDAO {
         return updatedProfile;
     }
 
-    public void deleteProfile(Profile userProfile) {
+    public void deleteProfile(long currentUserId) {
         String deleteSql = "delete from profile where user_id = ?";
 
-        theDatabase.update(deleteSql, userProfile.getUserId());
+        theDatabase.update(deleteSql, currentUserId);
     }
 
 
