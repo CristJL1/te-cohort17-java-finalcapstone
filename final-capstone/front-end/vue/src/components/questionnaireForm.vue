@@ -87,8 +87,8 @@
       <label class="dietarybox" for="dietary1"> Gluten Free</label>
       <input type="checkbox" name="dietary2" value="true" v-model="preferences.vegan">
       <label class="dietarybox" for="dietary2"> Vegan</label>
-      <input type="checkbox" name="dietary3" value="true" v-model="preferences.vegitarian">
-      <label class="dietarybox" for="dietary3"> Vegitarian</label>
+      <input type="checkbox" name="dietary3" value="true" v-model="preferences.vegetarian">
+      <label class="dietarybox" for="dietary3"> Vegetarian</label>
       <br>
       <br>
       <p> Price: </p>
@@ -102,9 +102,10 @@
       <label for="$"> $$$$ </label><br>
       <br>
       <br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <router-link :to="{ name: 'home' }">Create Account</router-link>
+      <!--<button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
-      </button>
+      </button>-->
       <br>
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>

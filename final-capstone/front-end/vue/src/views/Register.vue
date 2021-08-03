@@ -40,9 +40,10 @@
       />
       <br>
       <br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <!--<button class="btn btn-lg btn-primary btn-block" type="submit">
         Continue to Questionnaire
-      </button>
+      </button>-->
+      <router-link :to="{ name: 'questionnaire' }">Continue to Questionnaire</router-link>
       <br>
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
