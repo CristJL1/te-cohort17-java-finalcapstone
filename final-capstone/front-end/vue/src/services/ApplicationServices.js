@@ -4,3 +4,20 @@
 *  If you would prefer a file with a different name for your services, 
 *     simply create one 
 ***************************************************************************************/
+import axios from 'axios';
+
+const http = axios.create({
+  baseURL: "http://localhost:8080"
+});
+
+export default {
+
+addProfile(profile) {
+    return http.post('/user', profile)
+},
+
+addPreferences(preferences) {
+    return http.post('/user/preference', preferences)
+}
+
+}

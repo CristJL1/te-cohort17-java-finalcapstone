@@ -41,11 +41,11 @@
       <br>
       <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
+        Continue to Questionnaire
       </button>
       <br>
       <br>
-      <router-link :to="{ name: 'questionnaire' }">Continue to Questionnaire</router-link>
+      <router-link :to="{ name: 'login' }">Have an account?</router-link>
     </form>
   </div>
 </template>
@@ -141,7 +141,7 @@ h1 {
 input {
   margin-bottom: 5%;
   border-style: inset;
-  border-width: ;
+  border-width: medium;
 }
 
 
