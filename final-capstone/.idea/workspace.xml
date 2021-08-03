@@ -4,21 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="7416472a-a564-47b1-aebf-323b77430b66" name="Default Changelist" comment="" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="6f822fe2-4ed4-43fa-aa6a-cf2ad1921820" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="8de017e8-3a15-400d-ab71-9690ad8c7435" name="Default Changelist" comment="" />
+>>>>>>> 087a1be74e17ef5752519bcd1075a4d584ace59d
+>>>>>>> 6ae57e56f4fd1f90352a38f14024fdc499d3a13d
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="1wAytJ9QLZNRqOapiZQuty2fkbZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
+=======
+<<<<<<< HEAD
+  <component name="ProjectId" id="1wB1GVa58ZTFyOLZA1VoQLzQB4N" />
+=======
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1wB317qTzND0vzGq0YHMEJrGDqT" />
+>>>>>>> 087a1be74e17ef5752519bcd1075a4d584ace59d
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+>>>>>>> 6ae57e56f4fd1f90352a38f14024fdc499d3a13d
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6ae57e56f4fd1f90352a38f14024fdc499d3a13d
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
@@ -45,11 +75,32 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="7416472a-a564-47b1-aebf-323b77430b66" name="Default Changelist" comment="" />
       <created>1627915900728</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627915900728</updated>
+=======
+      <changelist id="6f822fe2-4ed4-43fa-aa6a-cf2ad1921820" name="Default Changelist" comment="" />
+      <created>1627917071911</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627917071911</updated>
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../java-key-module-2-capstone-team-3" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8de017e8-3a15-400d-ab71-9690ad8c7435" name="Default Changelist" comment="" />
+      <created>1627917936773</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627917936773</updated>
+>>>>>>> 087a1be74e17ef5752519bcd1075a4d584ace59d
+>>>>>>> 6ae57e56f4fd1f90352a38f14024fdc499d3a13d
     </task>
     <servers />
   </component>

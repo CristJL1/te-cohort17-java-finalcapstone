@@ -47,7 +47,6 @@
     </form>
   </div>
 </template>
-
 <script>
 import authService from "../services/AuthService";
 
@@ -86,29 +85,42 @@ export default {
 };
 </script>
 
+
 <style scoped>
+
+
 
 .text-center {
   text-align: center;
   font-family: Monospace, Cursive, Sans-serif;
+ 
 }
 
 
 
+
 #login {
+  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 100px 2fr 100px;
-  height: 100%;
   grid-template-areas:
   ". . ."
   ". form-signin ."
   ". . ."
+
+  
+  
+
 }
 
 div.app {
   height: 100%;
 }
+
+
+
+
 
 .form-signin {
   grid-area: form-signin;
@@ -124,6 +136,5 @@ h1 {
 input {
   margin-bottom: 5%;
 }
-
 
 </style>
