@@ -4,14 +4,80 @@
 
 package com.techelevator.application.controller;
 
+//import com.sun.tools.javac.util.DefinedBy;
+import com.techelevator.application.dao.PreferenceDAO;
+import com.techelevator.application.dao.ProfileDAO;
+import com.techelevator.application.model.Preference;
+import com.techelevator.application.model.Profile;
+import org.springframework.web.bind.annotation.*;
+
 import java.sql.Timestamp;
 
+@RestController
 public class ApiController {
+    PreferenceDAO preferenceData;
+    ProfileDAO profileData;
 
 /**********************************************************************************************************************
 * Put your Application API Controllers here
 **********************************************************************************************************************/
+public ApiController(PreferenceDAO thePreference, ProfileDAO theProfile) {
+    preferenceData = thePreference;
+    profileData = theProfile;
+}
 
+@RequestMapping(path = "/user", method = RequestMethod.POST)
+public Profile createProfile(@RequestBody Profile userProfile) {
+    logRequest("POST -- PROFILE");
+    profileData.setProfile(userProfile);
+
+    return userProfile;
+}
+
+@RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
+public Profile viewProfile(@PathVariable long id) {
+    logRequest("GET -- PROFILE");
+    return profileData.viewProfile(id);
+}
+
+@RequestMapping(path="/user", method = RequestMethod.PUT)
+public Profile updateProfile(@RequestBody Profile updatedProfile) {
+    logRequest("PUT -- PROFILE");
+
+    return profileData.updateProfile(updatedProfile);
+}
+
+@RequestMapping(path = "/user/{id}", method = RequestMethod.DELETE)
+public void deleteProfile(@PathVariable long id) {
+    logRequest("DELETE -- PROFILE");
+    profileData.deleteProfile(id);
+}
+
+@RequestMapping(path = "/user/preference", method = RequestMethod.POST)
+public Preference createPreference(@RequestBody Preference userPreference) {
+    logRequest("POST -- PREFERENCE");
+    preferenceData.setPreferences(userPreference);
+
+    return userPreference;
+}
+
+@RequestMapping(path="/user/{id}/preference", method = RequestMethod.GET)
+public Preference viewPreferences(@PathVariable long id) {
+    logRequest("GET -- PREFERENCE");
+    return preferenceData.viewPreferences(id);
+}
+
+@RequestMapping(path = "/user/preference", method = RequestMethod.PUT)
+public Preference updatedPreferences(@RequestBody Preference updatedPreferences) {
+    logRequest("PUT -- PREFERENCES");
+    return preferenceData.updatePreferences(updatedPreferences);
+}
+
+@RequestMapping(path = "/user/{id}/preference", method = RequestMethod.DELETE)
+public void deletePreferences(@PathVariable long id) {
+    logRequest("DELETE -- PREFERENCES");
+    preferenceData.deletePreferences(id);
+}
 	
 	
 	

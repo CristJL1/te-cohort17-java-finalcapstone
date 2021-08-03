@@ -7,11 +7,11 @@ import java.sql.Date;
 
 public interface ProfileDAO {
 
-   Profile setProfile(User currentUser, Profile userProfile);
+   Profile setProfile(Profile userProfile);
 
-   Profile viewProfile(User currentUser);
+   Profile viewProfile(long currentUserId);
 
    Profile updateProfile(Profile updatedProfile);
 
-   void deleteProfile(Profile userProfile);
+   void deleteProfile(long currentUserId);
 }
