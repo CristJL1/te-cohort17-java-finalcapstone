@@ -128,9 +128,13 @@ div.app {
 
 .form-signin {
   grid-area: form-signin;
-  background-color: white;
+  background-color: rgba(190, 186, 186, 0.877);
   height: 350px;
   padding: 5%;
+  border-style: outset;
+  border-width: medium;
+  border-color: rgba(92, 92, 92, 0.842);
+  border-radius: 10px;
 }
 
 input {

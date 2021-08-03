@@ -45,7 +45,7 @@
       </button>
       <br>
       <br>
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+      <router-link :to="{ name: 'questionnaire' }">Continue to Questionnaire</router-link>
     </form>
   </div>
 </template>
@@ -118,24 +118,30 @@ h1 {
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-
+  grid-template-rows: 100px 2fr 100px;
+  grid-template-areas: 
+  ". . ."
   " . form-register ."
- 
+  ". . ."
 
 }
 
 .form-register {
   grid-area: form-register;
-  background-color: white;
+  background-color: rgba(190, 186, 186, 0.877);
   height: 350px;
   text-align: center;
   padding: 5%;
+  border-style: outset;
+  border-width: medium;
+  border-color: rgba(92, 92, 92, 0.842);
+  border-radius: 10px;
 }
 
 input {
   margin-bottom: 5%;
-  
+  border-style: inset;
 }
+
 
 </style>
