@@ -148,9 +148,11 @@ export default {
         }
     }, // END OF DATA
     created() {
+      alert(`Created!!  Looking for username ${this.$store.state.currentUser.username}`)
         applicationServices
-        .getUserByUserName(this.$store.state.user.username ) 
+        .getUserByUserName(this.$store.state.currentUser.username) 
         .then(response => {
+          alert(`${response.data}`)
           this.$store.commit("SET_USER_DATA", response.data)
         });
     },

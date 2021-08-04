@@ -84,8 +84,10 @@ public void deletePreferences(@PathVariable long id) {
 
 @RequestMapping(path = "/user/getuser/{username}", method = RequestMethod.GET)
 public User getUser(@PathVariable String username) {
-    logRequest("GET -- USER");
-    return userData.findByUsername(username);
+    logRequest("GET -- USER - " + username);
+    User aUser = userData.findByUsername(username);
+    logRequest("userId found: " + aUser.getId());
+    return aUser;
 }
 
 	
