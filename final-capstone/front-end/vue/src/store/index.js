@@ -12,6 +12,7 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
+
 if(currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
@@ -21,6 +22,12 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
+    userData: {
+      username: '',
+      id: '',
+      password: '',
+      authorities: ''
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -41,6 +48,10 @@ export default new Vuex.Store({
     },
     SET_RESTAURANTS(state, data) {
       state.restaurants = data;
+    },
+    SET_USER_DATA(state, user) {
+      state.userData = user;
+      
     }
 
   }

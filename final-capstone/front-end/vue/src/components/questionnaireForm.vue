@@ -122,7 +122,7 @@ export default {
     data() {
         return {
             profile: {
-                userId: '', /* figure how to current UserID passed in*/
+                userId: this.$store.state.userData.id, /* figure how to current UserID passed in*/
                 firstName: '',
                 lastName: '',
                 dateOfBirth: '',
@@ -130,7 +130,7 @@ export default {
                 zipCode: ''
             },
             preferences: {
-                 userID: '', /* figure how to current UserID passed in*/
+                 userId: this.$store.state.userData.id, /* figure how to current UserID passed in*/
                  cuisineStyle1: '',
                  cuisineStyle2: '',
                  cuisineStyle3: '',
@@ -138,9 +138,22 @@ export default {
                  vegan: false,
                  vegetarian: false,
                  glutenFree: false
+            },
+            userData: {
+                username: '',
+                id: '',
+                password: '',
+                authorities: ''
             }
         }
     }, // END OF DATA
+    created() {
+        applicationServices
+        .getUserByUserName(this.$store.state.user.username ) 
+        .then(response => {
+          this.$store.commit("SET_USER_DATA", response.data)
+        });
+    },
     methods: {
         submitQuestionnaire() {
            /* const newProfile = {

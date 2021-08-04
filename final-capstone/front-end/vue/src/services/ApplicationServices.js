@@ -16,6 +16,10 @@ addProfile(profile) {
 
 addPreferences(preferences) {
     return axios.post('/user/preference', preferences)
+},
+
+getUserByUserName(username) {
+    return axios.get(`/user/getuser/${username}`)
 }
 
 }
