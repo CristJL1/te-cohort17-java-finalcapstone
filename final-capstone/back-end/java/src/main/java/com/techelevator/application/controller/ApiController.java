@@ -3,16 +3,16 @@
 **********************************************************************************************************************/
 
 package com.techelevator.application.controller;
-import com.techelevator.security.*;
+//import com.techelevator.security.dao;
 //import com.sun.tools.javac.util.DefinedBy;
 import com.techelevator.application.dao.PreferenceDAO;
 import com.techelevator.application.dao.ProfileDAO;
 import com.techelevator.application.model.Preference;
 import com.techelevator.application.model.Profile;
 import org.springframework.web.bind.annotation.*;
-
+import com.techelevator.security.dao.UserDAO;
 import java.sql.Timestamp;
-//import com.techelevator.security.model;
+import com.techelevator.security.model.User;
 @CrossOrigin
 @RestController
 public class ApiController {
@@ -82,9 +82,9 @@ public void deletePreferences(@PathVariable long id) {
     preferenceData.deletePreferences(id);
 }
 
-@RequestMapping(path = "/user/{username}", method = RequestMethod.GET)
+@RequestMapping(path = "/user/getuser/{username}", method = RequestMethod.GET)
 public User getUser(@PathVariable String username) {
-    return userData.findByUserName(username);
+    return userData.findByUsername(username);
 }
 	
 	
