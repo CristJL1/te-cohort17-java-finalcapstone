@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap%27);
 <template>
   <div id="login" class="text-center main-grid">
     <form class="form-signin" @submit.prevent="login">

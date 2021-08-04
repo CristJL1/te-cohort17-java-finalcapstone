@@ -22,7 +22,7 @@
       />
       <br>
       <label for="DOB">Date of Birth </label>
-      <input type="date" id="DOB" name="DOB" v-model="profile.DOB" required>
+      <input type="date" id="DOB" name="DOB" v-model="profile.dateOfBirth" required>
       <br>
       <label for="email">Email </label>
       <input id="email" name="email" type="email" placeholder="email@address.com" v-model="profile.email" required="required">
@@ -122,10 +122,10 @@ export default {
     data() {
         return {
             profile: {
-                userID: '', /* figure how to current UserID passed in*/
+                userId: '', /* figure how to current UserID passed in*/
                 firstName: '',
                 lastName: '',
-                DOB: '',
+                dateOfBirth: '',
                 email: '',
                 zipCode: ''
             },
