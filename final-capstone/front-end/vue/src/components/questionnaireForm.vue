@@ -122,6 +122,7 @@ export default {
     data() {
         return {
             profile: {
+                userID: '', /* figure how to current UserID passed in*/
                 firstName: '',
                 lastName: '',
                 DOB: '',
@@ -129,6 +130,7 @@ export default {
                 zipCode: ''
             },
             preferences: {
+                 userID: '', /* figure how to current UserID passed in*/
                  cuisineStyle1: '',
                  cuisineStyle2: '',
                  cuisineStyle3: '',
