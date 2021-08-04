@@ -6,18 +6,16 @@
 ***************************************************************************************/
 import axios from 'axios';
 
-const http = axios.create({
-  baseURL: "http://localhost:8080"
-});
+
 
 export default {
 
 addProfile(profile) {
-    return http.post('/user', profile)
+    return axios.post('/user', profile)
 },
 
 addPreferences(preferences) {
-    return http.post('/user/preference', preferences)
+    return axios.post('/user/preference', preferences)
 }
 
 }

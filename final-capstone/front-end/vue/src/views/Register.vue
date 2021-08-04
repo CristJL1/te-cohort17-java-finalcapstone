@@ -40,10 +40,9 @@
       />
       <br>
       <br>
-      <!--<button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
         Continue to Questionnaire
-      </button>-->
-      <router-link :to="{ name: 'questionnaire' }">Continue to Questionnaire</router-link>
+      </button>
       <br>
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
@@ -79,7 +78,7 @@ export default {
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: '/login',
+                path: '/questionnaire',
                 query: { registration: 'success' },
               });
             }
@@ -110,7 +109,6 @@ export default {
 
 
 h1 {
-  text-shadow:4px 4px 4px rgb(85, 3, 3);
   color: rgb(204, 10, 10);
 }
 

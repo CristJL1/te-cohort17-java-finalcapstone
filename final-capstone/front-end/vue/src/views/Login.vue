@@ -134,7 +134,6 @@ div.app {
 }
 
 h1 {
-  text-shadow:4px 4px 4px rgb(85, 3, 3);
   color: rgb(204, 10, 10);
 }
 

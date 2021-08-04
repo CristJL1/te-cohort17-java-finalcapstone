@@ -1,6 +1,6 @@
 <template>
     <div class="questionnaire text-center"> 
-    <form class="form-questionnaire" @submit.prevent="questionnaire">
+    <form class="form-questionnaire" @submit.prevent="submitQuestionnaire">
     <h1>Questionnaire</h1>
     <label for="firstName">First Name </label>
       <input v-model="profile.firstName"
@@ -102,10 +102,9 @@
       <label for="$"> $$$$ </label><br>
       <br>
       <br>
-      <router-link :to="{ name: 'home' }">Create Account</router-link>
-      <!--<button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
-      </button>-->
+      </button>
       <br>
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
@@ -113,11 +112,7 @@
     </div>    
 </template>
 
-<script>
-export default {
-    
-}
-</script>
+
 
 <script>
 import applicationServices from "../services/ApplicationServices"
@@ -146,20 +141,19 @@ export default {
     }, // END OF DATA
     methods: {
         submitQuestionnaire() {
-            const newProfile = {
+           /* const newProfile = {
                 firstName: this.profile.firstName,
                 lastName: this.profile.lastName,
                 DOB: this.profile.DOB,
                 email: this.profile.email,
                 zipCode: this.profile.zipCode 
-            };
+            }; */
             applicationServices
-            .addProfile(newProfile)
+            .addProfile(this.profile)
             .then(response => {
-            this.profile = response.data;
         })
 
-        const newPreferences = {
+        /*const newPreferences = {
                  cuisineStyle1: this.preferences.cuisineStyle1,
                  cuisineStyle2: this.preferences.cuisineStyle2,
                  cuisineStyle3: this.preferences.cuisineStyle3,
@@ -167,21 +161,23 @@ export default {
                  vegan: this.preferences.vegan,
                  vegetarian: this.preferences.vegetarian,
                  glutenFree: this.preferences.glutenFree
-            }
+            } */
             applicationServices
-            .addPreferences(newPreferences)
+            .addPreferences(this.preferences)
             .then(response => {
-            this.preferences = response.data;
+             this.$router.push({
+          path: '/login' 
         })
-
+        
+        });
         } // END OF SUBMITQUESTIONNAIRE
+
     }
 }
 </script>
 
 <style scoped>
     h1{
-        text-shadow:4px 4px 4px rgb(85, 3, 3);
         color: rgb(204, 10, 10);
     }
 
