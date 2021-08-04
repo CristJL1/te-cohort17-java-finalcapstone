@@ -3,7 +3,7 @@
 **********************************************************************************************************************/
 
 package com.techelevator.application.controller;
-
+import com.techelevator.security.*;
 //import com.sun.tools.javac.util.DefinedBy;
 import com.techelevator.application.dao.PreferenceDAO;
 import com.techelevator.application.dao.ProfileDAO;
@@ -12,18 +12,21 @@ import com.techelevator.application.model.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+//import com.techelevator.security.model;
 @CrossOrigin
 @RestController
 public class ApiController {
     PreferenceDAO preferenceData;
     ProfileDAO profileData;
+    UserDAO userData;
 
 /**********************************************************************************************************************
 * Put your Application API Controllers here
 **********************************************************************************************************************/
-public ApiController(PreferenceDAO thePreference, ProfileDAO theProfile) {
+public ApiController(PreferenceDAO thePreference, ProfileDAO theProfile, UserDAO theUserData) {
     preferenceData = thePreference;
     profileData = theProfile;
+    userData = theUserData;
 }
 
 @RequestMapping(path = "/user", method = RequestMethod.POST)
@@ -77,6 +80,11 @@ public Preference updatedPreferences(@RequestBody Preference updatedPreferences)
 public void deletePreferences(@PathVariable long id) {
     logRequest("DELETE -- PREFERENCES");
     preferenceData.deletePreferences(id);
+}
+
+@RequestMapping(path = "/user/{username}", method = RequestMethod.GET)
+public User getUser(@PathVariable String username) {
+    return userData.findByUserName(username);
 }
 	
 	
