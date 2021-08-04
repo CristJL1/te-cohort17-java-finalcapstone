@@ -180,8 +180,9 @@ export default {
 </script>
 
 <style scoped>
-h1{
-        color: red;
+    h1{
+        text-shadow:4px 4px 4px rgb(85, 3, 3);
+        color: rgb(204, 10, 10);
     }
 
     .questionnaire {
@@ -197,9 +198,13 @@ h1{
 
     .form-questionnaire {
         grid-area: form-questionnaire;
-        background-color: white;
-        height: 650px;
+        background-color: rgba(190, 186, 186, 0.911);
+        height: 550px;
         padding: 5%;
+        border-style: outset;
+        border-width: medium;
+        border-color: rgba(92, 92, 92, 0.842);
+        border-radius: 10px;
     }
 
     .text-center {
@@ -209,6 +214,9 @@ h1{
 
     .foodtype {
         margin: 2%;
+        border-style: inset;
+        border-width: medium;
+        border-color: rgba(92, 92, 92, 0.712);
     }
 
     .dietarybox {
@@ -217,5 +225,11 @@ h1{
 
     p {
         margin: 0px;
+    }
+
+    input {
+        border-style: inset;
+        border-width: medium;
+        border-color: rgba(92, 92, 92, 0.712);
     }
 </style>

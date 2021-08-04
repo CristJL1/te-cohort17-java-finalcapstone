@@ -124,7 +124,7 @@ div.app {
 
 .form-signin {
   grid-area: form-signin;
-  background-color: rgba(190, 186, 186, 0.877);
+  background-color: rgba(190, 186, 186, 0.911);
   height: 350px;
   padding: 5%;
   border-style: outset;
@@ -134,11 +134,15 @@ div.app {
 }
 
 h1 {
-  color: red;
+  text-shadow:4px 4px 4px rgb(85, 3, 3);
+  color: rgb(204, 10, 10);
 }
 
 input {
   margin-bottom: 5%;
+  border-style: inset;
+  border-width: medium;
+  border-color: rgba(92, 92, 92, 0.712);
 }
 
 </style>

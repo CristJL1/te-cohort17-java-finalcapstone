@@ -110,8 +110,8 @@ export default {
 
 
 h1 {
-
-  color: red;
+  text-shadow:4px 4px 4px rgb(85, 3, 3);
+  color: rgb(204, 10, 10);
 }
 
 
@@ -129,9 +129,8 @@ h1 {
 
 .form-register {
   grid-area: form-register;
-  background-color: rgba(190, 186, 186, 0.877);
+  background-color: rgba(190, 186, 186, 0.911);
   height: 350px;
-  text-align: center;
   padding: 5%;
   border-style: outset;
   border-width: medium;
