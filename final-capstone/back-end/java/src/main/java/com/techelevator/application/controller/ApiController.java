@@ -12,7 +12,7 @@ import com.techelevator.application.model.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-
+@CrossOrigin
 @RestController
 public class ApiController {
     PreferenceDAO preferenceData;
