@@ -22,7 +22,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         String sqlInsert = "insert into restaurants (restaurant_id, restaurant_name, " +
                 "restaurant_phone, restaurant_website, hours, price_range, price_range_num, " +
                 "cuisine_type_1, cuisine_type_2, cuisine_type_3, cuisine_type_4, cuisine_type_5, " +
-                "cuisine_type_6, cuisine_type_7, city, state, postal_code, street, formatted, lat, lon " +
+                "cuisine_type_6, cuisine_type_7, city, state, postal_code, street, formatted, lat, lon) " +
                 " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getRestaurantName(),
@@ -55,7 +55,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
-        String updateSql = "update restaurants set restaurant_name= ? restaurant_phone =?, restaurant_website =?, " +
+        String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone =?, restaurant_website =?, " +
                 "hours = ?, price_range = ?, price_range_num = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, " +
                 "cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, " +
                 "city = ?, state = ?, postal_code = ?, street = ?, formatted = ?, lat = ?, lon = ? where restaurant_id = ?";
