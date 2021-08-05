@@ -20,6 +20,14 @@ addPreferences(preferences) {
 
 getUserByUserName(username) {
     return axios.get(`/user/getuser/${username}`)
+},
+
+getProfileById(id) {
+    return axios.get(`/user/${id}`)
+},
+
+getPreferenceById(id) {
+    return axios.get(`/user/${id}/preference`)
 }
 
 }

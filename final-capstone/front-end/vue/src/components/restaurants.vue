@@ -17,19 +17,23 @@ export default {
        return {
 
        }
-   },
-   methods: {
-       getRestaurantsByZipCode(zipCode) {
+   }, 
+   created() {
+      
            // Don't know if we need this line below
+           /*let zipCode = this.$store.state.profile.zipCode
            let result = await Documenu.Restaurants.getRestaurantsByZipCode(zipCode); 
             
             Documenu.Restaurants.getRestaurantsByZipCode(zipCode)
             .then(response=> {
             this.$store.commit("SET_RESTAURANTS", response.data);
-        });
-       }
-   }
-}
+        }); */
+      
+
+   },
+
+   methods: { }
+} // end of export default
 </script>
 
 

@@ -50,6 +50,7 @@
   </div>
 </template>
 <script>
+import ApplicationServices from '../services/ApplicationServices';
 import authService from "../services/AuthService";
 
 export default {
@@ -72,7 +73,17 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            ApplicationServices
+            .getProfileByID(this.$store.state.user.id)
+            .then(response => {
+              this.$store.commit("SET_PROFILE_DATA", this.profile);
+              ApplicationServices
+              .getPreferenceById(this.$store.state.user.id)
+              .then(response => {
+                this.$store.commit("SET_PREFERENCE_DATA", this.preference); // need a service to get preference and profile
+                this.$router.push("/");
+              })
+            } )
           }
         })
         .catch(error => {

@@ -139,55 +139,30 @@ export default {
                  vegetarian: false,
                  glutenFree: false
             },
-            userData: {
-                username: '',
-                id: '',
-                password: '',
-                authorities: ''
-            }
+            
         }
     }, // END OF DATA
     created() {
-      /*alert(`Created!!  Looking for username ${this.$store.state.currentUser.username}`)
-        applicationServices
-        .getUserByUserName(this.$store.state.currentUser.username) 
-        .then(response => {
-          alert(`${response.data}`)
-          this.$store.commit("SET_USER_DATA", response.data)
-        });*/
     },
     methods: {
         submitQuestionnaire() {
-           /* const newProfile = {
-                firstName: this.profile.firstName,
-                lastName: this.profile.lastName,
-                DOB: this.profile.DOB,
-                email: this.profile.email,
-                zipCode: this.profile.zipCode 
-            }; */
+        
             this.profile.userId = this.$route.query.id;
             applicationServices
             .addProfile(this.profile)
             .then(response => {
                 this.preferences.userId = this.$route.query.id;
+                
                 applicationServices
                 .addPreferences(this.preferences)
                 .then(response => {
+                
                 this.$router.push({
                 path: '/login' 
         })
         })
 
-        /*const newPreferences = {
-                 cuisineStyle1: this.preferences.cuisineStyle1,
-                 cuisineStyle2: this.preferences.cuisineStyle2,
-                 cuisineStyle3: this.preferences.cuisineStyle3,
-                 pricePoint: this.preferences.pricePoint,
-                 vegan: this.preferences.vegan,
-                 vegetarian: this.preferences.vegetarian,
-                 glutenFree: this.preferences.glutenFree
-            } */
-            
+       
         
         });
         } // END OF SUBMITQUESTIONNAIRE
