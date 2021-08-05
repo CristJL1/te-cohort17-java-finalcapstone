@@ -8,8 +8,8 @@
 
 
 <script>
-const Documenu = require('documenu')
-Documenu.configure('e2992117f97c5ba5fea8074bed9851e6')
+/*const Documenu = require('documenu')
+Documenu.configure('e2992117f97c5ba5fea8074bed9851e6')*/
 
 export default {
    name: 'restaurants',

@@ -73,22 +73,22 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            ApplicationServices
+            this.$router.push("/");
+            /* ApplicationServices
             .getProfileByID(this.$store.state.user.id)
-            .then(response => {
-              this.$store.commit("SET_PROFILE_DATA", this.profile);
+            .then(res => {
+              this.$store.commit("SET_PROFILE_DATA", res.data);
               ApplicationServices
               .getPreferenceById(this.$store.state.user.id)
-              .then(response => {
-                this.$store.commit("SET_PREFERENCE_DATA", this.preference); // need a service to get preference and profile
+              .then(res => {
+                this.$store.commit("SET_PREFERENCE_DATA", res.data); // need a service to get preference and profile
                 this.$router.push("/");
               })
-            } )
+            }) */
           }
         })
         .catch(error => {
           const response = error.response;
-
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
