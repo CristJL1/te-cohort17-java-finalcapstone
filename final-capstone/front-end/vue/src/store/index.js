@@ -22,12 +22,9 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
-    userData: {
-      username: '',
-      id: '',
-      password: '',
-      authorities: ''
-    }
+    id: 0,          // Hold the id from the Questionnaire
+    profile:{},     // Hold the current users profile data
+    preference:{}   // Hold current users preference data
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -46,12 +43,18 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_RESTAURANTS(state, data) {
+    SET_RESTAURANTS(state, data) { 
       state.restaurants = data;
     },
     SET_USER_DATA(state, user) {
       state.userData = user;
       
+    },
+    SET_PREFERENCE_DATA(state, preference) { 
+      state.preference = preference;
+    },
+    SET_PROFILE_DATA(state, profile) {
+      state.profile = profile;
     }
 
   }
