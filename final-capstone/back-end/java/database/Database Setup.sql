@@ -49,7 +49,6 @@ constraint pk_preferences_user_id Primary Key (user_id));
 
 create table restaurants
 (restaurant_id serial not null, -- may need to change data type to long to use restaurant_id from API
-is_liked boolean,
 restaurant_name character varying(100),
 restaurant_phone character varying (14),
 restaurant_website character varying(150),
@@ -76,6 +75,7 @@ constraint pk_resturants_restaurant_id Primary Key (restaurant_id));
 create table restaurants_profile
 (restaurant_id int not null,
 user_id int not null,
+is_liked boolean,
 constraint pk_restaurants_profile_restaurant_id_user_id Primary Key (restaurant_id, user_id));
 
 

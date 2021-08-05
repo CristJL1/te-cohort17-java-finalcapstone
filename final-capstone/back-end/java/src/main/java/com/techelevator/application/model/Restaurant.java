@@ -3,7 +3,6 @@ package com.techelevator.application.model;
 public class Restaurant {
 
     private Long restaurantId;
-    private boolean isLiked;
     private String restaurantName;
     private String restaurantPhone;
     private String restaurantWebsite;
@@ -31,14 +30,6 @@ public class Restaurant {
 
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public boolean isLiked() {
-        return isLiked;
-    }
-
-    public void setLiked(boolean liked) {
-        isLiked = liked;
     }
 
     public String getRestaurantName() {
@@ -205,7 +196,6 @@ public class Restaurant {
     public String toString() {
         return "Restaurant{" +
                 "restaurantId=" + restaurantId +
-                ", isLiked=" + isLiked +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", restaurantPhone='" + restaurantPhone + '\'' +
                 ", restaurantWebsite='" + restaurantWebsite + '\'' +
