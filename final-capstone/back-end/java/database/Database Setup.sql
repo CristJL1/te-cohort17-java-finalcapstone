@@ -48,7 +48,7 @@ gluten_free boolean,
 constraint pk_preferences_user_id Primary Key (user_id));
 
 create table restaurants
-(restaurant_id serial not null,
+(restaurant_id serial not null, -- may need to change data type to long to use restaurant_id from API
 is_liked boolean,
 restaurant_name character varying(100),
 restaurant_phone character varying (14),
