@@ -64,7 +64,7 @@ public class AuthenticationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register(@Valid @RequestBody RegisterUserDTO newUser) {
+    public User register(@Valid @RequestBody RegisterUserDTO newUser) {
     	logRequest("/register path request for user: " + newUser.getUsername() + " Role: " + newUser.getRole());
         try {
             User user = userDAO.findByUsername(newUser.getUsername());
@@ -72,7 +72,9 @@ public class AuthenticationController {
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
             userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+            User regUser = userDAO.findByUsername(newUser.getUsername());
             logRequest("Request completed with status code 200: ");
+            return regUser;
         }
     }
 

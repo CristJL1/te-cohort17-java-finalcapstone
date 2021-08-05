@@ -77,9 +77,10 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
+              this.$store.commit("SET_USER", response.data);
               this.$router.push({
                 path: '/questionnaire',
-                query: { registration: 'success' },
+                query: {id:response.data.id, registration: 'success' },
               });
             }
           })

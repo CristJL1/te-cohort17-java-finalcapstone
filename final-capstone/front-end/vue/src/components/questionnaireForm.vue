@@ -122,7 +122,7 @@ export default {
     data() {
         return {
             profile: {
-                userId: this.$store.state.userData.id, /* figure how to current UserID passed in*/
+                userId: this.$route.params.id, /* figure how to current UserID passed in*/
                 firstName: '',
                 lastName: '',
                 dateOfBirth: '',
@@ -130,7 +130,7 @@ export default {
                 zipCode: ''
             },
             preferences: {
-                 userId: this.$store.state.userData.id, /* figure how to current UserID passed in*/
+                 userId: this.$route.params.id, /* figure how to current UserID passed in*/
                  cuisineStyle1: '',
                  cuisineStyle2: '',
                  cuisineStyle3: '',
@@ -148,13 +148,13 @@ export default {
         }
     }, // END OF DATA
     created() {
-      alert(`Created!!  Looking for username ${this.$store.state.currentUser.username}`)
+      /*alert(`Created!!  Looking for username ${this.$store.state.currentUser.username}`)
         applicationServices
         .getUserByUserName(this.$store.state.currentUser.username) 
         .then(response => {
           alert(`${response.data}`)
           this.$store.commit("SET_USER_DATA", response.data)
-        });
+        });*/
     },
     methods: {
         submitQuestionnaire() {
@@ -165,9 +165,17 @@ export default {
                 email: this.profile.email,
                 zipCode: this.profile.zipCode 
             }; */
+            this.profile.userId = this.$route.params.id;
             applicationServices
             .addProfile(this.profile)
             .then(response => {
+                this.preferences.userId = this.$route.params.id;
+                applicationServices
+                .addPreferences(this.preferences)
+                .then(response => {
+                this.$router.push({
+                path: '/login' 
+        })
         })
 
         /*const newPreferences = {
@@ -179,12 +187,7 @@ export default {
                  vegetarian: this.preferences.vegetarian,
                  glutenFree: this.preferences.glutenFree
             } */
-            applicationServices
-            .addPreferences(this.preferences)
-            .then(response => {
-             this.$router.push({
-          path: '/login' 
-        })
+            
         
         });
         } // END OF SUBMITQUESTIONNAIRE
