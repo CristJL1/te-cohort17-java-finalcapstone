@@ -7,8 +7,11 @@ package com.techelevator.application.controller;
 //import com.sun.tools.javac.util.DefinedBy;
 import com.techelevator.application.dao.PreferenceDAO;
 import com.techelevator.application.dao.ProfileDAO;
+import com.techelevator.application.dao.RestaurantDAO;
 import com.techelevator.application.model.Preference;
 import com.techelevator.application.model.Profile;
+import com.techelevator.application.model.Restaurant;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.techelevator.security.dao.UserDAO;
 import java.sql.Timestamp;
@@ -19,16 +22,20 @@ public class ApiController {
     PreferenceDAO preferenceData;
     ProfileDAO profileData;
     UserDAO userData;
-
+    RestaurantDAO restaurantData;
+// Figure out API call for adding a restaurant to restaurant_profile table
 /**********************************************************************************************************************
 * Put your Application API Controllers here
 **********************************************************************************************************************/
-public ApiController(PreferenceDAO thePreference, ProfileDAO theProfile, UserDAO theUserData) {
+public ApiController(PreferenceDAO thePreference, ProfileDAO theProfile, UserDAO theUserData,
+                     RestaurantDAO theRestaurantData) {
     preferenceData = thePreference;
     profileData = theProfile;
     userData = theUserData;
+    restaurantData = theRestaurantData;
 }
 
+@ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/user", method = RequestMethod.POST)
 public Profile createProfile(@RequestBody Profile userProfile) {
     logRequest("POST -- PROFILE");
@@ -56,6 +63,7 @@ public void deleteProfile(@PathVariable long id) {
     profileData.deleteProfile(id);
 }
 
+@ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/user/preference", method = RequestMethod.POST)
 public Preference createPreference(@RequestBody Preference userPreference) {
     logRequest("POST -- PREFERENCE");
@@ -90,6 +98,34 @@ public User getUser(@PathVariable String username) {
     return aUser;
 }
 
+@ResponseStatus(HttpStatus.CREATED)
+@RequestMapping(path = "/restaurants", method = RequestMethod.POST)
+public Restaurant addRestaurantToRestaurants(@RequestBody Restaurant restaurantToAdd) {
+    logRequest("POST -- RESTAURANT");
+
+    restaurantData.addRestaurant(restaurantToAdd);
+    return restaurantToAdd;
+}
+
+@RequestMapping(path = "/restaurants/{id}", method = RequestMethod.GET)
+public Restaurant getRestaurantById(@PathVariable long id) {
+    logRequest("GET -- RESTAURANT");
+
+    return restaurantData.viewRestaurant(id);
+}
+
+@RequestMapping(path = "/restaurants", method = RequestMethod.PUT)
+public Restaurant updateRestaurant(@RequestBody Restaurant restaurantToUpdate) {
+    logRequest("PUT -- RESTAURANT");
+
+    return restaurantData.updateRestaurant(restaurantToUpdate);
+
+}
+
+@RequestMapping(path="/restaurants/{id}", method = RequestMethod.DELETE)
+public void deleteRestaurant(@PathVariable long id) {
+    restaurantData.deleteRestaurant(id);
+}
 	
 	
 	

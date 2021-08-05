@@ -19,6 +19,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
+        // add logic to check if restaurant is already in restaurant list - check name and formatted
         String sqlInsert = "insert into restaurants (restaurant_id, restaurant_name, " +
                 "restaurant_phone, restaurant_website, hours, price_range, price_range_num, " +
                 "cuisine_type_1, cuisine_type_2, cuisine_type_3, cuisine_type_4, cuisine_type_5, " +
@@ -37,7 +38,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return restaurantToAdd;
     }
     @Override // need to check in DBV
-    public Restaurant addRestaurantToUserList(Restaurant restaurantToAdd, User currentUser) {
+    public Restaurant addRestaurantToUserList(Restaurant restaurantToAdd, User currentUser, boolean isLiked) {
+        //Add user_id from user, restaurant_id from restaurant and whether user liked it or not
         return restaurantToAdd;
     }
 
@@ -68,7 +70,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                 restaurantToUpdate.getCuisineType5(), restaurantToUpdate.getCuisineType6(),
                 restaurantToUpdate.getCuisineType7(), restaurantToUpdate.getCity(), restaurantToUpdate.getState(),
                 restaurantToUpdate.getPostal_code(), restaurantToUpdate.getStreet(), restaurantToUpdate.getFormatted(),
-                restaurantToUpdate.getLat(), restaurantToUpdate.getLon());
+                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
     }

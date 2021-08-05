@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.User;
 public interface RestaurantDAO {
     Restaurant addRestaurant(Restaurant restaurantToAdd);
 
-    Restaurant addRestaurantToUserList(Restaurant restaurantToAdd, User currentUser);
+    Restaurant addRestaurantToUserList(Restaurant restaurantToAdd, User currentUser, boolean isLiked);
 
     Restaurant viewRestaurant(Long id);
 
