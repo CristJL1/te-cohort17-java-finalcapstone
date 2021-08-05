@@ -47,7 +47,7 @@ const router = new Router({
       }
     },
     {
-      path: "/questionnaire/:id",
+      path: "/questionnaire",
       name: "questionnaire",
       component: Questionnaire,
       meta: {

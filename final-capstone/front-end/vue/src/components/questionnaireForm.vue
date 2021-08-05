@@ -122,7 +122,7 @@ export default {
     data() {
         return {
             profile: {
-                userId: this.$route.params.id, /* figure how to current UserID passed in*/
+                userId: '', /* figure how to current UserID passed in*/
                 firstName: '',
                 lastName: '',
                 dateOfBirth: '',
@@ -130,7 +130,7 @@ export default {
                 zipCode: ''
             },
             preferences: {
-                 userId: this.$route.params.id, /* figure how to current UserID passed in*/
+                 userId: '', /* figure how to current UserID passed in*/
                  cuisineStyle1: '',
                  cuisineStyle2: '',
                  cuisineStyle3: '',
@@ -165,11 +165,11 @@ export default {
                 email: this.profile.email,
                 zipCode: this.profile.zipCode 
             }; */
-            this.profile.userId = this.$route.params.id;
+            this.profile.userId = this.$route.query.id;
             applicationServices
             .addProfile(this.profile)
             .then(response => {
-                this.preferences.userId = this.$route.params.id;
+                this.preferences.userId = this.$route.query.id;
                 applicationServices
                 .addPreferences(this.preferences)
                 .then(response => {
