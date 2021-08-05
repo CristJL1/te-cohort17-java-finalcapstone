@@ -5,6 +5,8 @@ drop table if exists user_profile cascade;
 drop table if exists profile cascade;
 drop table if exists profile_preferences cascade;
 drop table if exists preferences cascade;
+drop table if exists restaurants cascade;
+drop table if exists restaurants_profile cascade;
 
 DROP SEQUENCE IF EXISTS seq_user_id;
 
@@ -45,7 +47,40 @@ vegetarian boolean,
 gluten_free boolean,
 constraint pk_preferences_user_id Primary Key (user_id));
 
--- removed uder-profile relator table
+create table restaurants
+(restaurant_id serial not null,
+is_liked boolean,
+restaurant_name character varying(100),
+restaurant_phone character varying (14),
+restaurant_website character varying(150),
+hours character varying (50),
+price_range character varying (4),
+price_range_num int,
+cuisine_type_1 character varying (50),
+cuisine_type_2 character varying (50),
+cuisine_type_3 character varying (50),
+cuisine_type_4 character varying (50),
+cuisine_type_5 character varying (50),
+cuisine_type_6 character varying (50),
+cuisine_type_7 character varying (50),
+city character varying (100),
+state character varying (2),
+postal_code numeric(5,0),
+street character varying (200),
+-- formatted address, API calls it just "formatted" ex: 123 Main St, Cleveland, OH 44444
+formatted character varying (500),
+lat double precision,
+lon double precision,
+constraint pk_resturants_restaurant_id Primary Key (restaurant_id));
+
+create table restaurants_profile
+(restaurant_id int not null,
+user_id int not null,
+constraint pk_restaurants_profile_restaurant_id_user_id Primary Key (restaurant_id, user_id));
+
+
+
+-- removed user-profile relator table
 
 --create table user_profile
 --(user_id integer not null,
@@ -67,6 +102,9 @@ constraint pk_preferences_user_id Primary Key (user_id));
 
 alter table preferences add foreign key (user_id) references users (user_id);
 alter table profile add foreign key (user_id) references users (user_id);
+
+alter table restaurants_profile add foreign key (restaurant_id) references restaurants (restaurant_id);
+alter table restaurants_profile add foreign key (user_id) references profile (user_id);
 
 
 commit;
