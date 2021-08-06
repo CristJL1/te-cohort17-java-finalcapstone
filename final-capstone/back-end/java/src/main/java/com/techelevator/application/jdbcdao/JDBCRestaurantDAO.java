@@ -25,6 +25,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
         // add logic to check if restaurant is already in restaurant list - check name and formatted
 
+        restaurantToAdd.setRestaurantId(getNextRestaurantId());
+
         if (viewRestaurant(restaurantToAdd.getRestaurantId()) != null) {
             String sqlInsert = "insert into restaurants (restaurant_id, restaurant_name, " +
                     "restaurant_phone, restaurant_website, hours, price_range, price_range_num, " +
@@ -100,8 +102,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView) {
         List<Restaurant> favoritedList = new ArrayList();
-        String sqlSearch = "select * from restaurants inner join restaurants_profile where is_liked = true and " +
-                "user_id = ?";
+        String sqlSearch = "select * from restaurants r inner join restaurants_profile rp on " +
+                           "r.restaurant_id = rp.restaurant_id where is_liked = true and user_id = ?";
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, restaurantToView.getCurrentProfile().getUserId());
 
         if (result.next()) {
@@ -159,6 +161,16 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         newRestaurant.setLon(row.getDouble("lon"));
 
         return newRestaurant;
+    }
+
+    private long getNextRestaurantId() {
+        SqlRowSet nextId = theDatabase.queryForRowSet("select nextval('restaurants_restaurant_id_seq')");
+
+        if (nextId.next()) {
+            return  nextId.getLong(1);
+        } else {
+            throw new RuntimeException("There was no next Restaurant Id");
+        }
     }
 
 
