@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.User;
 
 public class RestaurantDTO {
     private Restaurant restaurantToAdd;
-    private User       currentUser;
-    private boolean    isLiked;
+    private Profile currentProfile;
+    private boolean isLiked;
 
     public Restaurant getRestaurantToAdd() {
         return restaurantToAdd;
@@ -15,12 +15,12 @@ public class RestaurantDTO {
         this.restaurantToAdd = restaurantToAdd;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public Profile getCurrentProfile() {
+        return currentProfile;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setCurrentProfile(Profile currentProfile) {
+        this.currentProfile = currentProfile;
     }
 
     public boolean isLiked() {
@@ -35,7 +35,7 @@ public class RestaurantDTO {
     public String toString() {
         return "RestaurantDTO{" +
                 "restaurantToAdd=" + restaurantToAdd +
-                ", currentUser=" + currentUser +
+                ", currentProfile=" + currentProfile +
                 ", isLiked=" + isLiked +
                 '}';
     }
