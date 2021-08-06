@@ -23,24 +23,27 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
-        // add logic to check if restaurant is already in restaurant list - check name and formatted
+        // add logic to cycle through the List of cuisines, for any within the length of the array, assign it a value,
+        //      maybe make List of variables to hold cuisine_style_num, default value of null (field nullable in DB)
+        //      for loop that assigns, for length of cuisineList
 
         restaurantToAdd.setRestaurantId(getNextRestaurantId());
 
         if (viewRestaurant(restaurantToAdd.getRestaurantId()) != null) {
-            String sqlInsert = "insert into restaurants (restaurant_id, restaurant_name, " +
-                    "restaurant_phone, restaurant_website, hours, price_range, price_range_num, " +
-                    "cuisine_type_1, cuisine_type_2, cuisine_type_3, cuisine_type_4, cuisine_type_5, " +
-                    "cuisine_type_6, cuisine_type_7, city, state, postal_code, street, formatted, lat, lon) " +
-                    " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sqlInsert = "insert into restaurants (restaurant_id, location_id, restaurant_name, " +
+                    "restaurant_phone, restaurant_website, price_range, cuisine_type_1, cuisine_type_2, " +
+                    "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
+                    "address, lat, lon) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getRestaurantName(),
-                    restaurantToAdd.getRestaurantPhone(), restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getHours(),
-                    restaurantToAdd.getPriceRange(), restaurantToAdd.getPriceRangeNum(), restaurantToAdd.getCuisineType1(),
-                    restaurantToAdd.getCuisineType2(), restaurantToAdd.getCuisineType3(), restaurantToAdd.getCuisineType4(),
-                    restaurantToAdd.getCuisineType5(), restaurantToAdd.getCuisineType6(), restaurantToAdd.getCuisineType7(),
-                    restaurantToAdd.getCity(), restaurantToAdd.getState(), restaurantToAdd.getPostal_code(),
-                    restaurantToAdd.getStreet(), restaurantToAdd.getFormatted(), restaurantToAdd.getLat(),
+
+
+            theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getLocationId(),
+                    restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
+                    restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
+                    restaurantToAdd.getCuisineType1(), restaurantToAdd.getCuisineType2(),
+                    restaurantToAdd.getCuisineType3(), restaurantToAdd.getCuisineType4(),
+                    restaurantToAdd.getCuisineType5(), restaurantToAdd.getCuisineType6(),
+                    restaurantToAdd.getCuisineType7(), restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
         }
@@ -59,6 +62,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return aRestaurant;
     }
 
+    //edit to match new database set up, use same logic that works for add restaurant 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
         String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone = ?, restaurant_website = ?, " +
