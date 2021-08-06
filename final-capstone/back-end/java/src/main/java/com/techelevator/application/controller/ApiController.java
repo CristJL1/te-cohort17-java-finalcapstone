@@ -98,6 +98,7 @@ public User getUser(@PathVariable String username) {
     return aUser;
 }
 
+// Take the DTO? Then use it to update restaurants and restaurants_profile?
 @ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/restaurants", method = RequestMethod.POST)
 public Restaurant addRestaurantToRestaurants(@RequestBody Restaurant restaurantToAdd) {
