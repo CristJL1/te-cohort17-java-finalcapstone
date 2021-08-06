@@ -17,5 +17,9 @@ public interface RestaurantDAO {
 
     void deleteRestaurant(Long id);
 
-    List<Restaurant> viewIfUserLikesRestaurant(RestaurantDTO restaurantToView);
+    List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView);
+
+    RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate);
+
+    void deleteRestaurantFromUsersList(RestaurantDTO restaurantToDelete);
 }
