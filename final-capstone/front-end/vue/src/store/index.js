@@ -22,7 +22,6 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
-    id: 0,          // Hold the id from the Questionnaire
     profile:{},     // Hold the current users profile data
     preference:{}   // Hold current users preference data
   },

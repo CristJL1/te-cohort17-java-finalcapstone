@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+  <div class="home text-center">
     <restaurants/>
   </div>
 </template>
@@ -13,7 +11,7 @@ export default {
   components: { restaurants },
   name: "home",
   created() {
-    
+
     /*ApplicationServices
             .getProfileById(this.$store.state.user.id)
             .then(res => {
@@ -28,3 +26,7 @@ export default {
 };
 
 </script>
+
+<style scoped>
+
+</style>
