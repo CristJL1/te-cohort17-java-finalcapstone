@@ -13,7 +13,8 @@ export default {
   components: { restaurants },
   name: "home",
   created() {
-    ApplicationServices
+    
+    /*ApplicationServices
             .getProfileById(this.$store.state.user.id)
             .then(res => {
               this.$store.commit("SET_PROFILE_DATA", res.data);
@@ -22,7 +23,7 @@ export default {
               .then(res => {
                 this.$store.commit("SET_PREFERENCE_DATA", res.data); // need a service to get preference and profile
               })
-            }) 
+            }) */
   }
 };
 
