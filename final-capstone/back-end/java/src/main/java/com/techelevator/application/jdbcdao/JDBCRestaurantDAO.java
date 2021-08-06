@@ -25,6 +25,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
         // add logic to check if restaurant is already in restaurant list - check name and formatted
 
+        restaurantToAdd.setRestaurantId(getNextRestaurantId());
+
         if (viewRestaurant(restaurantToAdd.getRestaurantId()) != null) {
             String sqlInsert = "insert into restaurants (restaurant_id, restaurant_name, " +
                     "restaurant_phone, restaurant_website, hours, price_range, price_range_num, " +
@@ -59,7 +61,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
-        String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone =?, restaurant_website =?, " +
+        String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone = ?, restaurant_website = ?, " +
                 "hours = ?, price_range = ?, price_range_num = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, " +
                 "cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, " +
                 "city = ?, state = ?, postal_code = ?, street = ?, formatted = ?, lat = ?, lon = ? where restaurant_id = ?";
@@ -84,10 +86,10 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         theDatabase.update(deleteSql, id);
     }
 
-
+    // are we planning to send each one at a time or a List all at once when they navigate somewhere else?
     @Override
     public RestaurantDTO addRestaurantToUserList(RestaurantDTO restaurantToAddToUserList) {
-        //Add user_id from user, restaurant_id from restaurant and whether user liked it or not
+
         String sqlInsert = "insert into restaurants_profile (restaurant_id, user_id, is_liked) values " +
                 "(?, ?, ?)";
 
@@ -98,10 +100,10 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     }
 
     @Override
-    public List<Restaurant> viewIfUserLikesRestaurant(RestaurantDTO restaurantToView) {
+    public List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView) {
         List<Restaurant> favoritedList = new ArrayList();
-        String sqlSearch = "select * from restaurants inner join restaurants_profile where is_liked = true and " +
-                "user_id = ?";
+        String sqlSearch = "select * from restaurants r inner join restaurants_profile rp on " +
+                           "r.restaurant_id = rp.restaurant_id where is_liked = true and user_id = ?";
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, restaurantToView.getCurrentProfile().getUserId());
 
         if (result.next()) {
@@ -111,7 +113,24 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return favoritedList;
     }
 
+    @Override
+    public RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate) {
+        String sqlUpdateStmt = "update restaurants_profile set is_liked = ? where restaurant_id = ? and user_id = ?";
 
+        theDatabase.update(sqlUpdateStmt, restaurantToUpdate.isLiked(),
+                           restaurantToUpdate.getRestaurantToAdd().getRestaurantId(),
+                           restaurantToUpdate.getCurrentProfile().getUserId());
+
+        return restaurantToUpdate;
+    }
+
+    @Override
+    public void deleteRestaurantFromUsersList(RestaurantDTO restaurantToDelete) {
+        String sqlDeleteStmt = "delete from restaurants_profile where restaurant_id = ? and user_id = ?";
+
+        theDatabase.update(sqlDeleteStmt, restaurantToDelete.getRestaurantToAdd().getRestaurantId(),
+                           restaurantToDelete.getCurrentProfile().getUserId());
+    }
 
 
 // helper methods
@@ -142,6 +161,16 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         newRestaurant.setLon(row.getDouble("lon"));
 
         return newRestaurant;
+    }
+
+    private long getNextRestaurantId() {
+        SqlRowSet nextId = theDatabase.queryForRowSet("select nextval('restaurants_restaurant_id_seq')");
+
+        if (nextId.next()) {
+            return  nextId.getLong(1);
+        } else {
+            throw new RuntimeException("There was no next Restaurant Id");
+        }
     }
 
 

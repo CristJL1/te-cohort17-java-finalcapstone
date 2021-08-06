@@ -3,6 +3,7 @@ package com.techelevator.application.model;
 public class Restaurant {
 
     private Long restaurantId;
+    private Long locationId;
     private String restaurantName;
     private String restaurantPhone;
     private String restaurantWebsite;
@@ -30,6 +31,14 @@ public class Restaurant {
 
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
     public String getRestaurantName() {
@@ -196,6 +205,7 @@ public class Restaurant {
     public String toString() {
         return "Restaurant{" +
                 "restaurantId=" + restaurantId +
+                ", locationId=" + locationId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", restaurantPhone='" + restaurantPhone + '\'' +
                 ", restaurantWebsite='" + restaurantWebsite + '\'' +

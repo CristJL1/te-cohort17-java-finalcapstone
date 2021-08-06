@@ -11,6 +11,7 @@ import com.techelevator.application.dao.RestaurantDAO;
 import com.techelevator.application.model.Preference;
 import com.techelevator.application.model.Profile;
 import com.techelevator.application.model.Restaurant;
+import com.techelevator.application.model.RestaurantDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.techelevator.security.dao.UserDAO;
@@ -98,12 +99,13 @@ public User getUser(@PathVariable String username) {
     return aUser;
 }
 
+// Take the DTO? Then use it to update restaurants and restaurants_profile?
 @ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/restaurants", method = RequestMethod.POST)
-public Restaurant addRestaurantToRestaurants(@RequestBody Restaurant restaurantToAdd) {
+public RestaurantDTO addRestaurantToRestaurants(@RequestBody RestaurantDTO restaurantToAdd) {
     logRequest("POST -- RESTAURANT");
-
-    restaurantData.addRestaurant(restaurantToAdd);
+    restaurantData.addRestaurant(restaurantToAdd.getRestaurantToAdd());
+    restaurantData.addRestaurantToUserList(restaurantToAdd);
     return restaurantToAdd;
 }
 

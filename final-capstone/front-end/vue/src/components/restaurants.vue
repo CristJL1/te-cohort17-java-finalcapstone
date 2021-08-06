@@ -1,6 +1,30 @@
 <template>
-    <div class="restaurants">
-    
+    <div class="restaurants text-center">
+        <h2> Mangiamo </h2>
+        <div class="restaurantCard">
+           <h3>{{this.$store.state.restaurants.data[restaurantId].name}} </h3>
+           <p>{{this.$store.state.restaurants.data[restaurantId].description}}</p>
+           <p>{{this.$store.state.restaurants.data[restaurantId].address}}</p>
+           <p>Cuisine Type: {{this.$store.state.restaurants.data[restaurantId].cuisine[0].name}}</p>
+           <p>Go to Website: 
+               <a v-bind:href="this.$store.state.restaurants.data[restaurantId].website"
+               target="_blank">
+               {{this.$store.state.restaurants.data[restaurantId].website}}
+               </a>
+            </p>
+            <p>Price: {{this.$store.state.restaurants.data[restaurantId].price_level}} ({{this.$store.state.restaurants.data[restaurantId].price}}) </p>
+
+           <!--<p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[0].name}}</p>
+           <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[1].name}}</p>
+           <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[2].name}}</p>
+           -->
+           <button v-on:click.prevent="cycleRestaurant">I Like this Restaurant</button>
+           <!--
+           <img 
+           v-if="" - CHECK TO SEE IF A PICTURE EXISTS
+           v-bind:src="apiRestaurants.data[currentRestaurant].photo.images.large.url"/>
+           -->
+        </div>
     </div>    
 
 
@@ -9,46 +33,81 @@
 
 <script>
 import ApplicationServices from '../services/ApplicationServices.js'
-const Documenu = require('documenu')
-Documenu.configure('e2992117f97c5ba5fea8074bed9851e6')
+import axios from "axios";
+
 
 export default {
+
    name: 'restaurants',
    data() {
        return {
-           apiRestaurants: []
-
+           restaurantId: 0,     
+           filteredRestaurants: [], // Holds our Restaurants filtered by Preferences
+          
        }
    }, 
    created() {
-       // Instantiate the Documenu API with Key
-        const Documenu = require('documenu')
-        Documenu.configure('e2992117f97c5ba5fea8074bed9851e6')
-
-       ApplicationServices
-            .getProfileById(this.$store.state.user.id)
-            .then(res => {
-              this.$store.commit("SET_PROFILE_DATA", res.data);
-              ApplicationServices
-              .getPreferenceById(this.$store.state.user.id)
-              .then(res => {
-                this.$store.commit("SET_PREFERENCE_DATA", res.data); 
-                // Create zipCode Variable to hold our current user's zipCode
-                let zipCode = this.$store.state.profile.zipCode
-                // Call API to get Restaurants by zipCode    
-                Documenu.Restaurants.getByZipCode(zipCode)
-                .then(response=> {
-                this.apiRestaurants = response.data
-                }); 
-              })
-            }) 
+        const options = {
+        method: 'GET',
+        url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
+        params: {
+            latitude: '41.49932',
+            longitude: '-81.694361',
+            limit: '100',
+            currency: 'USD',
+            distance: '2',
+            lunit: 'km',
+            lang: 'en_US'
+            },
+        headers: {
+            'x-rapidapi-key': 'e6c2c2c125msh616ece324f702d5p18a5b7jsn6f5f714dfcb2',
+            'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
+  }
+};
+        
+        axios.request(options)
+        .then( (response) => {
+	        this.$store.commit("SET_RESTAURANTS", response.data)
+        });
    },
-
-   methods: { }
+   computed: { 
+       
+    }, 
+   methods: { 
+       cycleRestaurant() {
+           let currentRestaurant = this.$store.state.restaurants.data
+           this.restaurantId++
+       }
+   }
 } // end of export default
 </script>
 
 
 <style scoped>
+
+.text-center {
+        text-align: center;
+        font-family: Monospace, Cursive, Sans-serif;
+    }
+
+h2{
+    color: rgb(204, 10, 10);
+}
+
+.text-center {
+        text-align: center;
+        font-family: Monospace, Cursive, Sans-serif;
+        background-color: white;
+    }
+
+.restaurants {
+        background-color: rgba(190, 186, 186, 0.911);
+        padding: 5%;
+        border-style: outset;
+        border-width: medium;
+        border-color: rgba(92, 92, 92, 0.842);
+        border-radius: 10px;    
+}
+
 
 </style>
