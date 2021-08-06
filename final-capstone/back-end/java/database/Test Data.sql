@@ -18,6 +18,10 @@ insert into users
 (username, password_hash, role)
 values ('dagger', 'goose', 'ROLE_USER');
 
+insert into users
+(username, password_hash, role)
+values ('pandacat', 'PBM', 'ROLE_USER');
+
 select * from users;
 
 select * from profile;
@@ -38,6 +42,10 @@ insert into profile
 (user_id, first_name, last_name, date_of_birth, email, zip_code)
 values ((select user_id from users where username = 'dagger'), 'Israel', 'Dagg', '1988-06-06', 'daggertotheheart@mailinator.com', 44444);
 
+insert into profile
+(user_id, first_name, last_name, date_of_birth, email, zip_code)
+values ((select user_id from users where username = 'pandacat'), 'Maks', 'Yanevich', '2000-02-24', 'blinkartemis@mailinator.com', 44482);
+
 select * from profile;
 
 select * from preferences;
@@ -57,6 +65,12 @@ values ((select user_id from users where username = 'carlyslayjepsen'), 'BBQ', '
 insert into preferences
 (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
 values ((select user_id from users where username = 'dagger'), 'Thai', 'Italian', 'American', '$', false, false, false);
+
+insert into preferences
+(user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, price_point, vegan, vegetarian, gluten_free)
+values ((select user_id from users where username = 'pandacat'), 'Burgers', 'Greek', 'French', '$', true, false, false);
+
+
 
 select * from preferences;
 
@@ -228,6 +242,10 @@ values (5, 6, true);
 insert into restaurants_profile
 (restaurant_id, user_id, is_liked)
 values (6, 6, true);
+
+insert into restaurants_profile
+(restaurant_id, user_id, is_liked)
+values (1, 7, true);
 
 select * from restaurants_profile;
 
