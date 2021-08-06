@@ -37,6 +37,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
         return restaurantToAdd;
     }
+
     @Override // need to check in DBV
     public Restaurant addRestaurantToUserList(Restaurant restaurantToAdd, User currentUser, boolean isLiked) {
         //Add user_id from user, restaurant_id from restaurant and whether user liked it or not
