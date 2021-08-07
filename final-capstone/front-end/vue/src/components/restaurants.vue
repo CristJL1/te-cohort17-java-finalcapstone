@@ -1,7 +1,8 @@
 <template>
     <div class="restaurants text-center">
-        <h2> Mangiamo </h2>
+        
         <div class="restaurantCard">
+           <h1> Mangiamo </h1>
            <h3>{{this.$store.state.restaurants.data[restaurantId].name}} </h3>
            <p>{{this.$store.state.restaurants.data[restaurantId].description}}</p>
            <p>{{this.$store.state.restaurants.data[restaurantId].address}}</p>
@@ -85,29 +86,37 @@ export default {
 
 <style scoped>
 
-.text-center {
-        text-align: center;
-        font-family: Monospace, Cursive, Sans-serif;
+.restaurants {
+   
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        height: 100%;
+        grid-template-areas:
+            ". restaurantCard ."
     }
 
-h2{
+.restaurantCard {
+    grid-area: restaurantCard;
+    background-color: rgba(190, 186, 186, 0.911);
+    border-color: rgba(92, 92, 92, 0.842);
+    border-style: outset;
+    border-width: medium;
+    border-radius: 10px;
+    padding: 5%;
+    margin: 10%;
+}
+
+.text-center {
+    text-align: center;
+    font-family: Monospace, Cursive, Sans-serif;
+    }
+
+h1{
+    text-align: center;
     color: rgb(204, 10, 10);
 }
 
-.text-center {
-        text-align: center;
-        font-family: Monospace, Cursive, Sans-serif;
-        background-color: white;
-    }
 
-.restaurants {
-        background-color: rgba(190, 186, 186, 0.911);
-        padding: 5%;
-        border-style: outset;
-        border-width: medium;
-        border-color: rgba(92, 92, 92, 0.842);
-        border-radius: 10px;    
-}
 
 
 </style>

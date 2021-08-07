@@ -1,5 +1,5 @@
 <template>
-  <div class="home text-center">
+  <div class="home ">
     <restaurants/>
   </div>
 </template>
