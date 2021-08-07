@@ -1,6 +1,7 @@
 package com.techelevator.application.jdbcdao;
 
 import com.techelevator.application.dao.RestaurantDAO;
+import com.techelevator.application.model.Cuisine;
 import com.techelevator.application.model.Profile;
 import com.techelevator.application.model.Restaurant;
 import com.techelevator.application.model.RestaurantDTO;
@@ -35,13 +36,13 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                     "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
                     "address, lat, lon) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            String cuisine1 = "";
-            String cuisine2 = "";
-            String cuisine3 = "";
-            String cuisine4 = "";
-            String cuisine5 = "";
-            String cuisine6 = "";
-            String cuisine7 = "";
+            String cuisine1 = null;
+            String cuisine2 = null;
+            String cuisine3 = null;
+            String cuisine4 = null;
+            String cuisine5 = null;
+            String cuisine6 = null;
+            String cuisine7 = null;
 
             List<String> cuisines = new ArrayList();
 
@@ -54,7 +55,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             cuisines.add(cuisine7);
 
             for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
-      //          cuisines.get(i) = restaurantToAdd.getCuisineTypes().get(i).getName();
+                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getName());
             }
 
 
@@ -62,10 +63,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getLocationId(),
                     restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
                     restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
-//                    restaurantToAdd.getCuisineType1(), restaurantToAdd.getCuisineType2(),
-//                    restaurantToAdd.getCuisineType3(), restaurantToAdd.getCuisineType4(),
-//                    restaurantToAdd.getCuisineType5(), restaurantToAdd.getCuisineType6(),
-//                    restaurantToAdd.getCuisineType7(), restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
+                    cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6, cuisine7,
+                    restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
         }
@@ -88,19 +87,36 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
         String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone = ?, restaurant_website = ?, " +
-                "hours = ?, price_range = ?, price_range_num = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, " +
-                "cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, " +
-                "city = ?, state = ?, postal_code = ?, street = ?, formatted = ?, lat = ?, lon = ? where restaurant_id = ?";
+                "price_range = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, cuisine_type_3 = ?, cuisine_type_4 = ?, " +
+                "cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, address = ?, lat = ?, lon = ? " +
+                "where restaurant_id = ?";
+        String cuisine1 = null;
+        String cuisine2 = null;
+        String cuisine3 = null;
+        String cuisine4 = null;
+        String cuisine5 = null;
+        String cuisine6 = null;
+        String cuisine7 = null;
 
-//        theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
-//                restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
-//                restaurantToUpdate.getHours(), restaurantToUpdate.getPriceRange(), restaurantToUpdate.getPriceRangeNum(),
-//                restaurantToUpdate.getCuisineType1(), restaurantToUpdate.getCuisineType2(),
-//                restaurantToUpdate.getCuisineType3(), restaurantToUpdate.getCuisineType4(),
-//                restaurantToUpdate.getCuisineType5(), restaurantToUpdate.getCuisineType6(),
-//                restaurantToUpdate.getCuisineType7(), restaurantToUpdate.getCity(), restaurantToUpdate.getState(),
-//                restaurantToUpdate.getPostal_code(), restaurantToUpdate.getStreet(), restaurantToUpdate.getFormatted(),
-//                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
+        List<String> cuisines = new ArrayList();
+
+        cuisines.add(cuisine1);
+        cuisines.add(cuisine2);
+        cuisines.add(cuisine3);
+        cuisines.add(cuisine4);
+        cuisines.add(cuisine5);
+        cuisines.add(cuisine6);
+        cuisines.add(cuisine7);
+
+        for (int i = 0; i < restaurantToUpdate.getCuisineTypes().size(); i++) {
+            cuisines.set(i, restaurantToUpdate.getCuisineTypes().get(i).getName());
+        }
+
+        theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
+                restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
+                restaurantToUpdate.getPriceRange(), cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6,
+                cuisine7, restaurantToUpdate.getAddress(),
+                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
     }
@@ -165,11 +181,14 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         Restaurant newRestaurant = new Restaurant();
 
         newRestaurant.setRestaurantId(row.getLong("restaurant_id"));
+        newRestaurant.setLocationId(row.getLong("location_id"));
         newRestaurant.setRestaurantName(row.getString("restaurant_name"));
         newRestaurant.setRestaurantPhone(row.getString("restaurant_phone"));
         newRestaurant.setRestaurantWebsite(row.getString("restaurant_website"));
         newRestaurant.setPriceRange(row.getString("price_range"));
-//        newRestaurant.setCuisineType1(row.getString("cuisine_type_1"));
+
+        List<Cuisine> cuisinesList = new ArrayList();
+//        cuisinesList.add(row.getString("cuisine_type_1"));
 //        newRestaurant.setCuisineType2(row.getString("cuisine_type_2"));
 //        newRestaurant.setCuisineType3(row.getString("cuisine_type_3"));
 //        newRestaurant.setCuisineType4(row.getString("cuisine_type_4"));
