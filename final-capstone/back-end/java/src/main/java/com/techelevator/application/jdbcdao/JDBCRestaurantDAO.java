@@ -35,15 +35,37 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                     "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
                     "address, lat, lon) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+            String cuisine1 = "";
+            String cuisine2 = "";
+            String cuisine3 = "";
+            String cuisine4 = "";
+            String cuisine5 = "";
+            String cuisine6 = "";
+            String cuisine7 = "";
+
+            List<String> cuisines = new ArrayList();
+
+            cuisines.add(cuisine1);
+            cuisines.add(cuisine2);
+            cuisines.add(cuisine3);
+            cuisines.add(cuisine4);
+            cuisines.add(cuisine5);
+            cuisines.add(cuisine6);
+            cuisines.add(cuisine7);
+
+            for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
+      //          cuisines.get(i) = restaurantToAdd.getCuisineTypes().get(i).getName();
+            }
+
 
 
             theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getLocationId(),
                     restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
                     restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
-                    restaurantToAdd.getCuisineType1(), restaurantToAdd.getCuisineType2(),
-                    restaurantToAdd.getCuisineType3(), restaurantToAdd.getCuisineType4(),
-                    restaurantToAdd.getCuisineType5(), restaurantToAdd.getCuisineType6(),
-                    restaurantToAdd.getCuisineType7(), restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
+//                    restaurantToAdd.getCuisineType1(), restaurantToAdd.getCuisineType2(),
+//                    restaurantToAdd.getCuisineType3(), restaurantToAdd.getCuisineType4(),
+//                    restaurantToAdd.getCuisineType5(), restaurantToAdd.getCuisineType6(),
+//                    restaurantToAdd.getCuisineType7(), restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
         }
@@ -70,15 +92,15 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                 "cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, " +
                 "city = ?, state = ?, postal_code = ?, street = ?, formatted = ?, lat = ?, lon = ? where restaurant_id = ?";
 
-        theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
-                restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
-                restaurantToUpdate.getHours(), restaurantToUpdate.getPriceRange(), restaurantToUpdate.getPriceRangeNum(),
-                restaurantToUpdate.getCuisineType1(), restaurantToUpdate.getCuisineType2(),
-                restaurantToUpdate.getCuisineType3(), restaurantToUpdate.getCuisineType4(),
-                restaurantToUpdate.getCuisineType5(), restaurantToUpdate.getCuisineType6(),
-                restaurantToUpdate.getCuisineType7(), restaurantToUpdate.getCity(), restaurantToUpdate.getState(),
-                restaurantToUpdate.getPostal_code(), restaurantToUpdate.getStreet(), restaurantToUpdate.getFormatted(),
-                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
+//        theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
+//                restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
+//                restaurantToUpdate.getHours(), restaurantToUpdate.getPriceRange(), restaurantToUpdate.getPriceRangeNum(),
+//                restaurantToUpdate.getCuisineType1(), restaurantToUpdate.getCuisineType2(),
+//                restaurantToUpdate.getCuisineType3(), restaurantToUpdate.getCuisineType4(),
+//                restaurantToUpdate.getCuisineType5(), restaurantToUpdate.getCuisineType6(),
+//                restaurantToUpdate.getCuisineType7(), restaurantToUpdate.getCity(), restaurantToUpdate.getState(),
+//                restaurantToUpdate.getPostal_code(), restaurantToUpdate.getStreet(), restaurantToUpdate.getFormatted(),
+//                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
     }
@@ -146,21 +168,15 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         newRestaurant.setRestaurantName(row.getString("restaurant_name"));
         newRestaurant.setRestaurantPhone(row.getString("restaurant_phone"));
         newRestaurant.setRestaurantWebsite(row.getString("restaurant_website"));
-        newRestaurant.setHours(row.getString("hours"));
         newRestaurant.setPriceRange(row.getString("price_range"));
-        newRestaurant.setPriceRangeNum(row.getInt("price_range_num"));
-        newRestaurant.setCuisineType1(row.getString("cuisine_type_1"));
-        newRestaurant.setCuisineType2(row.getString("cuisine_type_2"));
-        newRestaurant.setCuisineType3(row.getString("cuisine_type_3"));
-        newRestaurant.setCuisineType4(row.getString("cuisine_type_4"));
-        newRestaurant.setCuisineType5(row.getString("cuisine_type_5"));
-        newRestaurant.setCuisineType6(row.getString("cuisine_type_6"));
-        newRestaurant.setCuisineType7(row.getString("cuisine_type_7"));
-        newRestaurant.setCity(row.getString("city"));
-        newRestaurant.setState(row.getString("state"));
-        newRestaurant.setPostal_code(row.getInt("postal_code"));
-        newRestaurant.setStreet(row.getString("street"));
-        newRestaurant.setFormatted(row.getString("formatted"));
+//        newRestaurant.setCuisineType1(row.getString("cuisine_type_1"));
+//        newRestaurant.setCuisineType2(row.getString("cuisine_type_2"));
+//        newRestaurant.setCuisineType3(row.getString("cuisine_type_3"));
+//        newRestaurant.setCuisineType4(row.getString("cuisine_type_4"));
+//        newRestaurant.setCuisineType5(row.getString("cuisine_type_5"));
+//        newRestaurant.setCuisineType6(row.getString("cuisine_type_6"));
+//        newRestaurant.setCuisineType7(row.getString("cuisine_type_7"));
+        newRestaurant.setAddress(row.getString("address"));
         newRestaurant.setLat(row.getDouble("lat"));
         newRestaurant.setLon(row.getDouble("lon"));
 
