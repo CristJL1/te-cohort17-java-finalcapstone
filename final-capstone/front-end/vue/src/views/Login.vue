@@ -3,7 +3,7 @@
 <template>
   <div id="login" class="text-center main-grid">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="title"> Mangiamo </h1>
+      <h1 id="katiesFont" class="title"> Mangiamo </h1>
       <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
       <div
         class="alert alert-danger"
@@ -101,7 +101,9 @@ export default {
 
 <style scoped>
 
-
+#katiesFont {
+  font-family: 'Pacifico', cursive;
+}
 
 .text-center {
   text-align: center;

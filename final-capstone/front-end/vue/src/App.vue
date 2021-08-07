@@ -11,6 +11,11 @@
 
 <style scoped>
   #nav {
-   font: white;
-  }
+background-color: rgba(190, 186, 186, 0.911);  
+border-bottom: outset;
+border-width: medium;
+border-color: rgba(92, 92, 92, 0.842);
+padding: 6px;
+
+}
 </style>

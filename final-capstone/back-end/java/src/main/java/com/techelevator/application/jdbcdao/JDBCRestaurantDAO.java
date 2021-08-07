@@ -22,6 +22,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         this.theDatabase = new JdbcTemplate(theDataSource);
     }
 
+
     @Override
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
         // add logic to cycle through the List of cuisines, for any within the length of the array, assign it a value,
