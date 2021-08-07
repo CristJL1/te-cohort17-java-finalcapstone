@@ -56,7 +56,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             cuisines.add(cuisine7);
 
             for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
-                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getName());
+                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getKey() + ","
+                                + restaurantToAdd.getCuisineTypes().get(i).getName());
             }
 
 
@@ -110,7 +111,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         cuisines.add(cuisine7);
 
         for (int i = 0; i < restaurantToUpdate.getCuisineTypes().size(); i++) {
-            cuisines.set(i, restaurantToUpdate.getCuisineTypes().get(i).getName());
+            cuisines.set(i, restaurantToUpdate.getCuisineTypes().get(i).getKey() + "," +
+                            restaurantToUpdate.getCuisineTypes().get(i).getName());
         }
 
         theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
@@ -189,13 +191,63 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         newRestaurant.setPriceRange(row.getString("price_range"));
 
         List<Cuisine> cuisinesList = new ArrayList();
-//        cuisinesList.add(row.getString("cuisine_type_1"));
-//        newRestaurant.setCuisineType2(row.getString("cuisine_type_2"));
-//        newRestaurant.setCuisineType3(row.getString("cuisine_type_3"));
-//        newRestaurant.setCuisineType4(row.getString("cuisine_type_4"));
-//        newRestaurant.setCuisineType5(row.getString("cuisine_type_5"));
-//        newRestaurant.setCuisineType6(row.getString("cuisine_type_6"));
-//        newRestaurant.setCuisineType7(row.getString("cuisine_type_7"));
+
+        if (row.getString("cuisine_type_1") != null) {
+            String[] bothValues = row.getString("cuisine_type_1").split(",");
+            Cuisine cuisine1 = new Cuisine();
+            cuisine1.setKey(bothValues[0]);
+            cuisine1.setName(bothValues[1]);
+            cuisinesList.add(cuisine1);
+        }
+
+        if (row.getString("cuisine_type_2") != null) {
+            String[] bothValues = row.getString("cuisine_type_2").split(",");
+            Cuisine cuisine2 = new Cuisine();
+            cuisine2.setKey(bothValues[0]);
+            cuisine2.setName(bothValues[1]);
+            cuisinesList.add(cuisine2);
+        }
+        if (row.getString("cuisine_type_3") != null) {
+            String[] bothValues = row.getString("cuisine_type_3").split(",");
+            Cuisine cuisine3 = new Cuisine();
+            cuisine3.setKey(bothValues[0]);
+            cuisine3.setName(bothValues[1]);
+            cuisinesList.add(cuisine3);
+        }
+
+        if (row.getString("cuisine_type_4") != null) {
+            String[] bothValues = row.getString("cuisine_type_4").split(",");
+            Cuisine cuisine4 = new Cuisine();
+            cuisine4.setKey(bothValues[0]);
+            cuisine4.setName(bothValues[1]);
+            cuisinesList.add(cuisine4);
+        }
+
+        if (row.getString("cuisine_type_5") != null) {
+            String[] bothValues = row.getString("cuisine_type_5").split(",");
+            Cuisine cuisine5 = new Cuisine();
+            cuisine5.setKey(bothValues[0]);
+            cuisine5.setName(bothValues[1]);
+            cuisinesList.add(cuisine5);
+        }
+
+        if (row.getString("cuisine_type_6") != null) {
+            String[] bothValues = row.getString("cuisine_type_6").split(",");
+            Cuisine cuisine6 = new Cuisine();
+            cuisine6.setKey(bothValues[0]);
+            cuisine6.setName(bothValues[1]);
+            cuisinesList.add(cuisine6);
+        }
+
+        if (row.getString("cuisine_type_7") != null) {
+            String[] bothValues = row.getString("cuisine_type_7").split(",");
+            Cuisine cuisine7 = new Cuisine();
+            cuisine7.setKey(bothValues[0]);
+            cuisine7.setName(bothValues[1]);
+            cuisinesList.add(cuisine7);
+        }
+
+        newRestaurant.setCuisineTypes(cuisinesList);
         newRestaurant.setAddress(row.getString("address"));
         newRestaurant.setLat(row.getDouble("lat"));
         newRestaurant.setLon(row.getDouble("lon"));
