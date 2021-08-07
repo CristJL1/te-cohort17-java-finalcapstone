@@ -1,7 +1,7 @@
 <template>
     <div class="questionnaire text-center"> 
     <form class="form-questionnaire" @submit.prevent="submitQuestionnaire">
-    <h1>Questionnaire</h1>
+    <h1 id="katiesFont">Questionnaire</h1>
     <label for="firstName">First Name </label>
       <input v-model="profile.firstName"
         type="text"
@@ -172,6 +172,10 @@ export default {
 </script>
 
 <style scoped>
+
+#katiesFont {
+  font-family: 'Pacifico', cursive;
+}
     h1{
         color: rgb(204, 10, 10);
     }
