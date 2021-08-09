@@ -49,7 +49,7 @@
 
 
 <script>
-import ApplicationServices from '../services/ApplicationServices.js'
+import applicationServices from "../services/ApplicationServices"
 import axios from "axios";
 
 

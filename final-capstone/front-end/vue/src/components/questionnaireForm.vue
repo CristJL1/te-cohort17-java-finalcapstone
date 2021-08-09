@@ -115,7 +115,7 @@
 
 
 <script>
-import applicationServices from "../services/ApplicationServices"
+import applicationServices from '../services/ApplicationServices';
 
 export default {
     name: 'questionnaire-form',
