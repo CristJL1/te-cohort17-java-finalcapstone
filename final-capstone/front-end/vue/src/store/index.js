@@ -26,8 +26,34 @@ export default new Vuex.Store({
     restaurantId: 0,
     likedRestaurant: {},
     profile:{},     // Hold the current users profile data
-    preference:{}   // Hold current users preference data
+    preference:{},   // Hold current users preference data
+    restaurantDTO: {
+      restaurantToAdd: {
+       restaurantId: Number,
+       locationId: Number,
+       restaurantName: '',
+       description: '',
+       imageLink: '',
+       restaurantPhone: '',
+       restaurantWebsite: '',
+       priceRange: '',
+       cuisineTypes:[],
+       address: '',
+       lat: '',
+       lon: '',
+     },
+     currentProfile: {
+         userId: '',   // - this.$store.state.profile.userId
+         firstName: '', // - this.$store.state.profile.firstName
+         lastName: '', // - this.$store.state.profile.lastName
+         dateOfBirth: '',  // - this.$store.state.profile.dateOfBirth
+         email: '',  //	- this.$store.state.profile.email
+         zipCode: '',   // - this.$store.state.profile.zipcode
+     },
+     isLiked : Boolean
+ }
   },
+
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -71,6 +97,7 @@ export default new Vuex.Store({
     },
     SET_PROFILE_DATA(state, profile) {
       state.profile = profile;
+      state.restaurantDTO.profile = profile;
     },
 
     UPDATE_TO_NEXT_RESTAURANT(state, nextRestaurantId) {
@@ -80,6 +107,25 @@ export default new Vuex.Store({
     
     LIKE_RESTAURANT(state, currentRestaurant) {
       state.likedRestaurant = currentRestaurant
+      state.restaurantDTO.isLiked = true
+    },
+
+    SET_RESTAURANTDTO(state, restaurant) {
+      state.restaurantDTO.restaurantToAdd.restaurantName = currentRestaurant.name
+      state.restaurantDTO.restaurantToAdd.locationId = currentRestaurant.location_id
+      state.restaurantDTO.restaurantToAdd.description = currentRestaurant.description
+      state.restaurantDTO.restaurantToAdd.imageLink = currentRestaurant.photo.images.medium.url
+      state.restaurantDTO.restaurantToAdd.restaurantPhone = currentRestaurant.phone
+      state.restaurantDTO.restaurantToAdd.restaurantWebsite = currentRestaurant.website
+      state.restaurantDTO.restaurantToAdd.priceRange = currentRestaurant.price_level
+
+      currentRestaurant.cuisine.forEach(cuisine => {
+        state.restaurantDTO.cuisineTypes.push(cuisine)
+      })
+
+      state.restaurantDTO.restaurantToAdd.address = currentRestaurant.address
+      state.restaurantDTO.restaurantToAdd.lat = currentRestaurant.latitude
+      state.restaurantDTO.restaurantToAdd.lon = currentRestaurant.longitude
     }
 
   }
