@@ -72,10 +72,9 @@ export default {
         .then(response => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
-            /* ApplicationServices
-            .getProfileByID(this.$store.state.user.id)
+            this.$store.commit("SET_USER", response.data.user);           
+            ApplicationServices
+            .getProfileById(this.$store.state.user.id)
             .then(res => {
               this.$store.commit("SET_PROFILE_DATA", res.data);
               ApplicationServices
@@ -84,7 +83,7 @@ export default {
                 this.$store.commit("SET_PREFERENCE_DATA", res.data); // need a service to get preference and profile
                 this.$router.push("/");
               })
-            }) */
+            }) 
           }
         })
         .catch(error => {

@@ -10,6 +10,7 @@
            <p 
            >Cuisine Type: {{this.$store.state.currentRestaurant.cuisine[0].name}}
            </p>
+           <p>Phone: {{this.$store.state.currentRestaurant.phone}}</p>
            <p v-if="canDisplayWebsite()"
            >Visit: 
                <a v-bind:href="this.$store.state.currentRestaurant.website"
@@ -61,7 +62,9 @@ export default {
             longitude: '-81.694361',
             limit: '100',
             currency: 'USD',
+            combined_food: this.$store.state.preference.cuisine_type_1,
             distance: '20',
+            dietary_restrictions: '10992',
             lunit: 'km',
             lang: 'en_US'
             },

@@ -152,11 +152,9 @@ export default {
             .addProfile(this.profile)
             .then(response => {
                 this.preferences.userId = this.$route.query.id;
-                this.$store.commit("SET_PROFILE_DATA", this.profile)
                 applicationServices
                 .addPreferences(this.preferences)
                 .then(response => {
-                this.$store.commit("SET_PREFERENCE_DATA", this.preferences)
                 this.$router.push({
                 path: '/login' 
         })

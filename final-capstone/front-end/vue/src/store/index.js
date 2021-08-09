@@ -65,10 +65,7 @@ export default new Vuex.Store({
       state.restaurants = filterData;
       state.currentRestaurant = filterData[0];
     },
-    SET_USER_DATA(state, user) {
-      state.userData = user;
-      
-    },
+    
     SET_PREFERENCE_DATA(state, preference) { 
       state.preference = preference;
     },
