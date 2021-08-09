@@ -83,11 +83,11 @@
       <br>
       <br>
       <p> Dietary Restrictions: </p>
-      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.glutenFree">
+      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.glutenFree" checked>
       <label class="dietarybox" for="dietary1"> Gluten Free</label>
-      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.vegan">
+      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.vegan" checked>
       <label class="dietarybox" for="dietary2"> Vegan</label>
-      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.vegetarian">
+      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.vegetarian" checked>
       <label class="dietarybox" for="dietary3"> Vegetarian</label>
       <br>
       <br>
