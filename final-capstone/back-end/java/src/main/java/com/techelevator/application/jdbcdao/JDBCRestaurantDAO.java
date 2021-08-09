@@ -31,7 +31,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
         restaurantToAdd.setRestaurantId(getNextRestaurantId());
 
-        if (viewRestaurant(restaurantToAdd.getRestaurantId()) != null) {
+        if (viewRestaurant(restaurantToAdd.getRestaurantId()) == null) {
             String sqlInsert = "insert into restaurants (restaurant_id, location_id, restaurant_name, " +
                     "restaurant_phone, restaurant_website, price_range, cuisine_type_1, cuisine_type_2, " +
                     "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
