@@ -8,7 +8,7 @@ package com.techelevator.application.controller;
 import com.techelevator.application.dao.PreferenceDAO;
 import com.techelevator.application.dao.ProfileDAO;
 import com.techelevator.application.dao.RestaurantDAO;
-import com.techelevator.application.model.Preference;
+import com.techelevator.application.model.Preferences;
 import com.techelevator.application.model.Profile;
 import com.techelevator.application.model.Restaurant;
 import com.techelevator.application.model.RestaurantDTO;
@@ -66,21 +66,21 @@ public void deleteProfile(@PathVariable long id) {
 
 @ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/user/preference", method = RequestMethod.POST)
-public Preference createPreference(@RequestBody Preference userPreference) {
+public Preferences createPreference(@RequestBody Preferences userPreferences) {
     logRequest("POST -- PREFERENCE");
-    preferenceData.setPreferences(userPreference);
+    preferenceData.setPreferences(userPreferences);
 
-    return userPreference;
+    return userPreferences;
 }
 
 @RequestMapping(path="/user/{id}/preference", method = RequestMethod.GET)
-public Preference viewPreferences(@PathVariable long id) {
+public Preferences viewPreferences(@PathVariable long id) {
     logRequest("GET -- PREFERENCE");
     return preferenceData.viewPreferences(id);
 }
 
 @RequestMapping(path = "/user/preference", method = RequestMethod.PUT)
-public Preference updatedPreferences(@RequestBody Preference updatedPreferences) {
+public Preferences updatedPreferences(@RequestBody Preferences updatedPreferences) {
     logRequest("PUT -- PREFERENCES");
     return preferenceData.updatePreferences(updatedPreferences);
 }

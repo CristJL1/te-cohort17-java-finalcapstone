@@ -1,6 +1,6 @@
 package com.techelevator.application.model;
 
-public class Preference {
+public class Preferences {
 
     private Long    userId;
     private String  cuisineStyle1;
