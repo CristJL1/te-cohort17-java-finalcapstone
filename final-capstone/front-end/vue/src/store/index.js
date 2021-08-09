@@ -48,10 +48,20 @@ export default new Vuex.Store({
     SET_RESTAURANTS(state, data) { 
       let filterData = []
             for(let i=0; i<data.data.length; i++) {
-                if(data.data[i].hasOwnProperty("name") && data.data[i].hasOwnProperty("address")) {
+              let restaurant = data.data[i]
+                if("name" in restaurant && 
+                  "address" in restaurant && 
+                  "cuisine" in restaurant && 
+                  "website" in restaurant && 
+                  "price" in restaurant &&
+                  "price_level" in restaurant &&
+                  "phone" in restaurant &&
+                  "photo" in restaurant) {
+                    if("images" in restaurant.photo) {
                     filterData.push(data.data[i])
+                    }
                 }
-            }
+              }
       state.restaurants = filterData;
       state.currentRestaurant = filterData[0];
     },

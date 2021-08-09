@@ -3,16 +3,12 @@
         
         <div class="restaurantCard">
            <h1 id="katiesFont"> Mangiamo </h1>
-
+            <img v-bind:src="this.$store.state.currentRestaurant.photo.images.medium.url" alt="Photo of the Restaurant">
            <h3>{{this.$store.state.currentRestaurant.name}} </h3>
-
            <p>{{this.$store.state.currentRestaurant.description}}</p>
            <p>{{this.$store.state.currentRestaurant.address}}</p>
-           <p v-if="canDisplayCuisine()" 
+           <p 
            >Cuisine Type: {{this.$store.state.currentRestaurant.cuisine[0].name}}
-           </p>
-           <p v-else 
-           >Cuisine Type: not listed
            </p>
            <p v-if="canDisplayWebsite()"
            >Visit: 
@@ -65,7 +61,7 @@ export default {
             longitude: '-81.694361',
             limit: '100',
             currency: 'USD',
-            distance: '2',
+            distance: '20',
             lunit: 'km',
             lang: 'en_US'
             },
@@ -102,7 +98,7 @@ export default {
        canDisplayCuisine() {
            let cuisine = this.$store.state.currentRestaurant.cuisine
            if(cuisine != null) {
-               if(cuisine.size > 0) {
+               if(cuisine.size >= 0) {
                    return true;
                }   
            }
@@ -160,6 +156,10 @@ h1{
   font-family: 'Pacifico', cursive;
 }
 
+img {
+    height: 400px;
+    width: auto;
+}
 
 
 
