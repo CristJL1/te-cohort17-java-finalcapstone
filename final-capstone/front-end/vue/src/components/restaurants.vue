@@ -135,6 +135,17 @@ export default {
 
 button {
     margin: 2%;
+    border-radius: 12px;
+    background-color: white;
+    color: black;
+    transition-duration: 0.6s;
+    cursor: pointer
+    
+}
+
+button:hover {
+  background-color: #e7e7e7;
+  color: black;
 }
 
 .restaurants {
