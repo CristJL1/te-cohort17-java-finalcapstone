@@ -20,8 +20,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         String newPreferenceStmt = "insert into preferences (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, " +
                                    "price_point, vegan, vegetarian, gluten_free) values (?, ?, ?, ?, ?, ?, ?, ?)";
         theDatabase.update(newPreferenceStmt, userPreference.getUserId(), userPreference.getCuisineStyle1(), userPreference.getCuisineStyle2(),
-                           userPreference.getCuisineStyle3(), userPreference.getPricePoint(), userPreference.isVegan(),
-                            userPreference.isVegetarian(), userPreference.isGlutenFree());
+                           userPreference.getCuisineStyle3(), userPreference.getPricePoint(), userPreference.getVegan(),
+                            userPreference.getVegetarian(), userPreference.getGlutenFree());
 
         return userPreference;
     };
@@ -43,8 +43,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
                                + "price_point = ?, vegan = ?, vegetarian = ?, gluten_free = ? where user_id = ?";
         theDatabase.update(sqlUpdateStmt, updatedPreference.getCuisineStyle1(),
                            updatedPreference.getCuisineStyle2(),updatedPreference.getCuisineStyle3(),
-                           updatedPreference.getPricePoint(), updatedPreference.isVegan(),
-                           updatedPreference.isVegetarian(), updatedPreference.isGlutenFree(),
+                           updatedPreference.getPricePoint(), updatedPreference.getVegan(),
+                           updatedPreference.getVegetarian(), updatedPreference.getGlutenFree(),
                            updatedPreference.getUserId());
 
         return updatedPreference;
@@ -66,22 +66,16 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         newPreference.setCuisineStyle3(row.getString("cuisine_style_3"));
         newPreference.setPricePoint(row.getString("price_point"));
 
-        if (!row.getBoolean("vegan")) {
-            newPreference.setVegan(false);
-        } else {
-            newPreference.setVegan(row.getBoolean("vegan"));
+        if (row.getString("vegan") != null) {
+            newPreference.setVegan(row.getString("vegan"));
         }
 
-        if (!row.getBoolean("vegetarian")) {
-            newPreference.setVegetarian(false);
-        } else {
-            newPreference.setVegetarian(row.getBoolean("vegetarian"));
+        if (row.getString("vegetarian") != null) {
+            newPreference.setVegetarian(row.getString("vegetarian"));
         }
 
-        if (!row.getBoolean("gluten_free")) {
-            newPreference.setGlutenFree(false);
-        } else {
-            newPreference.setGlutenFree(row.getBoolean("gluten_free"));
+        if (row.getString("gluten_free") != null) {
+            newPreference.setGlutenFree(row.getString("gluten_free"));
         }
 
         return newPreference;
