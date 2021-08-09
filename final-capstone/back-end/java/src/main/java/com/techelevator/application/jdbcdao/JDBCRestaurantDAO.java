@@ -35,7 +35,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             String sqlInsert = "insert into restaurants (restaurant_id, location_id, restaurant_name, " +
                     "restaurant_phone, restaurant_website, price_range, cuisine_type_1, cuisine_type_2, " +
                     "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
-                    "address, lat, lon) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "restaurant_description, restaurant_image, address, lat, lon) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             String cuisine1 = null;
             String cuisine2 = null;
@@ -66,6 +67,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                     restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
                     restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
                     cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6, cuisine7,
+                    restaurantToAdd.getDescription(), restaurantToAdd.getImageLink(),
                     restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
@@ -90,8 +92,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
         String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone = ?, restaurant_website = ?, " +
                 "price_range = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, cuisine_type_3 = ?, cuisine_type_4 = ?, " +
-                "cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, address = ?, lat = ?, lon = ? " +
-                "where restaurant_id = ?";
+                "cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, restaurant_description = ?, " + "" +
+                "restaurant_image = ?, address = ?, lat = ?, lon = ? where restaurant_id = ?";
         String cuisine1 = null;
         String cuisine2 = null;
         String cuisine3 = null;
@@ -118,8 +120,9 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
                 restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
                 restaurantToUpdate.getPriceRange(), cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6,
-                cuisine7, restaurantToUpdate.getAddress(),
-                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(), restaurantToUpdate.getRestaurantId());
+                cuisine7, restaurantToUpdate.getDescription(), restaurantToUpdate.getImageLink(),
+                restaurantToUpdate.getAddress(), restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
+                restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
     }
@@ -247,6 +250,14 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             cuisinesList.add(cuisine7);
         }
 
+        if (row.getString("restaurant_description") != null) {
+            newRestaurant.setDescription(row.getString("description"));
+        }
+
+        if (row.getString("restaurant_image") != null) {
+            newRestaurant.setImageLink(row.getString("image"));
+        }
+
         newRestaurant.setCuisineTypes(cuisinesList);
         newRestaurant.setAddress(row.getString("address"));
         newRestaurant.setLat(row.getDouble("lat"));
@@ -254,6 +265,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
         return newRestaurant;
     }
+
 
     private long getNextRestaurantId() {
         SqlRowSet nextId = theDatabase.queryForRowSet("select nextval('restaurants_restaurant_id_seq')");
