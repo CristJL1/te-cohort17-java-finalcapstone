@@ -49,10 +49,12 @@ constraint pk_preferences_user_id Primary Key (user_id));
 
 create table restaurants
 (restaurant_id serial not null, -- may need to change data type to long to use restaurant_id from API
-location_id bigint,
+location_id bigint not null,
 restaurant_name character varying(100),
 restaurant_phone character varying (20),
 restaurant_website character varying(150),
+restaurant_description character varying (10000),
+restaurant_image character varying (1000),
 -- hours character varying (50),
 price_range character varying (10),
 -- price_range_num int,
