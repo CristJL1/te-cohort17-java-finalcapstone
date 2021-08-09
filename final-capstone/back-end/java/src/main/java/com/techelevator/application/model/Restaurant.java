@@ -7,6 +7,8 @@ public class Restaurant {
     private Long restaurantId;
     private Long locationId;
     private String restaurantName;
+    private String description;
+    private String imageLink;
     private String restaurantPhone;
     private String restaurantWebsite;
     private String priceRange;
@@ -37,6 +39,22 @@ public class Restaurant {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public String getRestaurantPhone() {
@@ -101,6 +119,8 @@ public class Restaurant {
                 "restaurantId=" + restaurantId +
                 ", locationId=" + locationId +
                 ", restaurantName='" + restaurantName + '\'' +
+                ", description='" + description + '\'' +
+                ", imageLink='" + imageLink + '\'' +
                 ", restaurantPhone='" + restaurantPhone + '\'' +
                 ", restaurantWebsite='" + restaurantWebsite + '\'' +
                 ", priceRange='" + priceRange + '\'' +
