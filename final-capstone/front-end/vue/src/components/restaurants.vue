@@ -4,12 +4,20 @@
         <div class="restaurantCard">
            <h1 id="katiesFont"> Mangiamo </h1>
             <img v-bind:src="this.$store.state.currentRestaurant.photo.images.medium.url" alt="Photo of the Restaurant">
-           <h3>{{this.$store.state.currentRestaurant.name}} </h3>
-           <p>{{this.$store.state.currentRestaurant.description}}</p>
-           <p>{{this.$store.state.currentRestaurant.address}}</p>
-           <p 
-           >Cuisine Type: {{this.$store.state.currentRestaurant.cuisine[0].name}}
-           </p>
+           <h3>Restaurant Name:  <span>{{this.$store.state.currentRestaurant.name}} </span> </h3>
+
+           <p>Description: {{this.$store.state.currentRestaurant.description}}</p>
+           <p>Address: {{this.$store.state.currentRestaurant.address}}</p>
+
+           <h4>Cuisine Type & Dietary Restrictions: </h4>
+               <p
+                    v-for="cuisineObject in this.$store.state.currentRestaurant.cuisine"
+                    v-bind:key="cuisineObject.id"
+                >{{cuisineObject.name}} 
+                </p>
+           
+
+
            <p>Phone: {{this.$store.state.currentRestaurant.phone}}</p>
            <p v-if="canDisplayWebsite()"
            >Visit: 
@@ -54,6 +62,10 @@ export default {
        }
    }, 
    created() {
+        let cuisine = this.$store.state.preference
+        let dietaryRestriction = this.$store.state.preference
+        let usersCuisines = cuisine.cuisine_type_1 + ", " + cuisine.cuisine_type_2 + ", " + cuisine.cusine_type_3
+        let usersRestrictions = dietaryRestriction.glutenFree + ", " + dietaryRestriction.vegan + ", " + dietaryRestriction.vegitarian
         const options = {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
@@ -62,9 +74,9 @@ export default {
             longitude: '-81.694361',
             limit: '100',
             currency: 'USD',
-            combined_food: this.$store.state.preference.cuisine_type_1,
+            combined_food: usersCuisines,
             distance: '20',
-            dietary_restrictions: '10992',
+            dietary_restrictions: usersRestrictions,
             lunit: 'km',
             lang: 'en_US'
             },
