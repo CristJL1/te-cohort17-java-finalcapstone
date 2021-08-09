@@ -25,17 +25,14 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurantToAdd) {
-        // add logic to cycle through the List of cuisines, for any within the length of the array, assign it a value,
-        //      maybe make List of variables to hold cuisine_style_num, default value of null (field nullable in DB)
-        //      for loop that assigns, for length of cuisineList
 
         restaurantToAdd.setRestaurantId(getNextRestaurantId());
 
         if (viewRestaurant(restaurantToAdd.getRestaurantId()) == null) {
             String sqlInsert = "insert into restaurants (restaurant_id, location_id, restaurant_name, " +
-                    "restaurant_phone, restaurant_website, price_range, cuisine_type_1, cuisine_type_2, " +
-                    "cuisine_type_3, cuisine_type_4, cuisine_type_5, cuisine_type_6, cuisine_type_7, " +
-                    "restaurant_description, restaurant_image, address, lat, lon) " +
+                    "restaurant_phone, restaurant_website, restaurant_description, restaurant_image, " +
+                    "price_range, cuisine_type_1, cuisine_type_2, cuisine_type_3, cuisine_type_4, " +
+                    "cuisine_type_5, cuisine_type_6, cuisine_type_7, address, lat, lon) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             String cuisine1 = null;
@@ -66,8 +63,8 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getLocationId(),
                     restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
                     restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
-                    cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6, cuisine7,
                     restaurantToAdd.getDescription(), restaurantToAdd.getImageLink(),
+                    cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6, cuisine7,
                     restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
@@ -91,9 +88,9 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public Restaurant updateRestaurant(Restaurant restaurantToUpdate) {
         String updateSql = "update restaurants set restaurant_name= ?, restaurant_phone = ?, restaurant_website = ?, " +
-                "price_range = ?, cuisine_type_1 = ?, cuisine_type_2 = ?, cuisine_type_3 = ?, cuisine_type_4 = ?, " +
-                "cuisine_type_5 = ?, cuisine_type_6 = ?, cuisine_type_7 = ?, restaurant_description = ?, " + "" +
-                "restaurant_image = ?, address = ?, lat = ?, lon = ? where restaurant_id = ?";
+                "restaurant_description = ?, restaurant_image = ?, price_range = ?, cuisine_type_1 = ?, " +
+                "cuisine_type_2 = ?, cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, " +
+                "cuisine_type_7 = ?, address = ?, lat = ?, lon = ? where restaurant_id = ?";
         String cuisine1 = null;
         String cuisine2 = null;
         String cuisine3 = null;
@@ -119,9 +116,9 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
         theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
                 restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
+                restaurantToUpdate.getDescription(), restaurantToUpdate.getImageLink(),
                 restaurantToUpdate.getPriceRange(), cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6,
-                cuisine7, restaurantToUpdate.getDescription(), restaurantToUpdate.getImageLink(),
-                restaurantToUpdate.getAddress(), restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
+                cuisine7, restaurantToUpdate.getAddress(), restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
                 restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
@@ -134,7 +131,6 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         theDatabase.update(deleteSql, id);
     }
 
-    // are we planning to send each one at a time or a List all at once when they navigate somewhere else?
     @Override
     public RestaurantDTO addRestaurantToUserList(RestaurantDTO restaurantToAddToUserList) {
 
@@ -191,6 +187,15 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         newRestaurant.setRestaurantName(row.getString("restaurant_name"));
         newRestaurant.setRestaurantPhone(row.getString("restaurant_phone"));
         newRestaurant.setRestaurantWebsite(row.getString("restaurant_website"));
+
+        if (row.getString("restaurant_description") != null) {
+            newRestaurant.setDescription(row.getString("restaurant_description"));
+        }
+
+        if (row.getString("restaurant_image") != null) {
+            newRestaurant.setImageLink(row.getString("restaurant_image"));
+        }
+
         newRestaurant.setPriceRange(row.getString("price_range"));
 
         List<Cuisine> cuisinesList = new ArrayList();
@@ -248,14 +253,6 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
             cuisine7.setKey(bothValues[0]);
             cuisine7.setName(bothValues[1]);
             cuisinesList.add(cuisine7);
-        }
-
-        if (row.getString("restaurant_description") != null) {
-            newRestaurant.setDescription(row.getString("description"));
-        }
-
-        if (row.getString("restaurant_image") != null) {
-            newRestaurant.setImageLink(row.getString("image"));
         }
 
         newRestaurant.setCuisineTypes(cuisinesList);
