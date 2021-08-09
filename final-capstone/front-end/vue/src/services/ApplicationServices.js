@@ -28,6 +28,9 @@ getProfileById(id) {
 
 getPreferenceById(id) {
     return axios.get(`/user/${id}/preference`)
-}
+},
 
+addLikedRestaurant() {
+    return axios.put(`/restaurants`)
+    }
 }

@@ -22,6 +22,9 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
+    currentRestaurant: {},
+    restaurantId: 0,
+    likedRestaurant: {},
     profile:{},     // Hold the current users profile data
     preference:{}   // Hold current users preference data
   },
@@ -43,7 +46,14 @@ export default new Vuex.Store({
       axios.defaults.headers.common = {};
     },
     SET_RESTAURANTS(state, data) { 
-      state.restaurants = data;
+      let filterData = []
+            for(let i=0; i<data.data.length; i++) {
+                if(data.data[i].hasOwnProperty("name") && data.data[i].hasOwnProperty("address")) {
+                    filterData.push(data.data[i])
+                }
+            }
+      state.restaurants = filterData;
+      state.currentRestaurant = filterData[0];
     },
     SET_USER_DATA(state, user) {
       state.userData = user;
@@ -54,6 +64,15 @@ export default new Vuex.Store({
     },
     SET_PROFILE_DATA(state, profile) {
       state.profile = profile;
+    },
+
+    UPDATE_TO_NEXT_RESTAURANT(state, nextRestaurantId) {
+      state.currentRestaurant = this.state.restaurants[nextRestaurantId]
+      state.restaurantId = nextRestaurantId
+    },
+    
+    LIKE_RESTAURANT(state, currentRestaurant) {
+      state.likedRestaurant = currentRestaurant
     }
 
   }

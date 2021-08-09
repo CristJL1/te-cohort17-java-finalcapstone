@@ -2,24 +2,35 @@
     <div class="restaurants text-center">
         
         <div class="restaurantCard">
-           <h1> Mangiamo </h1>
-           <h3>{{this.$store.state.restaurants.data[restaurantId].name}} </h3>
-           <p>{{this.$store.state.restaurants.data[restaurantId].description}}</p>
-           <p>{{this.$store.state.restaurants.data[restaurantId].address}}</p>
-           <p>Cuisine Type: {{this.$store.state.restaurants.data[restaurantId].cuisine[0].name}}</p>
-           <p>Go to Website: 
-               <a v-bind:href="this.$store.state.restaurants.data[restaurantId].website"
+           <h1 id="katiesFont"> Mangiamo </h1>
+
+           <h3>{{this.$store.state.currentRestaurant.name}} </h3>
+
+           <p>{{this.$store.state.currentRestaurant.description}}</p>
+           <p>{{this.$store.state.currentRestaurant.address}}</p>
+           <p v-if="canDisplayCuisine()" 
+           >Cuisine Type: {{this.$store.state.currentRestaurant.cuisine[0].name}}
+           </p>
+           <p v-else 
+           >Cuisine Type: not listed
+           </p>
+           <p v-if="canDisplayWebsite()"
+           >Visit: 
+               <a v-bind:href="this.$store.state.currentRestaurant.website"
                target="_blank">
-               {{this.$store.state.restaurants.data[restaurantId].website}}
+               {{this.$store.state.currentRestaurant.name}}'s website
                </a>
             </p>
-            <p>Price: {{this.$store.state.restaurants.data[restaurantId].price_level}} ({{this.$store.state.restaurants.data[restaurantId].price}}) </p>
+            <p v-else>Website Not Listed </p>
+            <p>Price: {{this.$store.state.currentRestaurant.price_level}} 
+                ({{this.$store.state.currentRestaurant.price}}) </p>
 
            <!--<p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[0].name}}</p>
            <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[1].name}}</p>
            <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[2].name}}</p>
            -->
-           <button v-on:click.prevent="cycleRestaurant">I Like this Restaurant</button>
+           <button v-on:click.prevent="cycleRestaurant; pushToDatabase;">I Like this Restaurant</button>
+           <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
            <!--
            <img 
            v-if="" - CHECK TO SEE IF A PICTURE EXISTS
@@ -38,13 +49,11 @@ import axios from "axios";
 
 
 export default {
-
    name: 'restaurants',
    data() {
        return {
-           restaurantId: 0,     
+           //restaurantId: 0,     
            filteredRestaurants: [], // Holds our Restaurants filtered by Preferences
-          
        }
    }, 
    created() {
@@ -65,19 +74,46 @@ export default {
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
   }
 };
+
         
         axios.request(options)
         .then( (response) => {
-	        this.$store.commit("SET_RESTAURANTS", response.data)
+            this.$store.commit("SET_RESTAURANTS", response.data)
+
         });
    },
    computed: { 
        
     }, 
-   methods: { 
+   methods: {
        cycleRestaurant() {
-           let currentRestaurant = this.$store.state.restaurants.data
-           this.restaurantId++
+           // let currentRestaurant = this.$store.state.restaurants.data
+           let updatedId = this.$store.state.restaurantId + 1;
+           this.$store.commit("UPDATE_TO_NEXT_RESTAURANT", updatedId)
+           // this.restaurantId++
+       },
+
+       pushToDatabase() {
+           // Updating a liked restaurant to the data store
+           let currentRestaurant = this.$store.state.restaurants.data[this.$store.state.restaurantId]
+           this.$store.commit("LIKE_RESTAURANT", currentRestaurant)
+           // Still need to call the service to push to database
+       },
+       canDisplayCuisine() {
+           let cuisine = this.$store.state.currentRestaurant.cuisine
+           if(cuisine != null) {
+               if(cuisine.size > 0) {
+                   return true;
+               }   
+           }
+           return false;
+       },
+
+       canDisplayWebsite() {
+           let website = this.$store.state.currentRestaurant.website
+           if(website != null && website != '') {
+               return true;
+           }
        }
    }
 } // end of export default
@@ -85,6 +121,10 @@ export default {
 
 
 <style scoped>
+
+button {
+    margin: 2%;
+}
 
 .restaurants {
    
@@ -114,6 +154,10 @@ export default {
 h1{
     text-align: center;
     color: rgb(204, 10, 10);
+}
+
+#katiesFont {
+  font-family: 'Pacifico', cursive;
 }
 
 
