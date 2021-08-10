@@ -1,7 +1,7 @@
 package com.techelevator.application.jdbcdao;
 
 import com.techelevator.application.dao.PreferenceDAO;
-import com.techelevator.application.model.Preference;
+import com.techelevator.application.model.Preferences;
 import com.techelevator.security.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -16,38 +16,38 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         this.theDatabase = new JdbcTemplate(theDataSource);
     }
 
-    public Preference setPreferences(Preference userPreference) {
+    public Preferences setPreferences(Preferences userPreferences) {
         String newPreferenceStmt = "insert into preferences (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, " +
                                    "price_point, vegan, vegetarian, gluten_free) values (?, ?, ?, ?, ?, ?, ?, ?)";
-        theDatabase.update(newPreferenceStmt, userPreference.getUserId(), userPreference.getCuisineStyle1(), userPreference.getCuisineStyle2(),
-                           userPreference.getCuisineStyle3(), userPreference.getPricePoint(), userPreference.isVegan(),
-                            userPreference.isVegetarian(), userPreference.isGlutenFree());
+        theDatabase.update(newPreferenceStmt, userPreferences.getUserId(), userPreferences.getCuisineStyle1(), userPreferences.getCuisineStyle2(),
+                           userPreferences.getCuisineStyle3(), userPreferences.getPricePoint(), userPreferences.getVegan(),
+                            userPreferences.getVegetarian(), userPreferences.getGlutenFree());
 
-        return userPreference;
+        return userPreferences;
     };
 
-    public Preference viewPreferences(long currentUserId) {
+    public Preferences viewPreferences(long currentUserId) {
         String sqlSearch = "select * from preferences where user_id = ?";
-        Preference userPreference = new Preference();
+        Preferences userPreferences = new Preferences();
 
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, currentUserId);
 
         if (result.next()) {
-            userPreference = mapToPreference(result);
+            userPreferences = mapToPreference(result);
         }
-        return userPreference;
+        return userPreferences;
     };
 
-    public Preference updatePreferences(Preference updatedPreference) {
+    public Preferences updatePreferences(Preferences updatedPreferences) {
         String sqlUpdateStmt = "update preferences set cuisine_style_1 = ?, cuisine_style_2 = ?, cuisine_style_3 = ?, "
                                + "price_point = ?, vegan = ?, vegetarian = ?, gluten_free = ? where user_id = ?";
-        theDatabase.update(sqlUpdateStmt, updatedPreference.getCuisineStyle1(),
-                           updatedPreference.getCuisineStyle2(),updatedPreference.getCuisineStyle3(),
-                           updatedPreference.getPricePoint(), updatedPreference.isVegan(),
-                           updatedPreference.isVegetarian(), updatedPreference.isGlutenFree(),
-                           updatedPreference.getUserId());
+        theDatabase.update(sqlUpdateStmt, updatedPreferences.getCuisineStyle1(),
+                           updatedPreferences.getCuisineStyle2(), updatedPreferences.getCuisineStyle3(),
+                           updatedPreferences.getPricePoint(), updatedPreferences.getVegan(),
+                           updatedPreferences.getVegetarian(), updatedPreferences.getGlutenFree(),
+                           updatedPreferences.getUserId());
 
-        return updatedPreference;
+        return updatedPreferences;
     };
 
     public void deletePreferences(long currentUserId) {
@@ -58,33 +58,27 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     // helper methods
 
-    private Preference mapToPreference(SqlRowSet row) {
-        Preference newPreference = new Preference();
-        newPreference.setUserId(row.getLong("user_id"));
-        newPreference.setCuisineStyle1(row.getString("cuisine_style_1"));
-        newPreference.setCuisineStyle2(row.getString("cuisine_style_2"));
-        newPreference.setCuisineStyle3(row.getString("cuisine_style_3"));
-        newPreference.setPricePoint(row.getString("price_point"));
+    private Preferences mapToPreference(SqlRowSet row) {
+        Preferences newPreferences = new Preferences();
+        newPreferences.setUserId(row.getLong("user_id"));
+        newPreferences.setCuisineStyle1(row.getString("cuisine_style_1"));
+        newPreferences.setCuisineStyle2(row.getString("cuisine_style_2"));
+        newPreferences.setCuisineStyle3(row.getString("cuisine_style_3"));
+        newPreferences.setPricePoint(row.getString("price_point"));
 
-        if (!row.getBoolean("vegan")) {
-            newPreference.setVegan(false);
-        } else {
-            newPreference.setVegan(row.getBoolean("vegan"));
+        if (row.getString("vegan") != null) {
+            newPreferences.setVegan(row.getString("vegan"));
         }
 
-        if (!row.getBoolean("vegetarian")) {
-            newPreference.setVegetarian(false);
-        } else {
-            newPreference.setVegetarian(row.getBoolean("vegetarian"));
+        if (row.getString("vegetarian") != null) {
+            newPreferences.setVegetarian(row.getString("vegetarian"));
         }
 
-        if (!row.getBoolean("gluten_free")) {
-            newPreference.setGlutenFree(false);
-        } else {
-            newPreference.setGlutenFree(row.getBoolean("gluten_free"));
+        if (row.getString("gluten_free") != null) {
+            newPreferences.setGlutenFree(row.getString("gluten_free"));
         }
 
-        return newPreference;
+        return newPreferences;
     }
 
 }

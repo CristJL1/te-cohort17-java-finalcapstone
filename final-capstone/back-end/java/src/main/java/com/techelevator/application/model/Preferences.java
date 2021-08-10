@@ -1,21 +1,21 @@
 package com.techelevator.application.model;
 
-public class Preference {
+public class Preferences {
 
-    private long    userId;
+    private Long    userId;
     private String  cuisineStyle1;
     private String  cuisineStyle2;
     private String  cuisineStyle3;
     private String  pricePoint;
-    private Boolean vegan;
-    private Boolean vegetarian;
-    private Boolean glutenFree;
+    private String vegan;
+    private String vegetarian;
+    private String glutenFree;
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -51,41 +51,41 @@ public class Preference {
         this.pricePoint = pricePoint;
     }
 
-    public Boolean isVegan() {
+    public String getVegan() {
         return vegan;
     }
 
-    public void setVegan(Boolean vegan) {
+    public void setVegan(String vegan) {
         this.vegan = vegan;
     }
 
-    public Boolean isVegetarian() {
+    public String getVegetarian() {
         return vegetarian;
     }
 
-    public void setVegetarian(Boolean vegetarian) {
+    public void setVegetarian(String vegetarian) {
         this.vegetarian = vegetarian;
     }
 
-    public Boolean isGlutenFree() {
+    public String getGlutenFree() {
         return glutenFree;
     }
 
-    public void setGlutenFree(Boolean glutenFree) {
+    public void setGlutenFree(String glutenFree) {
         this.glutenFree = glutenFree;
     }
 
     @Override
     public String toString() {
-        return "Preferences{" +
+        return "Preference{" +
                 "userId=" + userId +
                 ", cuisineStyle1='" + cuisineStyle1 + '\'' +
                 ", cuisineStyle2='" + cuisineStyle2 + '\'' +
                 ", cuisineStyle3='" + cuisineStyle3 + '\'' +
                 ", pricePoint='" + pricePoint + '\'' +
-                ", vegan=" + vegan +
-                ", vegetarian=" + vegetarian +
-                ", glutenFree=" + glutenFree +
+                ", vegan='" + vegan + '\'' +
+                ", vegetarian='" + vegetarian + '\'' +
+                ", glutenFree='" + glutenFree + '\'' +
                 '}';
     }
 }

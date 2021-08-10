@@ -36,58 +36,58 @@
         <option value="none" selected disabled hidden>
           Select an Option
         </option>  
-        <option value="american">American</option>
-        <option value="barbecue">Barbecue</option>
-        <option value="chinese">Chinese</option>
-        <option value="italian">Italian</option>
-        <option value="indian">Indian</option>
-        <option value="mexican">Mexican</option>
-        <option value="pizza">Pizza</option>
-        <option value="seafood">Seafood</option>
-        <option value="steak">Steak</option>
-        <option value="sushi">Sushi</option>
-        <option value="thai">Thai</option>
+        <option value="9908">American</option>
+        <option value="10664">Greek</option>
+        <option value="5379">Chinese</option>
+        <option value="4617">Italian</option>
+        <option value="10687">Middle Eastern</option>
+        <option value="5110">Mexican</option>
+        <option value="10641">Pizza</option>
+        <option value="10642">Café</option>
+        <option value="10345">Steak</option>
+        <option value="10653">Sushi</option>
+        <option value="10660">Thai</option>
       </select>
       <select name="foodtype2" class="foodtype" v-model="preferences.cuisineStyle2">
         <option value="none" selected disabled hidden>
           Select an Option
         </option>  
-        <option value="american">American</option>
-        <option value="barbecue">Barbecue</option>
-        <option value="chinese">Chinese</option>
-        <option value="italian">Italian</option>
-        <option value="indian">Indian</option>
-        <option value="mexican">Mexican</option>
-        <option value="pizza">Pizza</option>
-        <option value="seafood">Seafood</option>
-        <option value="steak">Steak</option>
-        <option value="sushi">Sushi</option>
-        <option value="thai">Thai</option>
+        <option value="9908">American</option>
+        <option value="10664">Greek</option>
+        <option value="5379">Chinese</option>
+        <option value="4617">Italian</option>
+        <option value="10687">Middle Eastern</option>
+        <option value="5110">Mexican</option>
+        <option value="10641">Pizza</option>
+        <option value="10642">Café</option>
+        <option value="10345">Steak</option>
+        <option value="10653">Sushi</option>
+        <option value="10660">Thai</option>
       </select>
       <select name="foodtype3" class="foodtype" v-model="preferences.cuisineStyle3">
         <option value="none" selected disabled hidden>
           Select an Option
         </option>  
-        <option value="american">American</option>
-        <option value="barbecue">Barbecue</option>
-        <option value="chinese">Chinese</option>
-        <option value="italian">Italian</option>
-        <option value="indian">Indian</option>
-        <option value="mexican">Mexican</option>
-        <option value="pizza">Pizza</option>
-        <option value="seafood">Seafood</option>
-        <option value="steak">Steak</option>
-        <option value="sushi">Sushi</option>
-        <option value="thai">Thai</option>
+        <option value="9908">American</option>
+        <option value="10664">Greek</option>
+        <option value="5379">Chinese</option>
+        <option value="4617">Italian</option>
+        <option value="10687">Middle Eastern</option>
+        <option value="5110">Mexican</option>
+        <option value="10641">Pizza</option>
+        <option value="10642">Café</option>
+        <option value="10345">Steak</option>
+        <option value="10653">Sushi</option>
+        <option value="10660">Thai</option>
       </select>
       <br>
       <br>
       <p> Dietary Restrictions: </p>
-      <input type="checkbox" name="dietary1" value="true" v-model="preferences.glutenFree">
+      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.glutenFree" checked>
       <label class="dietarybox" for="dietary1"> Gluten Free</label>
-      <input type="checkbox" name="dietary2" value="true" v-model="preferences.vegan">
+      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.vegan" checked>
       <label class="dietarybox" for="dietary2"> Vegan</label>
-      <input type="checkbox" name="dietary3" value="true" v-model="preferences.vegetarian">
+      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.vegetarian" checked>
       <label class="dietarybox" for="dietary3"> Vegetarian</label>
       <br>
       <br>
@@ -115,7 +115,7 @@
 
 
 <script>
-import applicationServices from "../services/ApplicationServices"
+import applicationServices from '../services/ApplicationServices';
 
 export default {
     name: 'questionnaire-form',
@@ -135,9 +135,9 @@ export default {
                  cuisineStyle2: '',
                  cuisineStyle3: '',
                  pricePoint: '',
-                 vegan: false,
-                 vegetarian: false,
-                 glutenFree: false
+                 vegan: '',
+                 vegetarian: '',
+                 glutenFree: ''
             },
             
         }

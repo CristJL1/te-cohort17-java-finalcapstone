@@ -42,7 +42,7 @@
     
       <br>
       <p> Dietary Restrictions: </p>
-      <input type="checkbox" name="dietary1" value="true" v-model="preferences.glutenFree">
+      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.glutenFree">
         <label class="dietarybox" for="dietary1"> Gluten Free</label>
       </form>
 
