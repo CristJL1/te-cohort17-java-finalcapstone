@@ -119,13 +119,31 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.restaurantWebsite = restaurant.website
       state.restaurantDTO.restaurantToAdd.priceRange = restaurant.price_level
 
-      restaurant.cuisine.forEach(cuisine => {
-        state.restaurantDTO.restaurantToAdd.cuisineTypes.push(cuisine)
-      })
+      // restaurant.cuisine.forEach(cuisineName => {
+      //   state.restaurantDTO.restaurantToAdd.cuisineTypes.push(cuisineName)
+      // })
+      for (let i = 0; i < restaurant.cuisine.length; i++) {
+        state.restaurantDTO.restaurantToAdd.cuisineTypes.push(restaurant.cuisine[i])
+      }
 
       state.restaurantDTO.restaurantToAdd.address = restaurant.address
       state.restaurantDTO.restaurantToAdd.lat = restaurant.latitude
       state.restaurantDTO.restaurantToAdd.lon = restaurant.longitude
+    },
+
+    RESET_RESTAURANTDTO(state) {
+      state.restaurantDTO.restaurantToAdd.restaurantName = '',
+      state.restaurantDTO.restaurantToAdd.locationId = Number,
+      state.restaurantDTO.restaurantToAdd.description = '',
+      state.restaurantDTO.restaurantToAdd.imageLink = '',
+      state.restaurantDTO.restaurantToAdd.restaurantPhone = '',
+      state.restaurantDTO.restaurantToAdd.restaurantWebsite = '',
+      state.restaurantDTO.restaurantToAdd.priceRange = '',
+      state.restaurantDTO.restaurantToAdd.cuisineTypes = [],
+      state.restaurantDTO.restaurantToAdd.address = '',
+      state.restaurantDTO.restaurantToAdd.lat = '',
+      state.restaurantDTO.restaurantToAdd.lon = '',
+      state.restaurantDTO.isLiked = Boolean
     }
 
   }

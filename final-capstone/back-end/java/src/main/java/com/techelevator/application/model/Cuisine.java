@@ -23,9 +23,6 @@ public class Cuisine {
 
     @Override
     public String toString() {
-        return "Cuisine{" +
-                "key='" + key + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return getKey() + "," + getName();
     }
 }
