@@ -64,8 +64,7 @@ export default {
    created() {
         let cuisine = this.$store.state.preference
         let dietaryRestriction = this.$store.state.preference.dietaryRestriction
-        let usersCuisines = cuisine.cuisine_type_1 + ", " + cuisine.cuisine_type_2 + ", " + cuisine.cusine_type_3
-        let usersRestrictions = dietaryRestriction[0] + ", " + dietaryRestriction[1] + ", " + dietaryRestriction[2]
+        let usersCuisines = cuisine.cuisineStyle1 + ", " + cuisine.cuisineStyle2 + ", " + cuisine.cusineStyle3
         const options = {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
@@ -76,7 +75,7 @@ export default {
             currency: 'USD',
             combined_food: usersCuisines,
             distance: '20',
-            dietary_restrictions: usersRestrictions,
+            dietary_restrictions: dietaryRestriction,
             lunit: 'km',
             lang: 'en_US'
             },

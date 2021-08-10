@@ -1,6 +1,6 @@
 <template>
     <div class="questionnaire text-center"> 
-    <form class="form-questionnaire" @submit.prevent="submitQuestionnaire">
+    <form class="form-questionnaire" @submit.prevent="checkCheckBoxes(); submitQuestionnaire()">
     <h1 id="katiesFont">Questionnaire</h1>
     <label for="firstName">First Name </label>
       <input v-model="profile.firstName"
@@ -84,11 +84,11 @@
       <br>
       <p> Dietary Restrictions: </p>
 
-      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.dietraryRestrictions">
+      <input type="checkbox" name="dietary1" value="10992" v-model="dietaryRestrictionsArray">
       <label class="dietarybox" for="dietary1"> Gluten Free</label>
-      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.dietraryRestrictions">
+      <input type="checkbox" name="dietary2" value="10697" v-model="dietaryRestrictionsArray">
       <label class="dietarybox" for="dietary2"> Vegan</label>
-      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.dietraryRestrictions">
+      <input type="checkbox" name="dietary3" value="10665" v-model="dietaryRestrictionsArray">
       <label class="dietarybox" for="dietary3"> Vegetarian</label>
 
       <br>
@@ -123,7 +123,10 @@ export default {
     name: 'questionnaire-form',
     data() {
         return {
-            dietraryRestrictionsArray: [],
+            dietaryRestrictionsArray: [],
+            vegan: '',
+            glutenFree: '',
+            vegitarian: '',
 
             profile: {
                 userId: '', /* figure how to current UserID passed in*/
@@ -139,7 +142,7 @@ export default {
                  cuisineStyle2: '',
                  cuisineStyle3: '',
                  pricePoint: '',
-                 dietraryRestrictions: '',
+                 dietaryRestrictions: '',
                  // vegan: '',
                  // vegetarian: '',
                  // glutenFree: ''
@@ -150,8 +153,9 @@ export default {
     created() {
     },
     methods: {
-        checkCheckBoxes() {
-        let restrictions = this.preferences.dietraryRestrictionsArray
+        checkCheckBoxes(event) {
+        let restrictions = this.dietaryRestrictionsArray
+        
         if(restrictions === null) {
            restrictions.push(0, 0, 0)
         }
@@ -161,7 +165,7 @@ export default {
         if(restrictions.length === 2) {
           restrictions.push(0)
         }
-        let dietraryRestrictions = restrictions.toString();
+        this.preferences.dietaryRestrictions = restrictions.toString();
       },
 
         submitQuestionnaire() {
@@ -171,7 +175,6 @@ export default {
             .addProfile(this.profile)
             .then(response => {
                 this.preferences.userId = this.$route.query.id;
-                checkCheckBoxes()
                 applicationServices
                 .addPreferences(this.preferences)
                 .then(response => {

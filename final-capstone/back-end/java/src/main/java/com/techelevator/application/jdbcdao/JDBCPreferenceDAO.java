@@ -66,7 +66,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
         newPreferences.setCuisineStyle2(row.getString("cuisine_style_2"));
         newPreferences.setCuisineStyle3(row.getString("cuisine_style_3"));
         newPreferences.setPricePoint(row.getString("price_point"));
-        newPreferences.setDietaryRestrictions((row.getString("dietary_restrictions")));
+        newPreferences.setDietaryRestrictions(row.getString("dietary_restrictions"));
 
 //        if (row.getString("vegan") != null) {
 //            newPreferences.setVegan(row.getString("vegan"));
