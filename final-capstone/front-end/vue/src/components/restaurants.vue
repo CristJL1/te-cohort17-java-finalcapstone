@@ -2,45 +2,44 @@
     <div class="restaurants text-center">
         
         <div class="restaurantCard">
-           <h1 id="katiesFont"> Mangiamo </h1>
-            <img v-bind:src="this.$store.state.currentRestaurant.photo.images.medium.url" alt="Photo of the Restaurant">
-           <h3>Restaurant Name:  <span>{{this.$store.state.currentRestaurant.name}} </span> </h3>
+            <h1 id="katiesFont"> Mangiamo </h1>
 
-           <p>Description: {{this.$store.state.currentRestaurant.description}}</p>
-           <p>Address: {{this.$store.state.currentRestaurant.address}}</p>
+            <div class="imageGrid">
+            <img  v-bind:src="this.$store.state.currentRestaurant.photo.images.large.url" alt="Photo of the Restaurant" class="restaurantImg">
+            </div>
 
-           <h4>Cuisine Type & Dietary Restrictions: </h4>
-               <p
-                    v-for="cuisineObject in this.$store.state.currentRestaurant.cuisine"
-                    v-bind:key="cuisineObject.id"
-                >{{cuisineObject.name}} 
+            <div class="restaurantDetails">
+                <h3>Restaurant Name:  <span>{{this.$store.state.currentRestaurant.name}} </span> </h3>
+                <h5>Address: <span>{{this.$store.state.currentRestaurant.address}}</span></h5>
+                <h4>Cuisine Type & Dietary Restrictions: </h4>
+                <div class="typesGrid" >
+                    <div class="types">
+                        <h5 class="atype" v-for="cuisineObject in this.$store.state.currentRestaurant.cuisine"
+                            v-bind:key="cuisineObject.id"><img src="../../public/Food_icon.png" id="foodIcon"> {{cuisineObject.name}} </h5>
+                    </div>
+                </div>    
+                <p>Phone: {{this.$store.state.currentRestaurant.phone}}</p>
+                <p v-if="canDisplayWebsite()">Visit: 
+                    <a v-bind:href="this.$store.state.currentRestaurant.website" target="_blank">
+                        {{this.$store.state.currentRestaurant.name}}'s website
+                    </a>
                 </p>
+                <p v-else>Website Not Listed </p>
+                <p>Price: {{this.$store.state.currentRestaurant.price_level}} 
+                    ({{this.$store.state.currentRestaurant.price}}) 
+                </p>
+            </div>
+
+            <button type="button" class="description">See Description</button>
+                <p class="description" id="description">Description: {{this.$store.state.currentRestaurant.description}}</p>
+        
+            
+
            
-
-
-           <p>Phone: {{this.$store.state.currentRestaurant.phone}}</p>
-           <p v-if="canDisplayWebsite()"
-           >Visit: 
-               <a v-bind:href="this.$store.state.currentRestaurant.website"
-               target="_blank">
-               {{this.$store.state.currentRestaurant.name}}'s website
-               </a>
-            </p>
-            <p v-else>Website Not Listed </p>
-            <p>Price: {{this.$store.state.currentRestaurant.price_level}} 
-                ({{this.$store.state.currentRestaurant.price}}) </p>
-
-           <!--<p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[0].name}}</p>
-           <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[1].name}}</p>
-           <p>{{this.$store.state.restaurants.data[currentRestaurant].cuisine[2].name}}</p>
-           -->
-           <button v-on:click.prevent="cycleRestaurant; pushToDatabase;">I Like this Restaurant</button>
-           <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
-           <!--
-           <img 
-           v-if="" - CHECK TO SEE IF A PICTURE EXISTS
-           v-bind:src="apiRestaurants.data[currentRestaurant].photo.images.large.url"/>
-           -->
+            <div class="buttonFooter">
+                <button v-on:click.prevent="cycleRestaurant; pushToDatabase;">I Like this Restaurant</button>
+                <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
+            </div>
         </div>
     </div>    
 
@@ -59,6 +58,7 @@ export default {
        return {
            //restaurantId: 0,     
            filteredRestaurants: [], // Holds our Restaurants filtered by Preferences
+           trueFalse: false
        }
    }, 
    created() {
@@ -125,8 +125,10 @@ export default {
            if(website != null && website != '') {
                return true;
            }
-       }
+       },
+
    }
+
 } // end of export default
 </script>
 
@@ -138,7 +140,6 @@ button {
 }
 
 .restaurants {
-   
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         height: 100%;
@@ -153,8 +154,68 @@ button {
     border-style: outset;
     border-width: medium;
     border-radius: 10px;
-    padding: 5%;
-    margin: 10%;
+    margin-top: 3%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 75px .3fr .1fr .005fr;
+    height: 100%;
+    grid-template-areas:
+    "h1 h1"
+    "restaurantDetails imageGrid"
+    " description description"
+    " btn btn"
+}
+
+.description {
+    grid-area: description;
+    
+}
+
+#description {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.restaurantDetails {
+    grid-area: restaurantDetails;
+    padding: 3%;
+    display: inline-block;
+    max-width: auto;
+   
+    
+}
+
+.buttonFooter {
+    grid-area: btn;
+}
+
+h1{
+    grid-area: h1;
+    text-align: center;
+    color: rgb(204, 10, 10);
+    margin: 0%;
+    border: 5px ridge red;
+}
+
+h4{
+    margin-top: 2%;
+    margin-bottom: 0%;
+}
+
+.imageGrid {
+    grid-area: imageGrid;
+    height: auto;
+}
+
+.restaurantImg {
+    object-fit: cover;
+    width: 350px;
+    height: 350px;
+    margin: 10% 0% 10% 0%;
+    
 }
 
 .text-center {
@@ -162,20 +223,42 @@ button {
     font-family: Monospace, Cursive, Sans-serif;
     }
 
-h1{
-    text-align: center;
-    color: rgb(204, 10, 10);
-}
-
 #katiesFont {
   font-family: 'Pacifico', cursive;
 }
 
-img {
-    height: 400px;
-    width: auto;
+#foodIcon {
+    height: 15px;
+    width: 15px;
 }
 
+.typesGrid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    height: auto;
+    grid-template-areas:
+    ". types .";
 
+    
+
+}
+
+.types {
+    grid-area: types;
+    text-align: left;
+}
+
+.atype {
+    margin: 2%;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
 
 </style>
