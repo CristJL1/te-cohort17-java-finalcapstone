@@ -6,7 +6,7 @@
 
 <script>
 import restaurants from '../components/restaurants.vue';
-import ApplicationServices from '../services/ApplicationServices';
+import applicationServices from '../services/ApplicationServices';
 export default {
   components: { restaurants },
   name: "home",

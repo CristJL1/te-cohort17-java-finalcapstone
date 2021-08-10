@@ -111,21 +111,21 @@ export default new Vuex.Store({
     },
 
     SET_RESTAURANTDTO(state, restaurant) {
-      state.restaurantDTO.restaurantToAdd.restaurantName = currentRestaurant.name
-      state.restaurantDTO.restaurantToAdd.locationId = currentRestaurant.location_id
-      state.restaurantDTO.restaurantToAdd.description = currentRestaurant.description
-      state.restaurantDTO.restaurantToAdd.imageLink = currentRestaurant.photo.images.medium.url
-      state.restaurantDTO.restaurantToAdd.restaurantPhone = currentRestaurant.phone
-      state.restaurantDTO.restaurantToAdd.restaurantWebsite = currentRestaurant.website
-      state.restaurantDTO.restaurantToAdd.priceRange = currentRestaurant.price_level
+      state.restaurantDTO.restaurantToAdd.restaurantName = restaurant.name
+      state.restaurantDTO.restaurantToAdd.locationId = restaurant.location_id
+      state.restaurantDTO.restaurantToAdd.description = restaurant.description
+      state.restaurantDTO.restaurantToAdd.imageLink = restaurant.photo.images.medium.url
+      state.restaurantDTO.restaurantToAdd.restaurantPhone = restaurant.phone
+      state.restaurantDTO.restaurantToAdd.restaurantWebsite = restaurant.website
+      state.restaurantDTO.restaurantToAdd.priceRange = restaurant.price_level
 
-      currentRestaurant.cuisine.forEach(cuisine => {
+      restaurant.cuisine.forEach(cuisine => {
         state.restaurantDTO.cuisineTypes.push(cuisine)
       })
 
-      state.restaurantDTO.restaurantToAdd.address = currentRestaurant.address
-      state.restaurantDTO.restaurantToAdd.lat = currentRestaurant.latitude
-      state.restaurantDTO.restaurantToAdd.lon = currentRestaurant.longitude
+      state.restaurantDTO.restaurantToAdd.address = restaurant.address
+      state.restaurantDTO.restaurantToAdd.lat = restaurant.latitude
+      state.restaurantDTO.restaurantToAdd.lon = restaurant.longitude
     }
 
   }
