@@ -37,7 +37,7 @@
 
            
             <div class="buttonFooter">
-                <button v-on:click.prevent="cycleRestaurant; pushToDatabase;">I Like this Restaurant</button>
+                <button v-on:click.prevent="pushToDatabase(); cycleRestaurant()">I Like this Restaurant</button>
                 <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
             </div>
         </div>
@@ -62,9 +62,9 @@ export default {
        }
    }, 
    created() {
-        let cuisine = this.$store.state.preference
-        let dietaryRestriction = this.$store.state.preference.dietaryRestriction
-        let usersCuisines = cuisine.cuisineStyle1 + ", " + cuisine.cuisineStyle2 + ", " + cuisine.cusineStyle3
+        let preferences = this.$store.state.preference
+        let dietaryRestrictions = this.$store.state.preference.dietaryRestrictions
+        let usersCuisines = preferences.cuisineStyle1 + ", " + preferences.cuisineStyle2 + ", " + preferences.cuisineStyle3
         const options = {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
@@ -75,7 +75,7 @@ export default {
             currency: 'USD',
             combined_food: usersCuisines,
             distance: '20',
-            dietary_restrictions: dietaryRestriction,
+            dietary_restrictions: dietaryRestrictions,
             lunit: 'km',
             lang: 'en_US'
             },
@@ -105,9 +105,17 @@ export default {
 
        pushToDatabase() {
            // Updating a liked restaurant to the data store
-           let currentRestaurant = this.$store.state.restaurants.data[this.$store.state.restaurantId]
+           let currentRestaurant = this.$store.state.restaurants[this.$store.state.restaurantId]
            this.$store.commit("LIKE_RESTAURANT", currentRestaurant)
            // Still need to call the service to push to database
+           // Pass to the Database with our liked Restaurant
+           this.$store.commit("SET_RESTAURANTDTO", currentRestaurant)
+           applicationServices
+           .addLikedRestaurant(this.$store.state.restaurantDTO)
+           .then(response => {
+
+           }) 
+
        },
        canDisplayCuisine() {
            let cuisine = this.$store.state.currentRestaurant.cuisine

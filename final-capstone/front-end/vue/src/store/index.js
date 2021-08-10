@@ -97,7 +97,7 @@ export default new Vuex.Store({
     },
     SET_PROFILE_DATA(state, profile) {
       state.profile = profile;
-      state.restaurantDTO.profile = profile;
+      state.restaurantDTO.currentProfile = profile;
     },
 
     UPDATE_TO_NEXT_RESTAURANT(state, nextRestaurantId) {
@@ -114,13 +114,13 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.restaurantName = restaurant.name
       state.restaurantDTO.restaurantToAdd.locationId = restaurant.location_id
       state.restaurantDTO.restaurantToAdd.description = restaurant.description
-      state.restaurantDTO.restaurantToAdd.imageLink = restaurant.photo.images.medium.url
+      state.restaurantDTO.restaurantToAdd.imageLink = restaurant.photo.images.large.url
       state.restaurantDTO.restaurantToAdd.restaurantPhone = restaurant.phone
       state.restaurantDTO.restaurantToAdd.restaurantWebsite = restaurant.website
       state.restaurantDTO.restaurantToAdd.priceRange = restaurant.price_level
 
       restaurant.cuisine.forEach(cuisine => {
-        state.restaurantDTO.cuisineTypes.push(cuisine)
+        state.restaurantDTO.restaurantToAdd.cuisineTypes.push(cuisine)
       })
 
       state.restaurantDTO.restaurantToAdd.address = restaurant.address

@@ -30,7 +30,7 @@ getPreferenceById(id) {
     return axios.get(`/user/${id}/preference`)
 },
 
-addLikedRestaurant() {
-    return axios.put(`/restaurants`)
+addLikedRestaurant(restaurantDTO) {
+    return axios.post(`/restaurants`, restaurantDTO)
     }
 }
