@@ -83,12 +83,14 @@
       <br>
       <br>
       <p> Dietary Restrictions: </p>
-      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.glutenFree" checked>
+
+      <input type="checkbox" name="dietary1" value="10992" v-model="preferences.dietraryRestrictions">
       <label class="dietarybox" for="dietary1"> Gluten Free</label>
-      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.vegan" checked>
+      <input type="checkbox" name="dietary2" value="10697" v-model="preferences.dietraryRestrictions">
       <label class="dietarybox" for="dietary2"> Vegan</label>
-      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.vegetarian" checked>
+      <input type="checkbox" name="dietary3" value="10665" v-model="preferences.dietraryRestrictions">
       <label class="dietarybox" for="dietary3"> Vegetarian</label>
+
       <br>
       <br>
       <p> Price: </p>
@@ -121,6 +123,8 @@ export default {
     name: 'questionnaire-form',
     data() {
         return {
+            dietraryRestrictionsArray: [],
+
             profile: {
                 userId: '', /* figure how to current UserID passed in*/
                 firstName: '',
@@ -135,9 +139,10 @@ export default {
                  cuisineStyle2: '',
                  cuisineStyle3: '',
                  pricePoint: '',
-                 vegan: '',
-                 vegetarian: '',
-                 glutenFree: ''
+                 dietraryRestrictions: '',
+                 // vegan: '',
+                 // vegetarian: '',
+                 // glutenFree: ''
             },
             
         }
@@ -145,6 +150,20 @@ export default {
     created() {
     },
     methods: {
+        checkCheckBoxes() {
+        let restrictions = this.preferences.dietraryRestrictionsArray
+        if(restrictions === null) {
+           restrictions.push(0, 0, 0)
+        }
+        if(restrictions.length === 1) {
+          restrictions.push(0, 0)
+        }
+        if(restrictions.length === 2) {
+          restrictions.push(0)
+        }
+        let dietraryRestrictions = restrictions.toString();
+      },
+
         submitQuestionnaire() {
         
             this.profile.userId = this.$route.query.id;
@@ -152,19 +171,21 @@ export default {
             .addProfile(this.profile)
             .then(response => {
                 this.preferences.userId = this.$route.query.id;
+                checkCheckBoxes()
                 applicationServices
                 .addPreferences(this.preferences)
                 .then(response => {
                 this.$router.push({
                 path: '/login' 
-        })
-        })
-
-       
-        
-        });
+                })
+                })
+            });
         } // END OF SUBMITQUESTIONNAIRE
 
+    },
+
+    computed:{
+      
     }
 }
 </script>
