@@ -6,6 +6,8 @@ import Logout from '../views/Logout.vue'
 import Questionnaire from '../views/Questionnaire.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import User from '../views/User.vue'
+
 
 Vue.use(Router)
 
@@ -22,6 +24,14 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,   // Get the base server URL from the .env file
   routes: [
+    {
+      path: "/user",
+      name: "user",
+      component: User,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/',
       name: 'home',
@@ -62,6 +72,7 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    
   ]
 })
 
