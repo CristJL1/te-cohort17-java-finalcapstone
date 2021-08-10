@@ -42,9 +42,10 @@ cuisine_style_1 character varying(50) not null,
 cuisine_style_2 character varying(50) not null,
 cuisine_style_3 character varying(50) not null,
 price_point character varying(4) not null,
-vegan character varying (10),
-vegetarian character varying (10),
-gluten_free character varying (10),
+dietary_restrictions character varying (32),
+--vegan character varying (10),
+--vegetarian character varying (10),
+--gluten_free character varying (10),
 constraint pk_preferences_user_id Primary Key (user_id));
 
 create table restaurants
