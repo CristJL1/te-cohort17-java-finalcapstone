@@ -28,47 +28,53 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
 
         restaurantToAdd.setRestaurantId(getNextRestaurantId());
 
-        if (viewRestaurant(restaurantToAdd.getRestaurantId()) == null) {
+
             String sqlInsert = "insert into restaurants (restaurant_id, location_id, restaurant_name, " +
                     "restaurant_phone, restaurant_website, restaurant_description, restaurant_image, " +
                     "price_range, cuisine_type_1, cuisine_type_2, cuisine_type_3, cuisine_type_4, " +
                     "cuisine_type_5, cuisine_type_6, cuisine_type_7, address, lat, lon) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            String cuisine1 = null;
-            String cuisine2 = null;
-            String cuisine3 = null;
-            String cuisine4 = null;
-            String cuisine5 = null;
-            String cuisine6 = null;
-            String cuisine7 = null;
+//            String cuisine1 = "";
+//            String cuisine2 = "";
+//            String cuisine3 = "";
+//            String cuisine4 = "";
+//            String cuisine5 = "";
+//            String cuisine6 = "";
+//            String cuisine7 = "";
+//
+//            List<String> cuisines = new ArrayList();
+//
+//            cuisines.add(cuisine1);
+//            cuisines.add(cuisine2);
+//            cuisines.add(cuisine3);
+//            cuisines.add(cuisine4);
+//            cuisines.add(cuisine5);
+//            cuisines.add(cuisine6);
+//            cuisines.add(cuisine7);
+//
+//            for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
+//                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getKey() + ","
+//                                + restaurantToAdd.getCuisineTypes().get(i).getName());
+      //      }
 
-            List<String> cuisines = new ArrayList();
-
-            cuisines.add(cuisine1);
-            cuisines.add(cuisine2);
-            cuisines.add(cuisine3);
-            cuisines.add(cuisine4);
-            cuisines.add(cuisine5);
-            cuisines.add(cuisine6);
-            cuisines.add(cuisine7);
-
-            for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
-                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getKey() + ","
-                                + restaurantToAdd.getCuisineTypes().get(i).getName());
+            while (restaurantToAdd.getCuisineTypes().size() < 7) {
+                restaurantToAdd.getCuisineTypes().add(new Cuisine());
             }
-
 
 
             theDatabase.update(sqlInsert, restaurantToAdd.getRestaurantId(), restaurantToAdd.getLocationId(),
                     restaurantToAdd.getRestaurantName(), restaurantToAdd.getRestaurantPhone(),
                     restaurantToAdd.getRestaurantWebsite(), restaurantToAdd.getPriceRange(),
                     restaurantToAdd.getDescription(), restaurantToAdd.getImageLink(),
-                    cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6, cuisine7,
+                    restaurantToAdd.getCuisineTypes().get(0).toString(), restaurantToAdd.getCuisineTypes().get(1).toString(),
+                    restaurantToAdd.getCuisineTypes().get(2).toString(), restaurantToAdd.getCuisineTypes().get(3).toString(),
+                    restaurantToAdd.getCuisineTypes().get(4).toString(), restaurantToAdd.getCuisineTypes().get(5).toString(),
+                    restaurantToAdd.getCuisineTypes().get(6).toString(),
                     restaurantToAdd.getAddress(), restaurantToAdd.getLat(),
                     restaurantToAdd.getLon());
 
-        }
+
         return restaurantToAdd;
     }
 

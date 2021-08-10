@@ -113,8 +113,7 @@ export default {
            applicationServices
            .addLikedRestaurant(this.$store.state.restaurantDTO)
            .then(response => {
-
-           }) 
+               this.$store.commit("RESET_RESTAURANTDTO")}) 
 
        },
        canDisplayCuisine() {
