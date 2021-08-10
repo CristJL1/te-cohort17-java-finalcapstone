@@ -18,7 +18,7 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     public Preferences setPreferences(Preferences userPreferences) {
         String newPreferenceStmt = "insert into preferences (user_id, cuisine_style_1, cuisine_style_2, cuisine_style_3, " +
-                                   "price_point, vegan, vegetarian, gluten_free) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                                   "price_point, dietary_restrictions) values (?, ?, ?, ?, ?, ?)"; // removed vegan/vegetarian/gluten free and replaced with dietary_restrictions
         theDatabase.update(newPreferenceStmt, userPreferences.getUserId(), userPreferences.getCuisineStyle1(), userPreferences.getCuisineStyle2(),
                            userPreferences.getCuisineStyle3(), userPreferences.getPricePoint(), userPreferences.getDietaryRestrictions());
                 //userPreferences.getVegan(), userPreferences.getVegetarian(), userPreferences.getGlutenFree());
@@ -40,7 +40,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     public Preferences updatePreferences(Preferences updatedPreferences) {
         String sqlUpdateStmt = "update preferences set cuisine_style_1 = ?, cuisine_style_2 = ?, cuisine_style_3 = ?, "
-                               + "price_point = ?, vegan = ?, vegetarian = ?, gluten_free = ? where user_id = ?";
+                               + "price_point = ?, + dietary_restrictions = ? " + //vegan = ?, vegetarian = ?, gluten_free = ? " +
+                "where user_id = ?";
         theDatabase.update(sqlUpdateStmt, updatedPreferences.getCuisineStyle1(),
                            updatedPreferences.getCuisineStyle2(), updatedPreferences.getCuisineStyle3(),
                            updatedPreferences.getPricePoint(), updatedPreferences.getDietaryRestrictions(),
