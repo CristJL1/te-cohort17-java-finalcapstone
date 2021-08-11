@@ -19,6 +19,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    locationArray: [],
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
