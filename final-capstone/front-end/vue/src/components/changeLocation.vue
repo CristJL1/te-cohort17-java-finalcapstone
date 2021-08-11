@@ -1,4 +1,5 @@
 <template>
+    <div>
     <select name="cityDropdownMenu" class="dropdown" v-model="latLongString">
         <option value="none" selected disabled hidden>
           Select a City
@@ -24,6 +25,7 @@
         <option value="47.6036, -122.3358">Seattle, WA</option>
         <option value="38.9113, -77.0407">Washington D.C.</option>
       </select>
+    </div>
 </template>
 
 
@@ -31,18 +33,20 @@
 <script>
 export default {
 
-    name: changeLocation,
+    name: 'change-location',
     data() { 
 
         return {
 
         latLongString:'',
-        lat: '',
-        long: '',
+        locationArray: [
+
+        ]
         }
     },
     methods: {
         splitString() {
+            this.locationArray === latLongString.split(",")
             // method to split latLongString at the comma
             // computed method to call splitString
         }
