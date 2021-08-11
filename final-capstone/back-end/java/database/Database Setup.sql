@@ -7,6 +7,7 @@ drop table if exists profile_preferences cascade;
 drop table if exists preferences cascade;
 drop table if exists restaurants cascade;
 drop table if exists restaurants_profile cascade;
+drop table if exists cuisines cascade;
 
 DROP SEQUENCE IF EXISTS seq_user_id;
 
@@ -80,6 +81,80 @@ create table restaurants_profile
 (restaurant_id int not null,
 user_id int not null,
 constraint pk_restaurants_profile_restaurant_id_user_id Primary Key (restaurant_id, user_id));
+
+create table cuisines
+(cuisine_number int not null,
+cuisine_name character varying (100),
+constraint pk_cuisines_cuisine_number Primary Key (cuisine_number));
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (9908, 'American');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10641, 'Pizza');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10660, 'Thai');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10664, 'Greek');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (4617, 'Italian');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10666, 'Deli');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10687, 'Middle Eastern');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (5473, 'Japanese');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10653, 'Sushi');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10659, 'Asian');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10649, 'Mediterranean');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10640, 'Bar');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10345, 'Steakhouse');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10670, 'Pub');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (5379, 'Chinese');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10642, 'Cafe');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10679, 'Healthy');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10634, 'Southwestern');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (5110, 'Mexican');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10646, 'Fast Food');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10665, 'Vegtarian Friendly');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10697, 'Vegan Options');
+
+insert into cuisines (cuisine_number, cuisine_name)
+values (10992, 'Gluten Free Options');
 
 
 
