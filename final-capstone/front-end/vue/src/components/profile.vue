@@ -2,9 +2,9 @@
 <div>
     <h1>Preferences</h1>
 
-    <p>{{this.$store.state.preference.cuisineStyle1}}</p>
-    <p>{{this.$store.state.preference.cuisineStyle2}}</p>
-    <p>{{this.$store.state.preference.cuisineStyle3}}</p>
+    <p>{{CurrentUserCuisine1}}</p>
+    <p>{{CurrentUserCuisine2}}</p>
+    <p>{{CurrentUserCuisine3}}</p>
     <p>{{this.$store.state.preference.pricePoint}}</p>
     <p>{{this.$store.state.preference.dietaryRestrictions}}</p>
  
