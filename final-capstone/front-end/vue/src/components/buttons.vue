@@ -48,36 +48,21 @@ export default {
 }
 
 #likeBtn {
-    /*
-  background-color: green;
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 28px;
-  margin: 4px 2px;
-  border-radius: 50%;*/
-
-   height: 60 px;
-  width: 60px;
+    cursor: pointer;
+    height: 60 px;
+    width: 60px;
+    border-radius: 50%;
 }
-
+#likeBtn:active {
+    transform: translateY(4px);
+}
 #dislikeBtn {
- /* background-color: red;
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 28px;
-  margin: 4px 2px;
-  border-radius: 50%;*/
-
-  height: 60 px;
-  width: 60px;
+    cursor: pointer;
+    height: 60 px;
+    width: 60px;
+}
+#dislikeBtn:active {
+    transform: translateY(4px)
 }
 
 </style>

@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.techelevator.security.dao.UserDAO;
 import java.sql.Timestamp;
+import java.util.List;
+
 import com.techelevator.security.model.User;
 @CrossOrigin
 @RestController
@@ -99,7 +101,7 @@ public User getUser(@PathVariable String username) {
     return aUser;
 }
 
-// Take the DTO? Then use it to update restaurants and restaurants_profile?
+
 @ResponseStatus(HttpStatus.CREATED)
 @RequestMapping(path = "/restaurants", method = RequestMethod.POST)
 public RestaurantDTO addRestaurantToRestaurants(@RequestBody RestaurantDTO restaurantToAdd) {
@@ -127,6 +129,12 @@ public Restaurant updateRestaurant(@RequestBody Restaurant restaurantToUpdate) {
 @RequestMapping(path="/restaurants/{id}", method = RequestMethod.DELETE)
 public void deleteRestaurant(@PathVariable long id) {
     restaurantData.deleteRestaurant(id);
+}
+
+@RequestMapping(path = "/user/{id}/restaurants", method = RequestMethod.GET)
+public List<Restaurant> getLikedRestaurants(@PathVariable Long id) {
+    logRequest("GET -- LIKED RESTAURANTS");
+    return restaurantData.viewFavoritedRestaurants(id);
 }
 	
 	

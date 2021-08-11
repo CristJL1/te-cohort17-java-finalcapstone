@@ -116,11 +116,11 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     }
 
     @Override
-    public List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView) {
+    public List<Restaurant> viewFavoritedRestaurants(Long id) {
         List<Restaurant> favoritedList = new ArrayList();
         String sqlSearch = "select * from restaurants r inner join restaurants_profile rp on " +
                            "r.restaurant_id = rp.restaurant_id where user_id = ?";
-        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, restaurantToView.getCurrentProfile().getUserId());
+        SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, id);
 
         if (result.next()) {
             Restaurant likedRestaurant = mapToRestaurant(result);
