@@ -80,7 +80,16 @@
 
 
 </template>
-<script></script>
+<script>
+
+export default {
+  name: 'update-profile',
+  data() {
+
+  }
+}
+</script>
+
 
 
 <style scoped>
