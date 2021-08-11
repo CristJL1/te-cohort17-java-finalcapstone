@@ -87,7 +87,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                 restaurantToUpdate.getCuisineTypes().get(1).toString(),
                 restaurantToUpdate.getCuisineTypes().get(2).toString(),
                 restaurantToUpdate.getCuisineTypes().get(3).toString(),
-                restaurantToUpdate.getCuisineTypes().get(4).toString(), 
+                restaurantToUpdate.getCuisineTypes().get(4).toString(),
                 restaurantToUpdate.getCuisineTypes().get(5).toString(),
                 restaurantToUpdate.getCuisineTypes().get(6).toString(), restaurantToUpdate.getAddress(),
                 restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
