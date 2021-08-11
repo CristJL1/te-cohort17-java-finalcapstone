@@ -34,9 +34,9 @@ export default {
     let id2 = this.$store.state.preference.cuisineStyle2
     let id3 = this.$store.state.preference.cuisineStyle3
     
-    this.CurrentUserCuisine1 = this.$store.state.cuisines.find(cuisineId => cuisineId === id1)
-    this.CurrentUserCuisine2 = this.$store.state.cuisines.find(cuisineId => cuisineId === id2)
-    this.CurrentUserCuisine3 = this.$store.state.cuisines.find(cuisineId => cuisineId === id3)
+    this.CurrentUserCuisine1 = this.$store.state.cuisines.find(cuisine => cuisine.key === id1).name
+    this.CurrentUserCuisine2 = this.$store.state.cuisines.find(cuisine => cuisine.key === id2).name
+    this.CurrentUserCuisine3 = this.$store.state.cuisines.find(cuisine => cuisine.key === id3).name
   }
 }
 </script>
