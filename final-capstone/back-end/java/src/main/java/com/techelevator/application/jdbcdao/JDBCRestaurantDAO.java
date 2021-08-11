@@ -35,28 +35,6 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                     "cuisine_type_5, cuisine_type_6, cuisine_type_7, address, lat, lon) " +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-//            String cuisine1 = "";
-//            String cuisine2 = "";
-//            String cuisine3 = "";
-//            String cuisine4 = "";
-//            String cuisine5 = "";
-//            String cuisine6 = "";
-//            String cuisine7 = "";
-//
-//            List<String> cuisines = new ArrayList();
-//
-//            cuisines.add(cuisine1);
-//            cuisines.add(cuisine2);
-//            cuisines.add(cuisine3);
-//            cuisines.add(cuisine4);
-//            cuisines.add(cuisine5);
-//            cuisines.add(cuisine6);
-//            cuisines.add(cuisine7);
-//
-//            for (int i = 0; i < restaurantToAdd.getCuisineTypes().size(); i++) {
-//                cuisines.set(i, restaurantToAdd.getCuisineTypes().get(i).getKey() + ","
-//                                + restaurantToAdd.getCuisineTypes().get(i).getName());
-      //      }
 
             while (restaurantToAdd.getCuisineTypes().size() < 7) {
                 restaurantToAdd.getCuisineTypes().add(new Cuisine());
@@ -97,34 +75,22 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
                 "restaurant_description = ?, restaurant_image = ?, price_range = ?, cuisine_type_1 = ?, " +
                 "cuisine_type_2 = ?, cuisine_type_3 = ?, cuisine_type_4 = ?, cuisine_type_5 = ?, cuisine_type_6 = ?, " +
                 "cuisine_type_7 = ?, address = ?, lat = ?, lon = ? where restaurant_id = ?";
-        String cuisine1 = null;
-        String cuisine2 = null;
-        String cuisine3 = null;
-        String cuisine4 = null;
-        String cuisine5 = null;
-        String cuisine6 = null;
-        String cuisine7 = null;
 
-        List<String> cuisines = new ArrayList();
-
-        cuisines.add(cuisine1);
-        cuisines.add(cuisine2);
-        cuisines.add(cuisine3);
-        cuisines.add(cuisine4);
-        cuisines.add(cuisine5);
-        cuisines.add(cuisine6);
-        cuisines.add(cuisine7);
-
-        for (int i = 0; i < restaurantToUpdate.getCuisineTypes().size(); i++) {
-            cuisines.set(i, restaurantToUpdate.getCuisineTypes().get(i).getKey() + "," +
-                            restaurantToUpdate.getCuisineTypes().get(i).getName());
+        while (restaurantToUpdate.getCuisineTypes().size() < 7) {
+            restaurantToUpdate.getCuisineTypes().add(new Cuisine());
         }
 
         theDatabase.update(updateSql, restaurantToUpdate.getRestaurantName(),
                 restaurantToUpdate.getRestaurantPhone(), restaurantToUpdate.getRestaurantWebsite(),
                 restaurantToUpdate.getDescription(), restaurantToUpdate.getImageLink(),
-                restaurantToUpdate.getPriceRange(), cuisine1, cuisine2, cuisine3, cuisine4, cuisine5, cuisine6,
-                cuisine7, restaurantToUpdate.getAddress(), restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
+                restaurantToUpdate.getPriceRange(), restaurantToUpdate.getCuisineTypes().get(0).toString(),
+                restaurantToUpdate.getCuisineTypes().get(1).toString(),
+                restaurantToUpdate.getCuisineTypes().get(2).toString(),
+                restaurantToUpdate.getCuisineTypes().get(3).toString(),
+                restaurantToUpdate.getCuisineTypes().get(4).toString(), 
+                restaurantToUpdate.getCuisineTypes().get(5).toString(),
+                restaurantToUpdate.getCuisineTypes().get(6).toString(), restaurantToUpdate.getAddress(),
+                restaurantToUpdate.getLat(), restaurantToUpdate.getLon(),
                 restaurantToUpdate.getRestaurantId());
 
         return restaurantToUpdate;
@@ -140,11 +106,11 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     @Override
     public RestaurantDTO addRestaurantToUserList(RestaurantDTO restaurantToAddToUserList) {
 
-        String sqlInsert = "insert into restaurants_profile (restaurant_id, user_id, is_liked) values " +
-                "(?, ?, ?)";
+        String sqlInsert = "insert into restaurants_profile (restaurant_id, user_id) values " +
+                "(?, ?)";
 
         theDatabase.update(sqlInsert, restaurantToAddToUserList.getRestaurantToAdd().getRestaurantId(),
-                restaurantToAddToUserList.getCurrentProfile().getUserId(), restaurantToAddToUserList.isLiked());
+                restaurantToAddToUserList.getCurrentProfile().getUserId());
 
         return restaurantToAddToUserList;
     }
@@ -153,7 +119,7 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
     public List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView) {
         List<Restaurant> favoritedList = new ArrayList();
         String sqlSearch = "select * from restaurants r inner join restaurants_profile rp on " +
-                           "r.restaurant_id = rp.restaurant_id where is_liked = true and user_id = ?";
+                           "r.restaurant_id = rp.restaurant_id where user_id = ?";
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, restaurantToView.getCurrentProfile().getUserId());
 
         if (result.next()) {
@@ -163,16 +129,16 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         return favoritedList;
     }
 
-    @Override
-    public RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate) {
-        String sqlUpdateStmt = "update restaurants_profile set is_liked = ? where restaurant_id = ? and user_id = ?";
-
-        theDatabase.update(sqlUpdateStmt, restaurantToUpdate.isLiked(),
-                           restaurantToUpdate.getRestaurantToAdd().getRestaurantId(),
-                           restaurantToUpdate.getCurrentProfile().getUserId());
-
-        return restaurantToUpdate;
-    }
+//    @Override
+//    public RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate) {
+//        String sqlUpdateStmt = "update restaurants_profile set is_liked = ? where restaurant_id = ? and user_id = ?";
+//
+//        theDatabase.update(sqlUpdateStmt, restaurantToUpdate.isLiked(),
+//                           restaurantToUpdate.getRestaurantToAdd().getRestaurantId(),
+//                           restaurantToUpdate.getCurrentProfile().getUserId());
+//
+//        return restaurantToUpdate;
+//    }
 
     @Override
     public void deleteRestaurantFromUsersList(RestaurantDTO restaurantToDelete) {

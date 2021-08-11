@@ -43,14 +43,13 @@ export default new Vuex.Store({
        lon: '',
      },
      currentProfile: {
-         userId: '',   // - this.$store.state.profile.userId
-         firstName: '', // - this.$store.state.profile.firstName
-         lastName: '', // - this.$store.state.profile.lastName
-         dateOfBirth: '',  // - this.$store.state.profile.dateOfBirth
-         email: '',  //	- this.$store.state.profile.email
-         zipCode: '',   // - this.$store.state.profile.zipcode
-     },
-     isLiked : Boolean
+         userId: '',   
+         firstName: '',
+         lastName: '', 
+         dateOfBirth: '',  
+         email: '', 
+         zipCode: '',  
+     }
  }
   },
 
@@ -107,7 +106,6 @@ export default new Vuex.Store({
     
     LIKE_RESTAURANT(state, currentRestaurant) {
       state.likedRestaurant = currentRestaurant
-      state.restaurantDTO.isLiked = true
     },
 
     SET_RESTAURANTDTO(state, restaurant) {
@@ -119,9 +117,6 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.restaurantWebsite = restaurant.website
       state.restaurantDTO.restaurantToAdd.priceRange = restaurant.price_level
 
-      // restaurant.cuisine.forEach(cuisineName => {
-      //   state.restaurantDTO.restaurantToAdd.cuisineTypes.push(cuisineName)
-      // })
       for (let i = 0; i < restaurant.cuisine.length; i++) {
         state.restaurantDTO.restaurantToAdd.cuisineTypes.push(restaurant.cuisine[i])
       }
@@ -142,8 +137,7 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.cuisineTypes = [],
       state.restaurantDTO.restaurantToAdd.address = '',
       state.restaurantDTO.restaurantToAdd.lat = '',
-      state.restaurantDTO.restaurantToAdd.lon = '',
-      state.restaurantDTO.isLiked = Boolean
+      state.restaurantDTO.restaurantToAdd.lon = ''
     }
 
   }

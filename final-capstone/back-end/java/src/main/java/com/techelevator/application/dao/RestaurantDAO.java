@@ -19,7 +19,7 @@ public interface RestaurantDAO {
 
     List<Restaurant> viewFavoritedRestaurants(RestaurantDTO restaurantToView);
 
-    RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate);
+//    RestaurantDTO updateIfRestaurantIsLiked(RestaurantDTO restaurantToUpdate);
 
     void deleteRestaurantFromUsersList(RestaurantDTO restaurantToDelete);
 }
