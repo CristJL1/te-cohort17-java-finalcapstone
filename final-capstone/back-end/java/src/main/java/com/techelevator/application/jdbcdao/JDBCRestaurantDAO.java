@@ -124,9 +124,9 @@ public class JDBCRestaurantDAO implements RestaurantDAO {
         String sqlSearch = "select * from restaurants r inner join restaurants_profile rp on " +
                            "r.restaurant_id = rp.restaurant_id where user_id = ?";
         SqlRowSet result = theDatabase.queryForRowSet(sqlSearch, id);
-
-        if (result.next()) {
-            Restaurant likedRestaurant = mapToRestaurant(result);
+        Restaurant likedRestaurant = new Restaurant();
+        while (result.next()) {
+            likedRestaurant = mapToRestaurant(result);
             favoritedList.add(likedRestaurant);
         }
         return favoritedList;
