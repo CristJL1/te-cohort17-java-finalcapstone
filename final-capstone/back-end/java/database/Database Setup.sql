@@ -79,7 +79,6 @@ constraint pk_resturants_restaurant_id Primary Key (restaurant_id));
 create table restaurants_profile
 (restaurant_id int not null,
 user_id int not null,
-is_liked boolean,
 constraint pk_restaurants_profile_restaurant_id_user_id Primary Key (restaurant_id, user_id));
 
 
