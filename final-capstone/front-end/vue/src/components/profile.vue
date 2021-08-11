@@ -21,8 +21,23 @@
 
 <script>
 export default {
-  name: 'profile'
-  
+  name: 'profile',
+  data () {
+    return {
+      CurrentUserCuisine1: '',
+      CurrentUserCuisine2: '',
+      CurrentUserCuisine3: '',
+    }
+  }, // end of data
+  created() {
+    let id1 = this.$store.state.preference.cuisineStyle1
+    let id2 = this.$store.state.preference.cuisineStyle2
+    let id3 = this.$store.state.preference.cuisineStyle3
+    
+    this.CurrentUserCuisine1 = this.$store.state.cuisines.find(cuisineId => cuisineId === id1)
+    this.CurrentUserCuisine2 = this.$store.state.cuisines.find(cuisineId => cuisineId === id2)
+    this.CurrentUserCuisine3 = this.$store.state.cuisines.find(cuisineId => cuisineId === id3)
+  }
 }
 </script>
 

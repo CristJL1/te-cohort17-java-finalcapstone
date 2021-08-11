@@ -27,6 +27,31 @@ export default new Vuex.Store({
     likedRestaurant: {},
     profile:{},     // Hold the current users profile data
     preference:{},   // Hold current users preference data
+    cuisines: [
+      {'10660': 'Thai '},
+      {'9908' : 'American'}, 
+      {'10641' : 'Pizza '},
+      {'10664' : 'Greek '},
+      {'4617' : 'Italian '},
+      {'10666 ' : 'Deli'},
+      {'10687' : 'Middle Eastern'},
+      {'5473' : 'Japanese '},
+      {'10653' : 'Sushi '},
+      {'10659' : 'Asian '},
+      {'10649' : 'Mediterranean '},
+      {'10640' : 'Bar '},
+      {'10345' : 'Steakhouse '},
+      {'10670' : 'Pub '},
+      {'5379' : 'Chinese '},
+      {'10642' : 'Café '},
+      {'10679' : 'Healthy '},
+      {'10634' : 'Southwestern '},
+      {'5110' : 'Mexican '},
+      {'10646' : 'Fast Food'},
+      {'10665' : 'Vegetarian Friendly'},
+      {'10697' : 'Vegan Options'},
+      {'10992' : 'Gluten Free Options'},
+    ],
     restaurantDTO: {
       restaurantToAdd: {
        restaurantId: Number,
@@ -139,6 +164,5 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.lat = '',
       state.restaurantDTO.restaurantToAdd.lon = ''
     }
-
   }
 })
