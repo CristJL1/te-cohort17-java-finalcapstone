@@ -1,7 +1,10 @@
 <template>
     <div class="buttonFooter">
-        <button v-on:click.prevent="pushToDatabase(); cycleRestaurant()">I Like this Restaurant</button>
-        <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
+        <img id="likeBtn" src="../../public/Green_CheckMark.png" v-on:click.prevent="pushToDatabase(); cycleRestaurant()"/>
+        <img id="dislikeBtn" src="../../public/Red_CheckMark.png" v-on:click.prevent="cycleRestaurant" />
+
+ <!--       <button id="likeBtn" type="submit" v-on:click.prevent="pushToDatabase(); cycleRestaurant()">✔</button>
+        <button id="dislikeBtn" v-on:click.prevent="cycleRestaurant">✖</button> -->
     </div>
     
 </template>
@@ -38,5 +41,43 @@ export default {
 </script>
 
 <style scoped>
+
+.buttonFooter {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#likeBtn {
+    /*
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 28px;
+  margin: 4px 2px;
+  border-radius: 50%;*/
+
+   height: 60 px;
+  width: 60px;
+}
+
+#dislikeBtn {
+ /* background-color: red;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 28px;
+  margin: 4px 2px;
+  border-radius: 50%;*/
+
+  height: 60 px;
+  width: 60px;
+}
 
 </style>
