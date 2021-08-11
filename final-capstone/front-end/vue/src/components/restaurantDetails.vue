@@ -3,21 +3,24 @@
             <button type="button" id="description" class="collapsible" v-on:click.prevent="collapse">See Description</button>
                 <div class="content">
                     <p v-if="canDisplayDescription()">Description: {{this.$store.state.currentRestaurant.description}}</p>
-                    <p>{{this.$store.state.currentRestaurant.rating}}</p>
-
+                    <p v-if="this.$store.state.currentRestaurant.rating != null">{{this.$store.state.currentRestaurant.rating}}</p>
+                    
+                
                     <div class="awardGrid">
                         <div class="awardName">
                             <div id="name"
                                 v-for="awardObject in this.$store.state.currentRestaurant.awards"
-                                v-bind:key="awardObject.id"><span>{{awardObject.display_name}}</span></div>
+                                v-bind:key="awardObject.id"><span v-if="awardObject.display_name != null">{{awardObject.display_name}}</span></div>
                         </div>
                         <div class="awardImg">
                             <div 
                                 v-for="awardObject in this.$store.state.currentRestaurant.awards"
-                                v-bind:key="awardObject.id"><img id="award" v-bind:src="awardObject.images.large" alt=""></div>
+                                v-bind:key="awardObject.id"><img id="award"  v-if="awardObject.images.large != null"  v-bind:src="awardObject.images.large" alt=""></div>
                         </div>
                     </div>
-                    <p> <a v-bind:href="this.$store.state.currentRestaurant.reviews[0].url" target="_blank">
+                  
+
+                    <p v-if="this.$store.state.currentRestaurant.reviews[0] != null"> <a v-bind:href="this.$store.state.currentRestaurant.reviews[0].url" target="_blank">
                         Click here to see {{this.$store.state.currentRestaurant.name}}'s Reviews!</a>
                     </p>
                 </div>
@@ -37,6 +40,7 @@ export default {
                    return true
                }
            }
+           return false
        },
 
        collapse() {
