@@ -74,8 +74,8 @@ export default {
         method: 'GET',
         url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
         params: {
-            latitude: '41.49932',
-            longitude: '-81.694361',
+            latitude: this.$store.state.locationArray[0],
+            longitude: this.$store.state.locationArray[1],
             limit: '100',
             currency: 'USD',
             combined_food: usersCuisines,

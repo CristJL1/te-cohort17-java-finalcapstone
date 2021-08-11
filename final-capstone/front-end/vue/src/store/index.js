@@ -19,7 +19,10 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-    locationArray: [],
+    locationArray: [
+      "41.49932",
+      "-81.694361"
+    ],
     token: currentToken || '',
     user: currentUser || {},
     restaurants: [],
@@ -187,6 +190,15 @@ export default new Vuex.Store({
       state.restaurantDTO.restaurantToAdd.address = '',
       state.restaurantDTO.restaurantToAdd.lat = '',
       state.restaurantDTO.restaurantToAdd.lon = ''
+    },
+
+    SET_LAT_LONG(state, array) {
+      state.locationArray = array
+    },
+
+    CLEAR_RESTAURANT_DATA(state) {
+      state.restaurants = ''
     }
+
   }
 })

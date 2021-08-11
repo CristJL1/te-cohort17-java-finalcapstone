@@ -33,6 +33,8 @@
 
 
 <script>
+import axios from "axios";
+
 export default {
 
     name: 'change-location',
@@ -49,6 +51,37 @@ export default {
             this.locationArray = this.latLongString.split(",")
             // method to split latLongString at the comma
             // computed method to call splitString
+            this.$store.commit("SET_LAT_LONG", this.locationArray)
+            this.$store.commit("CLEAR_RESTAURANT_DATA")
+            
+        let preferences = this.$store.state.preference
+        let dietaryRestrictions = this.$store.state.preference.dietaryRestrictions
+        let usersCuisines = preferences.cuisineStyle1 + ", " + preferences.cuisineStyle2 + ", " + preferences.cuisineStyle3
+        const options = {
+        method: 'GET',
+        url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
+        params: {
+            latitude: this.$store.state.locationArray[0],
+            longitude: this.$store.state.locationArray[1],
+            limit: '100',
+            currency: 'USD',
+            combined_food: usersCuisines,
+            distance: '20',
+            dietary_restrictions: dietaryRestrictions,
+            lunit: 'km',
+            lang: 'en_US'
+            },
+        headers: {
+            'x-rapidapi-key': '14a46059f3msh988e7d991f2e1b8p1364a6jsn76d4c5b639c7',
+            'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
+        }
+    };
+
+        axios.request(options)
+        .then( (response) => {
+            this.$store.commit("SET_RESTAURANTS", response.data)
+
+        });
         }
     }
 }
