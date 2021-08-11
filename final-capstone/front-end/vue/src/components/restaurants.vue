@@ -30,15 +30,9 @@
                 </p>
             </div>
 
-            <div class="descriptionGrid">
-            <button type="button" id="description" class="collapsible" v-on:click.prevent="collapse">See Description</button>
-                <div class="content">
-                    <p v-if="canDisplayDescription()">Description: {{this.$store.state.currentRestaurant.description}}</p>
-                    <p v-else>No Description Listed</p>
-                </div>
-            </div>
+           <buttons id="buttonsComponent"/>
 
-           <buttons/>
+           <restaurant-details id="restaurantDetailsComponent"/>
             
         </div>
     </div>    
@@ -51,11 +45,14 @@
 import applicationServices from "../services/ApplicationServices"
 import axios from "axios";
 import buttons from "../components/buttons.vue"
+import restaurantDetails from "../components/restaurantDetails.vue"
+import RestaurantDetails from '../components/restaurantDetails.vue';
 
 export default {
    name: 'restaurants',
    components: {
-       buttons
+       buttons,
+      RestaurantDetails
    },
 
    data() {
@@ -100,15 +97,6 @@ export default {
     }, 
    methods: {
 
-       canDisplayDescription() {
-           let description = this.$store.state.currentRestaurant.description
-           if(description != null) {
-               if(description != '') {
-                   return true
-               }
-           }
-       },
-
        canDisplayCuisine() {
            let cuisine = this.$store.state.currentRestaurant.cuisine
            if(cuisine != null) {
@@ -126,21 +114,7 @@ export default {
            }
        },
 
-        collapse() {
-            const coll = document.getElementsByClassName("collapsible");
-
-            for (let i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    let content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                    content.style.display = "block";
-                    }
-                });
-            }
-        }
+        
    } // end of Methods
 } // end of export default
 
@@ -149,7 +123,10 @@ export default {
 
 <style scoped>
 
-
+#award {
+    height: 100px;
+    width: 100px;
+}
 
 button {
     
@@ -190,9 +167,16 @@ button:hover {
     grid-template-areas:
     "h1 h1"
     "restaurantDetails imageGrid"
-    " btn btn"
-    " descriptionGrid descriptionGrid"
-    
+    "buttons buttons"
+    "restaurant-details restaurant-details"    
+}
+
+#buttonsComponent {
+    grid-area: buttons;
+}
+
+#restaurantDetailsComponent {
+    grid-area: restaurant-details;
 }
 
 
@@ -205,9 +189,7 @@ button:hover {
     grid-area: restaurantDetails;
     padding: 3%;
     display: inline-block;
-    max-width: auto;
-   
-    
+    max-width: auto;  
 }
 
 .buttonFooter {
@@ -221,17 +203,14 @@ h1{
     margin: 0%;
     border: 5px ridge red;
 }
-
 h4{
     margin-top: 2%;
     margin-bottom: 0%;
 }
-
 .imageGrid {
     grid-area: imageGrid;
     height: auto;
 }
-
 .restaurantImg {
     object-fit: cover;
     width: 350px;
@@ -239,79 +218,40 @@ h4{
     margin: 10% 0% 10% 0%;
     
 }
-
 .text-center {
     text-align: center;
     font-family: Monospace, Cursive, Sans-serif;
     }
-
 #katiesFont {
   font-family: 'Pacifico', cursive;
 }
-
 #foodIcon {
     height: 15px;
     width: 15px;
 }
-
 .typesGrid {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     height: auto;
     grid-template-areas:
     ". types .";
-
-    
-
 }
-
 .types {
     grid-area: types;
     text-align: left;
 }
-
 .atype {
     margin: 2%;
 }
 
 
-.collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 10px;
-  width: 100%;
-  border: 2px solid black;
-  outline: none;
-  font-size: 15px;
-  margin-top: 20px;
-}
-
-.active, .collapsible:hover {
-  background-color: rgb(184, 184, 184);
-}
 
 
 
-.descriptionGrid {
-    display: grid;
-    grid-template-rows: 1fr 3fr;
-    height: 100%;
-    grid-template-areas:
-    "description"
-    "content" 
-}
 
-#description {
-grid-area: description;
-}
 
-.content {
-  grid-area: content;  
-  padding: 0 18px;
-  display: none;
-  overflow: scroll;
-  background-color: #f1f1f16b;
-  height: auto;
-}
+
+
+
+
 </style>
