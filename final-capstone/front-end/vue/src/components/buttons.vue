@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import applicationServices from "../services/ApplicationServices";
 export default {
     name: 'buttons',
 
