@@ -30,16 +30,13 @@
                 </p>
             </div>
 
-            <button type="button" class="description">See Description</button>
-                <p class="description" id="description">Description: {{this.$store.state.currentRestaurant.description}}</p>
-        
+            <button type="button" class="description collapsible" v-on:click.prevent="collapse">See Description</button>
+                <div class="content">
+                    <p class="description" id="description">Description: {{this.$store.state.currentRestaurant.description}}</p>
+                </div>
+ 
+           <buttons/>
             
-
-           
-            <div class="buttonFooter">
-                <button v-on:click.prevent="pushToDatabase(); cycleRestaurant()">I Like this Restaurant</button>
-                <button v-on:click.prevent="cycleRestaurant">I Dislike this Restaurant</button>
-            </div>
         </div>
     </div>    
 
@@ -50,10 +47,14 @@
 <script>
 import applicationServices from "../services/ApplicationServices"
 import axios from "axios";
-
+import buttons from "../components/buttons.vue"
 
 export default {
    name: 'restaurants',
+   components: {
+       buttons
+   },
+
    data() {
        return {
            //restaurantId: 0,     
@@ -80,7 +81,7 @@ export default {
             lang: 'en_US'
             },
         headers: {
-            'x-rapidapi-key': 'e6c2c2c125msh616ece324f702d5p18a5b7jsn6f5f714dfcb2',
+            'x-rapidapi-key': '14a46059f3msh988e7d991f2e1b8p1364a6jsn76d4c5b639c7',
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
   }
 };
@@ -96,26 +97,6 @@ export default {
        
     }, 
    methods: {
-       cycleRestaurant() {
-           // let currentRestaurant = this.$store.state.restaurants.data
-           let updatedId = this.$store.state.restaurantId + 1;
-           this.$store.commit("UPDATE_TO_NEXT_RESTAURANT", updatedId)
-           // this.restaurantId++
-       },
-
-       pushToDatabase() {
-           // Updating a liked restaurant to the data store
-           let currentRestaurant = this.$store.state.restaurants[this.$store.state.restaurantId]
-           this.$store.commit("LIKE_RESTAURANT", currentRestaurant)
-           // Still need to call the service to push to database
-           // Pass to the Database with our liked Restaurant
-           this.$store.commit("SET_RESTAURANTDTO", currentRestaurant)
-           applicationServices
-           .addLikedRestaurant(this.$store.state.restaurantDTO)
-           .then(response => {
-               this.$store.commit("RESET_RESTAURANTDTO")}) 
-
-       },
        canDisplayCuisine() {
            let cuisine = this.$store.state.currentRestaurant.cuisine
            if(cuisine != null) {
@@ -133,13 +114,30 @@ export default {
            }
        },
 
-   }
+        collapse() {
+            const coll = document.getElementsByClassName("collapsible");
 
+            for (let i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    let content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                    content.style.display = "block";
+                    }
+                });
+            }
+        }
+   } // end of Methods
 } // end of export default
+
 </script>
 
 
 <style scoped>
+
+
 
 button {
     margin: 2%;
@@ -276,6 +274,29 @@ h4{
   border: none;
   outline: none;
   font-size: 15px;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
 }
 
 </style>
