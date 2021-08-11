@@ -30,11 +30,14 @@
                 </p>
             </div>
 
-            <button type="button" class="description collapsible" v-on:click.prevent="collapse">See Description</button>
+            <div class="descriptionGrid">
+            <button type="button" id="description" class="collapsible" v-on:click.prevent="collapse">See Description</button>
                 <div class="content">
-                    <p class="description" id="description">Description: {{this.$store.state.currentRestaurant.description}}</p>
+                    <p v-if="canDisplayDescription()">Description: {{this.$store.state.currentRestaurant.description}}</p>
+                    <p v-else>No Description Listed</p>
                 </div>
- 
+            </div>
+
            <buttons/>
             
         </div>
@@ -83,10 +86,9 @@ export default {
         headers: {
             'x-rapidapi-key': '14a46059f3msh988e7d991f2e1b8p1364a6jsn76d4c5b639c7',
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
-  }
-};
+        }
+    };
 
-        
         axios.request(options)
         .then( (response) => {
             this.$store.commit("SET_RESTAURANTS", response.data)
@@ -97,6 +99,16 @@ export default {
        
     }, 
    methods: {
+
+       canDisplayDescription() {
+           let description = this.$store.state.currentRestaurant.description
+           if(description != null) {
+               if(description != '') {
+                   return true
+               }
+           }
+       },
+
        canDisplayCuisine() {
            let cuisine = this.$store.state.currentRestaurant.cuisine
            if(cuisine != null) {
@@ -140,7 +152,7 @@ export default {
 
 
 button {
-    margin: 2%;
+    
     border-radius: 12px;
     background-color: white;
     color: black;
@@ -173,25 +185,20 @@ button:hover {
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 75px .3fr .1fr .005fr;
+    grid-template-rows: 75px .3fr .005fr .005fr;
     height: 100%;
     grid-template-areas:
     "h1 h1"
     "restaurantDetails imageGrid"
-    " description description"
     " btn btn"
-}
-
-.description {
-    grid-area: description;
+    " descriptionGrid descriptionGrid"
     
 }
 
-#description {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
+
+.descriptionGrid {
+    grid-area: descriptionGrid;
+    
 }
 
 .restaurantDetails {
@@ -267,36 +274,44 @@ h4{
     margin: 2%;
 }
 
-.collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  font-size: 15px;
-}
 
 .collapsible {
   background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 10px;
   width: 100%;
-  border: none;
-  text-align: left;
+  border: 2px solid black;
   outline: none;
   font-size: 15px;
+  margin-top: 20px;
 }
 
 .active, .collapsible:hover {
-  background-color: #ccc;
+  background-color: rgb(184, 184, 184);
+}
+
+
+
+.descriptionGrid {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    height: 100%;
+    grid-template-areas:
+    "description"
+    "content" 
+}
+
+#description {
+grid-area: description;
 }
 
 .content {
+  grid-area: content;  
   padding: 0 18px;
   display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
+  overflow: scroll;
+  background-color: #f1f1f16b;
+  height: auto;
 }
-
 </style>
