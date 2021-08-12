@@ -104,7 +104,9 @@ export default new Vuex.Store({
          email: '', 
          zipCode: '',  
      }
- }
+ },
+    likedRestaurants: [],
+    favoritedRestaurant: {}
   },
 
   mutations: {
@@ -218,9 +220,12 @@ export default new Vuex.Store({
 
     FALSE_EDITING_PROFILE(state) {
       state.editingProfile = false;
+    },
+    SET_LIKED_RESTAURANTS(state, data) {
+      state.likedRestaurants = data
+    },
+    SET_FAVORITED_RESTAURANT(state, restaurant) {
+      state.favoritedRestaurant = restaurant
     }
-
-    
-
   }
 })

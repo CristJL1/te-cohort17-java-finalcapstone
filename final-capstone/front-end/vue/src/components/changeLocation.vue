@@ -19,7 +19,7 @@
         <option value="41.4993, -81.6944">Cleveland, OH</option>
         <option value="39.9887, -83.0104">Columbus, OH</option>
         <option value="39.9526, -75.1652">Philadelphia, PA</option>
-        <option value="35.2907, -80.7440">Charlotte, SC</option>
+        <option value="35.2907, -80.7440">Charlotte, NC</option>
         <option value="32.7767, -96.7970">Dallas, TX</option>
         <option value="29.7604, -95.3698">Houston, TX</option>
         <option value="47.6036, -122.3358">Seattle, WA</option>
