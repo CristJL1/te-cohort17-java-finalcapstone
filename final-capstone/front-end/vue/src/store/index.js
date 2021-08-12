@@ -224,8 +224,19 @@ export default new Vuex.Store({
     SET_LIKED_RESTAURANTS(state, data) {
       state.likedRestaurants = data
     },
-    SET_FAVORITED_RESTAURANT(state, restaurant) {
-      state.favoritedRestaurant = restaurant
-    }
+    SET_FAVORITED_RESTAURANT(state, restaurantId) {
+      state.favoritedRestaurant = this.state.restaurants[restaurantId]
+    },
+
+    UPDATE_TO_NEXT_LIKED_RESTAURANT(state, nextRestaurantId) {
+      if(nextRestaurantId > state.likedRestaurants.length) {
+        this.displayMessage = true;
+      } else {
+        state.favoritedRestaurant = this.state.likedRestaurants[nextRestaurantId]
+        state.restaurantId = nextRestaurantId
+      }
   }
+}
 })
+
+
