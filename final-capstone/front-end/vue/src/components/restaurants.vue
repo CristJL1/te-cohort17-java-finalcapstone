@@ -8,7 +8,7 @@
             <h1 id="katiesFont"> Mangiamo </h1>
 
             <div class="imageGrid">
-            <img  v-bind:src="this.$store.state.currentRestaurant.photo.images.large.url" alt="Photo of the Restaurant" class="restaurantImg">
+            <img  v-if="this.$store.state.currentRestaurant.photo.images != null" v-bind:src="this.$store.state.currentRestaurant.photo.images.large.url" alt="Photo of the Restaurant" class="restaurantImg">
             </div>
 
             <div class="restaurantDetails">
@@ -97,6 +97,7 @@ export default {
         });
    },
    computed: { 
+       
        
     }, 
    methods: {

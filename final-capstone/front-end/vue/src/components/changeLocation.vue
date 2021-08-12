@@ -53,6 +53,7 @@ export default {
             // computed method to call splitString
             this.$store.commit("SET_LAT_LONG", this.locationArray)
             this.$store.commit("CLEAR_RESTAURANT_DATA")
+            this.$store.commit("CLEAR_RESTAURANT_ID")
             
         let preferences = this.$store.state.preference
         let dietaryRestrictions = this.$store.state.preference.dietaryRestrictions

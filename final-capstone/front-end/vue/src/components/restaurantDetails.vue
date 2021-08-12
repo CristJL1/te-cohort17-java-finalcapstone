@@ -2,8 +2,7 @@
     <div class="descriptionGrid">
             <button type="button" id="description" class="collapsible" v-on:click.prevent="collapse">See Description</button>
                 <div class="content">
-                    <p v-if="canDisplayDescription()">Description: {{this.$store.state.currentRestaurant.description}}</p>
-                    <p v-if="this.$store.state.currentRestaurant.rating != null">{{this.$store.state.currentRestaurant.rating}}</p>
+                    <p v-if="this.$store.state.currentRestaurant.rating != null">Average Rating: {{this.$store.state.currentRestaurant.rating}}</p>
                     
                 
                     <div class="awardGrid">
@@ -17,6 +16,7 @@
                                 v-for="awardObject in this.$store.state.currentRestaurant.awards"
                                 v-bind:key="awardObject.id"><img id="award"  v-if="awardObject.images.large != null"  v-bind:src="awardObject.images.large" alt=""></div>
                         </div>
+                        <p class="descriptionText" v-if="canDisplayDescription()">Description: {{this.$store.state.currentRestaurant.description}}</p>
                     </div>
                   
 
@@ -123,7 +123,11 @@ grid-area: description;
     display: grid;
     grid-template-columns: .25fr .5fr 1fr 1fr;
     grid-template-areas:
-    "awardImg awardName . .";
+    "awardImg awardName descriptionText descriptionText";
+}
+
+.descriptionText {
+    grid-area: descriptionText;
 }
 
 .awardImg {

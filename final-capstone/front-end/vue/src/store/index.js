@@ -19,6 +19,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    displayMessage: false,
     locationArray: [
       "41.49932",
       "-81.694361"
@@ -152,8 +153,12 @@ export default new Vuex.Store({
     },
 
     UPDATE_TO_NEXT_RESTAURANT(state, nextRestaurantId) {
-      state.currentRestaurant = this.state.restaurants[nextRestaurantId]
-      state.restaurantId = nextRestaurantId
+      if(nextRestaurantId > state.restaurants.length) {
+        this.displayMessage = true;
+      } else {
+        state.currentRestaurant = this.state.restaurants[nextRestaurantId]
+        state.restaurantId = nextRestaurantId
+      }
     },
     
     LIKE_RESTAURANT(state, currentRestaurant) {
@@ -198,6 +203,14 @@ export default new Vuex.Store({
 
     CLEAR_RESTAURANT_DATA(state) {
       state.restaurants = ''
+    },
+
+    CLEAR_RESTAURANT_ID(state) {
+      state.restaurantId = 0;
+    },
+
+    CLEAR_DISPLAY_MESSAGE(state) {
+      state.displayMessage = false;
     }
 
   }
