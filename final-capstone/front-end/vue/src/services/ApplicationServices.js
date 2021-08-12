@@ -14,6 +14,10 @@ addProfile(profile) {
     return axios.post('/user', profile)
 },
 
+updatePreferences(preferences) {
+    return axios.put(`/user/preference`, preferences)
+},
+
 addPreferences(preferences) {
     return axios.post('/user/preference', preferences)
 },

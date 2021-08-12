@@ -19,6 +19,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    editingProfile: false,
     displayMessage: false,
     locationArray: [
       "41.49932",
@@ -209,7 +210,17 @@ export default new Vuex.Store({
 
     CLEAR_DISPLAY_MESSAGE(state) {
       state.displayMessage = false;
+    },
+
+    TRUE_EDITING_PROFILE(state) {
+      state.editingProfile = true;
+    },
+
+    FALSE_EDITING_PROFILE(state) {
+      state.editingProfile = false;
     }
+
+    
 
   }
 })

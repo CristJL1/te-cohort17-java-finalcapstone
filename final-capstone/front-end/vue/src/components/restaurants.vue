@@ -4,6 +4,14 @@
         <h1 class="chooseCity">Choose City</h1>
         <change-location class="changeLocation" />
         </div>
+        <div class="leftSideArea" v-if="this.$store.state.editingProfile === false" >
+            <h1 class="preferences">Preferences</h1>
+            <profile class="profile" />
+        </div>
+        <div class="leftSideArea" v-if="this.$store.state.editingProfile === true" >
+            <h1 class="preferences">Preferences</h1>
+            <update-profile class="profile" />
+        </div>
         <div class="restaurantCard">
             <h1 id="katiesFont"> Mangiamo </h1>
 
@@ -50,13 +58,17 @@ import buttons from '../components/buttons.vue'
 import restaurantDetails from '../components/restaurantDetails.vue'
 import RestaurantDetails from '../components/restaurantDetails.vue';
 import ChangeLocation from './changeLocation.vue';
+import Profile from './profile.vue';
+import UpdateProfile from './updateProfile.vue';
 
 export default {
    name: 'restaurants',
    components: {
        buttons,
       RestaurantDetails,
-      ChangeLocation
+      ChangeLocation,
+      Profile,
+      UpdateProfile
    },
 
    data() {
@@ -153,14 +165,14 @@ button:hover {
         grid-template-columns: 1fr 3fr 1fr;
         height: 100%;
         grid-template-areas:
-            ". restaurantCard rightSideArea"
+            "leftSideArea restaurantCard rightSideArea"
     }
 
     .rightSideArea {
         grid-area: rightSideArea;
         margin-top: 9.52%;
         display: grid;
-        grid-template-rows: .39fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: .185fr .25fr 1fr 1fr 1fr 1fr;
         grid-template-areas: 
         "chooseCity"
         "changeLocation"
@@ -168,6 +180,32 @@ button:hover {
         "."
         "."
         ".";
+    }
+
+     .leftSideArea {
+        grid-area: leftSideArea;
+        margin-top: 9.52%;
+        display: grid;
+        grid-template-rows: .21fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+        "preferences"
+        "profile"
+        "."
+        "."
+        "."
+        ".";
+    }
+
+    .preferences {
+        grid-area: preferences;
+        font-family: 'Pacifico', cursive;
+        background-color: rgba(190, 186, 186, 0.911);
+    }
+
+    .profile {
+      grid-area: profile;
+        padding: 7%;
+        background-color: rgba(190, 186, 186, 0.911);  
     }
 
     .chooseCity {
@@ -178,7 +216,7 @@ button:hover {
 
     .changeLocation {
         grid-area: changeLocation;
-        padding: 10%;
+        padding:10%;
         background-color: rgba(190, 186, 186, 0.911);
 
     }
