@@ -5,7 +5,7 @@
       &nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
        &nbsp;|&nbsp; 
-       <router-link v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">Profile</router-link>
+       <router-link v-bind:to="{ name: 'user' }" v-if="$store.state.token != ''">Favorited Restaurants</router-link>
     </div>
     <router-view />
   </div>

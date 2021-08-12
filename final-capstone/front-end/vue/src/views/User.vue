@@ -1,11 +1,12 @@
 <template>
   <div>
     <!--<updated-profile/>-->
-    <profile/>
+    <liked-restaurants/>
   </div>
 </template>
 
 <script>
+import LikedRestaurants from '../components/LikedRestaurants.vue'
 
 //import updateProfile from "../components/updateProfile.vue";//
 import profile from "../components/profile.vue"
@@ -15,6 +16,7 @@ export default {
       components : {
           profile,
           //updateProfile//
+            LikedRestaurants
          
       }
 

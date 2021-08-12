@@ -131,8 +131,6 @@ export default new Vuex.Store({
                   "address" in restaurant && 
                   "cuisine" in restaurant && 
                   "website" in restaurant && 
-                  "price" in restaurant &&
-                  "price_level" in restaurant &&
                   "phone" in restaurant &&
                   "photo" in restaurant) {
                     if("images" in restaurant.photo) {

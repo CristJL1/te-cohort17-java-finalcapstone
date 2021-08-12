@@ -28,7 +28,7 @@
                     </a>
                 </p>
                 <p v-else>Website Not Listed </p>
-                <p>Price: {{this.$store.state.currentRestaurant.price_level}} 
+                <p v-if="this.$store.state.currentRestaurant.price != null">Price: {{this.$store.state.currentRestaurant.price_level}} 
                     ({{this.$store.state.currentRestaurant.price}}) 
                 </p>
             </div>

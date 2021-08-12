@@ -11,7 +11,6 @@
     
     <button v-on:click.prevent="editProfile">Edit Profile</button>
  
-    <liked-restaurants/>
     
   
 
@@ -21,10 +20,9 @@
 </template>
 
 <script>
-import LikedRestaurants from './LikedRestaurants.vue'
 
 export default {
-  components: { LikedRestaurants },
+  components: {  },
   name: 'profile',
   data () {
     return {
