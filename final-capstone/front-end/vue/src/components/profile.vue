@@ -50,7 +50,7 @@ export default {
     if(this.$store.state.preference.dietaryRestrictions != '') {
       let restrictions = this.$store.state.preference.dietaryRestrictions.split(",")
    
-      if (restrictions != []) {
+      if (restrictions != 0) {
         this.restriction1 = this.$store.state.cuisines.find(cuisine => cuisine.key === restrictions[0]).name
         this.dietaryRestrictions = this.restriction1
       }

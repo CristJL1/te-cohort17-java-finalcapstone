@@ -73,7 +73,7 @@
       <br>
       <br>
       <button class="btn btn-lg btn-primary btn-block" type="submit"
-      v-on:click.prevent="checkCheckBoxes(); submitUpdatedPreference">
+      v-on:click.prevent="checkCheckBoxes(); submitUpdatedPreference()">
         Save Changes
       </button>
 </div>
@@ -83,6 +83,8 @@
 </template>
 <script>
 import ApplicationServices from '../services/ApplicationServices'
+import axios from "axios";
+
 
 export default {
   name: 'update-profile',
@@ -90,10 +92,11 @@ export default {
     return {
       dietaryRestrictionsArray: [],
       preferences: {
-        userId: "", /* figure how to current UserID passed in*/
+        userId: '', /* figure how to current UserID passed in*/
         cuisineStyle1: '',
         cuisineStyle2: '',
         cuisineStyle3: '',
+        pricePoint: '',
         dietaryRestrictions: ''
       }        
     }
@@ -115,23 +118,58 @@ export default {
         this.preferences.dietaryRestrictions = restrictions.toString();
       },
 
-     /*submitUpdatedPreference() {
+     submitUpdatedPreference() {
+        // Set user Id for the new preferences
         this.preferences.userId = this.$store.state.profile.userId
+        this.preferences.pricePoint = this.$store.state.preference.pricePoint
         this.$store.commit("CLEAR_RESTAURANT_DATA")
         this.$store.commit("CLEAR_RESTAURANT_ID")
-        applicationServices
-        .addPreferences
-        .updatedPreferences(this.preferences)
+        // Call service to update new preferences in DB
+        ApplicationServices
+        .updatePreferences(this.preferences)
         .then(response => {
-          }, // End of addPreferences Sevice 
-            applicationServices
-            .getPreferenceById(this.$store.state.profile.userId)
-            .then(response => {
-              //call mutation to update preferences in data store
-              this.$store.commit("FALSE_EDITING_PROFILE")
-            })
+          // Once new preferences is set in DB, call service to get that new preference at set it in the datastore
+          ApplicationServices
+          .getPreferenceById(this.$store.state.profile.userId)
+          .then(response => {
+            // Set new preferences to datastore
+            this.$store.commit("SET_PREFERENCE_DATA", this.preferences)
+            //Set up to call API
+            let preferences = this.$store.state.preference
+            let dietaryRestrictions = this.$store.state.preference.dietaryRestrictions
+            let usersCuisines = preferences.cuisineStyle1 + ", " + preferences.cuisineStyle2 + ", " + preferences.cuisineStyle3
+            const options = {
+              method: 'GET',
+              url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
+              params: {
+                latitude: this.$store.state.locationArray[0],
+                longitude: this.$store.state.locationArray[1],
+                limit: '100',
+                currency: 'USD',
+                combined_food: usersCuisines,
+                distance: '20',
+                dietary_restrictions: dietaryRestrictions,
+                lunit: 'km',
+                lang: 'en_US'
+              },
+              headers: {
+                'x-rapidapi-key': '14a46059f3msh988e7d991f2e1b8p1364a6jsn76d4c5b639c7',
+                'x-rapidapi-host': 'travel-advisor.p.rapidapi.com'
+              }
+            };
+            // Call the API
+            axios.request(options)
+            .then( (response) => {
+              // Set new restaurants based on new preferences
+              this.$store.commit("SET_RESTAURANTS", response.data)
+            });
+            // Exit updateProfile component
+            this.$store.commit("FALSE_EDITING_PROFILE")
+          })
+        })
+            
          
-    } // End of Submit Method */
+    } // End of Submit Method 
 
   }// End of Method
 } // End of Export
