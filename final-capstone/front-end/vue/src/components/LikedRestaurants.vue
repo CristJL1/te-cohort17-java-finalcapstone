@@ -12,7 +12,7 @@
                 <div class="typesGrid" >
                     <div class="types">
                         <h5 class="atype" v-for="cuisineObject in this.$store.state.favoritedRestaurant.cuisineTypes"
-                            v-bind:key="cuisineObject.id"><img src="../../public/Food_icon.png" id="foodIcon"> {{cuisineObject.name}} </h5>
+                            v-bind:key="cuisineObject.id"><img src="../../public/Food_icon.png" id="foodIcon" v-if="cuisineObject.key != 'null'"> {{cuisineObject.name != "null" ? cuisineObject.name : ""}} </h5>
                     </div>
                 </div>    
                 <p>Phone: {{this.$store.state.favoritedRestaurant.restaurantPhone}}</p>

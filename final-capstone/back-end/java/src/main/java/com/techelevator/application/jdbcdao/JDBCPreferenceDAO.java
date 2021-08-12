@@ -40,8 +40,8 @@ public class JDBCPreferenceDAO implements PreferenceDAO {
 
     public Preferences updatePreferences(Preferences updatedPreferences) {
         String sqlUpdateStmt = "update preferences set cuisine_style_1 = ?, cuisine_style_2 = ?, cuisine_style_3 = ?, "
-                               + "price_point = ?,  dietary_restrictions = ? " + //vegan = ?, vegetarian = ?, gluten_free = ? " +
-                "where user_id = ?";
+                               + "price_point = ?, dietary_restrictions = ? " +
+                " where user_id = ?";
         theDatabase.update(sqlUpdateStmt, updatedPreferences.getCuisineStyle1(),
                            updatedPreferences.getCuisineStyle2(), updatedPreferences.getCuisineStyle3(),
                            updatedPreferences.getPricePoint(), updatedPreferences.getDietaryRestrictions(),
