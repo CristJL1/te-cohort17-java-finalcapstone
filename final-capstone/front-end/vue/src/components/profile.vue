@@ -11,7 +11,6 @@
     
     <button v-on:click.prevent="editProfile">Edit Profile</button>
  
-    <h2> Liked Restaurants </h2> 
     <liked-restaurants/>
     
   

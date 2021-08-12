@@ -44,10 +44,10 @@
 
 
 <script>
-import applicationServices from "../services/ApplicationServices"
+import applicationServices from '../services/ApplicationServices'
 import axios from "axios";
-import buttons from "../components/buttons.vue"
-import restaurantDetails from "../components/restaurantDetails.vue"
+import buttons from '../components/buttons.vue'
+import restaurantDetails from '../components/restaurantDetails.vue'
 import RestaurantDetails from '../components/restaurantDetails.vue';
 import ChangeLocation from './changeLocation.vue';
 

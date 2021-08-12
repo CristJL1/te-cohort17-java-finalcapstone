@@ -1,5 +1,8 @@
 <template>
-    <div> 
+<div class="restaurants text-center">
+<div class="restaurantCard">
+    <h1 id="katiesFont"> Favorite Restaurants </h1>
+    <div class="imageGrid"> 
         <img  v-bind:src="this.$store.state.currentRestaurant.photo.images.large.url" alt="Photo of the Restaurant" class="restaurantImg">
 
         <div class="restaurantDetails">
@@ -23,18 +26,27 @@
                     ({{this.$store.state.currentRestaurant.price}}) 
                 </p>
             </div>
-        <!-- Display restaurant name -->
-        <!-- Display restaurant address -->
-        <!-- Display restaurant name -->
+
+            <buttons id="buttonsComponent"/>
+
+            <restaurant-details id="restaurantDetailsComponent"/> 
     </div>
+</div>
+</div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 import ApplicationServices from '../services/ApplicationServices';
+import buttons from '../components/buttons.vue'
+import RestaurantDetails from '../components/restaurantDetails.vue';
 
 export default {
     name: 'liked-restaurant',
+    components: {
+        buttons,
+        RestaurantDetails
+    },
     data() {
         return {
 
@@ -70,5 +82,129 @@ export default {
 </script>
 
 <style scoped> 
+.restaurants {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        height: 100%;
+        grid-template-areas:
+            ". restaurantCard restaurantCard"
+}
+.restaurantCard {
+    grid-area: restaurantCard;
+    background-color: rgba(190, 186, 186, 0.911);
+    border-color: rgba(92, 92, 92, 0.842);
+    border-style: outset;
+    border-width: medium;
+    border-radius: 10px;
+    margin-top: 3%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 75px .3fr .005fr .005fr;
+    height: 100%;
+    grid-template-areas:
+    "h1 h1"
+    "restaurantDetails imageGrid"
+    "buttons buttons"
+    "restaurant-details restaurant-details"    
+}
+
+#buttonsComponent {
+    grid-area: buttons;
+}
+#restaurantDetailsComponent {
+    grid-area: restaurant-details;
+}
+.restaurantDetails {
+    grid-area: restaurantDetails;
+    background-color: rgba(190, 186, 186, 0.911);
+    border-color: rgba(92, 92, 92, 0.842);
+    border-style: outset;
+    border-width: medium;
+    border-radius: 10px;
+    margin-top: 3%;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr ;
+    grid-template-rows: 75px .3fr .005fr .005fr;
+    height: 100%;
+    grid-template-areas:
+    "h1 h1"
+    "restaurantDetails imageGrid"
+    "buttons buttons"
+    "restaurant-details restaurant-details"    
+}
+#buttonsComponent {
+    grid-area: buttons;
+}
+
+#restaurantDetailsComponent {
+    grid-area: restaurant-details;
+}
+
+
+.descriptionGrid {
+    grid-area: descriptionGrid;
+    
+}
+
+.restaurantDetails {
+    grid-area: restaurantDetails;
+    padding: 3%;
+    display: inline-block;
+    max-width: auto;  
+}
+
+.buttonFooter {
+    grid-area: btn;
+}
+
+h1{
+    grid-area: h1;
+    text-align: center;
+    color: rgb(204, 10, 10);
+    margin: 0%;
+    border: 5px ridge red;
+}
+h4{
+    margin-top: 2%;
+    margin-bottom: 0%;
+}
+.imageGrid {
+    grid-area: imageGrid;
+    height: auto;
+}
+.restaurantImg {
+    object-fit: cover;
+    width: 350px;
+    height: 350px;
+    margin: 10% 0% 10% 0%;
+    
+}
+.text-center {
+    text-align: center;
+    font-family: Monospace, Cursive, Sans-serif;
+    }
+#katiesFont {
+  font-family: 'Pacifico', cursive;
+}
+#foodIcon {
+    height: 15px;
+    width: 15px;
+}
+.typesGrid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    height: auto;
+    grid-template-areas:
+    ". types .";
+}
+.types {
+    grid-area: types;
+    text-align: left;
+}
+.atype {
+    margin: 2%;
+}
 
 </style>
